@@ -1,0 +1,13 @@
+{
+  "int": {
+  },
+  "int[]": {
+  },
+  "float": {
+  },
+  "Vector2": {
+    "WhitePicSize": [ 300, 200 ]
+  },
+  "BitMapProp": {
+  }
+}
