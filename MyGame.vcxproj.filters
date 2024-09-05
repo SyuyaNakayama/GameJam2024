@@ -80,7 +80,10 @@
     <Filter Include="ソース ファイル\リソース ファイル">
       <UniqueIdentifier>{87941c2a-f2f5-45f0-9d9e-d5dc5507b36a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Application\MyGame\GameObjects">
+    <Filter Include="ソース ファイル\Application\MyGame\Stage">
+      <UniqueIdentifier>{84480062-ec1e-41d2-a2ab-fe7882a30d90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Application\MyGame\Stage\GameObjects">
       <UniqueIdentifier>{557e78e9-4f96-4221-9e83-7dc4a08a70df}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -251,13 +254,16 @@
       <Filter>ソース ファイル\Application\MyGame\GameScenes</Filter>
     </ClCompile>
     <ClCompile Include="SourceFiles\Application\GameObjects\Enemy.cpp">
-      <Filter>ソース ファイル\Application\MyGame\GameObjects</Filter>
+      <Filter>ソース ファイル\Application\MyGame\Stage\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="SourceFiles\Application\GameObjects\Player.cpp">
-      <Filter>ソース ファイル\Application\MyGame\GameObjects</Filter>
+      <Filter>ソース ファイル\Application\MyGame\Stage\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="SourceFiles\Engine\GameObject\BaseStage.cpp">
       <Filter>ソース ファイル\Engine\3d\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceFiles\Application\GameObjects\BaseEnemy.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -448,13 +454,13 @@
       <Filter>ソース ファイル\Application\MyGame\GameScenes</Filter>
     </ClInclude>
     <ClInclude Include="SourceFiles\Application\GameObjects\BaseEnemy.h">
-      <Filter>ソース ファイル\Application\MyGame\GameObjects</Filter>
+      <Filter>ソース ファイル\Application\MyGame\Stage\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="SourceFiles\Application\GameObjects\Enemy.h">
-      <Filter>ソース ファイル\Application\MyGame\GameObjects</Filter>
+      <Filter>ソース ファイル\Application\MyGame\Stage\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="SourceFiles\Application\GameObjects\Player.h">
-      <Filter>ソース ファイル\Application\MyGame\GameObjects</Filter>
+      <Filter>ソース ファイル\Application\MyGame\Stage\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="SourceFiles\Engine\GameObject\BaseStage.h">
       <Filter>ソース ファイル\Engine\3d\Object</Filter>
