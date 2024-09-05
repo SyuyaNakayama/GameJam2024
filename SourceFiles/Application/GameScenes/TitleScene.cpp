@@ -21,8 +21,8 @@ void TitleScene::Update()
 
 void UIDrawerTitleScene::Initialize()
 {
-	sprites["white"] = Sprite::Create("white1x1.png");
-	sprites["white"]->SetCenterPos();
-	sprites["white"]->SetCenterAnchor();
-	sprites["white"]->size = constant->GetConstant<Vector2>("WhitePicSize");
+	sprites["title"] = Sprite::Create("Title.png");
+	sprites["title"]->size *= 2.0f;
+	sprites["title"]->SetCenterPos();
+	sprites["title"]->SetCenterAnchor();
 }

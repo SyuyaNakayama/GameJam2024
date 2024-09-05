@@ -22,4 +22,8 @@ void GameOverScene::Update()
 
 void UIDrawerGameOverScene::Initialize()
 {
+	sprites["death"] = Sprite::Create("GameOver.png");
+	sprites["death"]->size *= 4.0f;
+	sprites["death"]->SetCenterPos();
+	sprites["death"]->SetCenterAnchor();
 }
