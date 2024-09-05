@@ -5,12 +5,12 @@ using namespace WristerEngine::_2D;
 void Enemy::Initialize()
 {
 	// ‰Šú‰»
-	sprite = Sprite::Create("white1x1.png");
+	sprite = Sprite::Create("TestEnemy.png");
 	sprite->size = Const(Vector2, "EnemySize");
 	sprite->position.x = Const(float, "EnemyPosX");
 	sprite->position.y = WristerEngine::WIN_SIZE.y - Const(float, "GroundHeight");
 	sprite->anchorPoint = { 0.5f,1.0f };
-	sprite->color = { 0.5f,0.5f,1.0f,1.0f };
+	sprite->color = { 1.0f,1.0f,1.0f,1.0f };
 
 	eyeBeam = Sprite::Create("white1x1.png");
 	eyeBeam->size.x = 1000;
