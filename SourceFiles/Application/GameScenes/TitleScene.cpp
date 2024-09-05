@@ -1,7 +1,7 @@
 #include "TitleScene.h"
+#include "SceneManager.h"
 
 using namespace WristerEngine::_2D;
-using namespace WristerEngine::_3D;
 
 void TitleScene::Initialize()
 {
@@ -12,6 +12,9 @@ void TitleScene::Initialize()
 
 void TitleScene::Update()
 {
+	if (operate->GetTrigger("SceneChange")) {
+		sceneManager->ChangeScene(Scene::Play);
+	}
 	// UI•`‰æ
 	uiDrawer->Update();
 }

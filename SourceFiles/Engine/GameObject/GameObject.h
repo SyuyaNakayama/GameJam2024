@@ -18,13 +18,12 @@ namespace WristerEngine
 		public:
 			// 仮想デストラクタ
 			virtual ~GameObject() = default;
-			/// <summary>
-			/// 初期化(純粋仮想関数)
-			/// </summary>
-			/// <param name="objectData">Jsonファイルから読み込んだデータ</param>
+			// 初期化(純粋仮想関数)
 			virtual void Initialize() = 0;
 			// 更新(純粋仮想関数)
 			virtual void Update() = 0;
+			// 描画(純粋仮想関数)
+			virtual void Draw() = 0;
 			// 現在のシーンを取得
 			Scene GetNowScene() const { return SceneManager::GetInstance()->GetNowScene(); }
 		};

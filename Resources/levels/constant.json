@@ -4,11 +4,14 @@
   "int[]": {
   },
   "float": {
-    "GroundHeight": 100
+    "GroundHeight": 100,
+    "PlayerMoveSpd": 3,
+    "EnemyPosX": 920
   },
   "Vector2": {
     "WhitePicSize": [ 300, 200 ],
-    "PlayerSize": [ 50, 50 ]
+    "PlayerSize": [ 50, 50 ],
+    "EnemySize": [ 150, 400 ]
   },
   "BitMapProp": {
   }

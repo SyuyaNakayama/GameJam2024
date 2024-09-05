@@ -68,7 +68,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)SourceFiles\Engine\2d;$(ProjectDir)SourceFiles\Engine\3d\Camera;$(ProjectDir)SourceFiles\Engine\3d\Object;$(ProjectDir)SourceFiles\Engine\Audio;$(ProjectDir)SourceFiles\Engine\DirectX;$(ProjectDir)SourceFiles\Engine\Font;$(ProjectDir)SourceFiles\Engine\Framework;$(ProjectDir)SourceFiles\Engine\Functions;$(SolutionDir)SourceFiles\Engine\GameObject;$(ProjectDir)SourceFiles\Engine\Input;$(ProjectDir)SourceFiles\Engine\Json;$(ProjectDir)SourceFiles\Engine\Light;$(ProjectDir)SourceFiles\Engine\Math;$(ProjectDir)SourceFiles\Engine\Particle;$(ProjectDir)SourceFiles\Engine\Physics;$(ProjectDir)SourceFiles\Engine\Scene;$(ProjectDir)SourceFiles\Engine\Timer;$(ProjectDir)SourceFiles\Engine\WinApp;$(ProjectDir)SourceFiles\Application\Stage;$(ProjectDir)SourceFiles\Application\MyGame;$(ProjectDir)SourceFiles\Application\Camera;$(ProjectDir)SourceFiles\Application\GameScenes;$(ProjectDir)SourceFiles\Application\GameScenes\TutorialScene;$(ProjectDir)SourceFiles\Application\GameScenes\ResultScene;$(ProjectDir)SourceFiles\Application\OperateDrawer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)SourceFiles\Engine\2d;$(ProjectDir)SourceFiles\Engine\3d\Camera;$(ProjectDir)SourceFiles\Engine\3d\Object;$(ProjectDir)SourceFiles\Engine\Audio;$(ProjectDir)SourceFiles\Engine\DirectX;$(ProjectDir)SourceFiles\Engine\Font;$(ProjectDir)SourceFiles\Engine\Framework;$(ProjectDir)SourceFiles\Engine\Functions;$(SolutionDir)SourceFiles\Engine\GameObject;$(ProjectDir)SourceFiles\Engine\Input;$(ProjectDir)SourceFiles\Engine\Json;$(ProjectDir)SourceFiles\Engine\Light;$(ProjectDir)SourceFiles\Engine\Math;$(ProjectDir)SourceFiles\Engine\Particle;$(ProjectDir)SourceFiles\Engine\Physics;$(ProjectDir)SourceFiles\Engine\Scene;$(ProjectDir)SourceFiles\Engine\Timer;$(ProjectDir)SourceFiles\Engine\WinApp;$(ProjectDir)SourceFiles\Application\Stage;$(ProjectDir)SourceFiles\Application\MyGame;$(ProjectDir)SourceFiles\Application\GameScenes;$(ProjectDir)SourceFiles\Application\GameObjects</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard_C>Default</LanguageStandard_C>
     </ClCompile>
@@ -93,7 +93,7 @@
       <ExceptionHandling>Sync</ExceptionHandling>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)SourceFiles\Engine\2d;$(ProjectDir)SourceFiles\Engine\3d\Camera;$(ProjectDir)SourceFiles\Engine\3d\Object;$(ProjectDir)SourceFiles\Engine\Audio;$(ProjectDir)SourceFiles\Engine\DirectX;$(ProjectDir)SourceFiles\Engine\Font;$(ProjectDir)SourceFiles\Engine\Framework;$(ProjectDir)SourceFiles\Engine\Functions;$(SolutionDir)SourceFiles\Engine\GameObject;$(ProjectDir)SourceFiles\Engine\Input;$(ProjectDir)SourceFiles\Engine\Json;$(ProjectDir)SourceFiles\Engine\Light;$(ProjectDir)SourceFiles\Engine\Math;$(ProjectDir)SourceFiles\Engine\Particle;$(ProjectDir)SourceFiles\Engine\Physics;$(ProjectDir)SourceFiles\Engine\Scene;$(ProjectDir)SourceFiles\Engine\Timer;$(ProjectDir)SourceFiles\Engine\WinApp;$(ProjectDir)SourceFiles\Application\Stage;$(ProjectDir)SourceFiles\Application\MyGame;$(ProjectDir)SourceFiles\Application\Camera;$(ProjectDir)SourceFiles\Application\GameScenes;$(ProjectDir)SourceFiles\Application\GameScenes\TutorialScene;$(ProjectDir)SourceFiles\Application\GameScenes\ResultScene;$(ProjectDir)SourceFiles\Application\OperateDrawer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)SourceFiles\Engine\2d;$(ProjectDir)SourceFiles\Engine\3d\Camera;$(ProjectDir)SourceFiles\Engine\3d\Object;$(ProjectDir)SourceFiles\Engine\Audio;$(ProjectDir)SourceFiles\Engine\DirectX;$(ProjectDir)SourceFiles\Engine\Font;$(ProjectDir)SourceFiles\Engine\Framework;$(ProjectDir)SourceFiles\Engine\Functions;$(SolutionDir)SourceFiles\Engine\GameObject;$(ProjectDir)SourceFiles\Engine\Input;$(ProjectDir)SourceFiles\Engine\Json;$(ProjectDir)SourceFiles\Engine\Light;$(ProjectDir)SourceFiles\Engine\Math;$(ProjectDir)SourceFiles\Engine\Particle;$(ProjectDir)SourceFiles\Engine\Physics;$(ProjectDir)SourceFiles\Engine\Scene;$(ProjectDir)SourceFiles\Engine\Timer;$(ProjectDir)SourceFiles\Engine\WinApp;$(ProjectDir)SourceFiles\Application\Stage;$(ProjectDir)SourceFiles\Application\MyGame;$(ProjectDir)SourceFiles\Application\GameScenes;$(ProjectDir)SourceFiles\Application\GameObjects</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard_C>Default</LanguageStandard_C>
       <Optimization>MinSpace</Optimization>
@@ -117,6 +117,7 @@
     <ClCompile Include="SourceFiles\Application\GameScenes\OperateConfig.cpp" />
     <ClCompile Include="SourceFiles\Application\GameScenes\SceneFactory.cpp" />
     <ClCompile Include="SourceFiles\Application\MyGame\MyGame.cpp" />
+    <ClCompile Include="SourceFiles\Application\Stage\Stage.cpp" />
     <ClCompile Include="SourceFiles\Engine\GameObject\BaseStage.cpp" />
     <ClCompile Include="SourceFiles\Engine\Scene\BasePauseMenu.cpp" />
     <ClCompile Include="SourceFiles\Engine\2d\BitMapNumber.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="SourceFiles\Application\GameScenes\SceneFactory.h" />
     <ClInclude Include="SourceFiles\Application\GameScenes\TitleScene.h" />
     <ClInclude Include="SourceFiles\Application\MyGame\MyGame.h" />
+    <ClInclude Include="SourceFiles\Application\Stage\Stage.h" />
     <ClInclude Include="SourceFiles\Engine\GameObject\BaseStage.h" />
     <ClInclude Include="SourceFiles\Engine\Scene\BasePauseMenu.h" />
     <ClInclude Include="SourceFiles\Engine\2d\AbstractUIDrawer.h" />
