@@ -80,6 +80,9 @@
     <Filter Include="ソース ファイル\リソース ファイル">
       <UniqueIdentifier>{87941c2a-f2f5-45f0-9d9e-d5dc5507b36a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Application\MyGame\GameObjects">
+      <UniqueIdentifier>{557e78e9-4f96-4221-9e83-7dc4a08a70df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SourceFiles\Engine\Math\Matrix4.cpp">
@@ -246,6 +249,15 @@
     </ClCompile>
     <ClCompile Include="SourceFiles\Application\GameScenes\ClearScene.cpp">
       <Filter>ソース ファイル\Application\MyGame\GameScenes</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceFiles\Application\GameObjects\Enemy.cpp">
+      <Filter>ソース ファイル\Application\MyGame\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceFiles\Application\GameObjects\Player.cpp">
+      <Filter>ソース ファイル\Application\MyGame\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceFiles\Engine\GameObject\BaseStage.cpp">
+      <Filter>ソース ファイル\Engine\3d\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -434,6 +446,18 @@
     </ClInclude>
     <ClInclude Include="SourceFiles\Application\GameScenes\ClearScene.h">
       <Filter>ソース ファイル\Application\MyGame\GameScenes</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceFiles\Application\GameObjects\BaseEnemy.h">
+      <Filter>ソース ファイル\Application\MyGame\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceFiles\Application\GameObjects\Enemy.h">
+      <Filter>ソース ファイル\Application\MyGame\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceFiles\Application\GameObjects\Player.h">
+      <Filter>ソース ファイル\Application\MyGame\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceFiles\Engine\GameObject\BaseStage.h">
+      <Filter>ソース ファイル\Engine\3d\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

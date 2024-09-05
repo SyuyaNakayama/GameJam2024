@@ -108,12 +108,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="SourceFiles\Application\GameObjects\Enemy.cpp" />
+    <ClCompile Include="SourceFiles\Application\GameObjects\Player.cpp" />
     <ClCompile Include="SourceFiles\Application\GameScenes\ClearScene.cpp" />
     <ClCompile Include="SourceFiles\Application\GameScenes\GameOverScene.cpp" />
     <ClCompile Include="SourceFiles\Application\GameScenes\GamePlayScene.cpp" />
     <ClCompile Include="SourceFiles\Application\GameScenes\OperateConfig.cpp" />
     <ClCompile Include="SourceFiles\Application\GameScenes\SceneFactory.cpp" />
     <ClCompile Include="SourceFiles\Application\MyGame\MyGame.cpp" />
+    <ClCompile Include="SourceFiles\Engine\GameObject\BaseStage.cpp" />
     <ClCompile Include="SourceFiles\Engine\Scene\BasePauseMenu.cpp" />
     <ClCompile Include="SourceFiles\Engine\2d\BitMapNumber.cpp" />
     <ClCompile Include="SourceFiles\Engine\2d\BaseMapChip.cpp" />
@@ -165,6 +168,9 @@
     <ClCompile Include="SourceFiles\Application\GameScenes\TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="SourceFiles\Application\GameObjects\BaseEnemy.h" />
+    <ClInclude Include="SourceFiles\Application\GameObjects\Enemy.h" />
+    <ClInclude Include="SourceFiles\Application\GameObjects\Player.h" />
     <ClInclude Include="SourceFiles\Application\GameScenes\ClearScene.h" />
     <ClInclude Include="SourceFiles\Application\GameScenes\GameOverScene.h" />
     <ClInclude Include="SourceFiles\Application\GameScenes\GamePlayScene.h" />
@@ -173,6 +179,7 @@
     <ClInclude Include="SourceFiles\Application\GameScenes\SceneFactory.h" />
     <ClInclude Include="SourceFiles\Application\GameScenes\TitleScene.h" />
     <ClInclude Include="SourceFiles\Application\MyGame\MyGame.h" />
+    <ClInclude Include="SourceFiles\Engine\GameObject\BaseStage.h" />
     <ClInclude Include="SourceFiles\Engine\Scene\BasePauseMenu.h" />
     <ClInclude Include="SourceFiles\Engine\2d\AbstractUIDrawer.h" />
     <ClInclude Include="SourceFiles\Engine\2d\BitMapNumber.h" />

@@ -4,9 +4,11 @@
   "int[]": {
   },
   "float": {
+    "GroundHeight": 100
   },
   "Vector2": {
-    "WhitePicSize": [ 300, 200 ]
+    "WhitePicSize": [ 300, 200 ],
+    "PlayerSize": [ 50, 50 ]
   },
   "BitMapProp": {
   }

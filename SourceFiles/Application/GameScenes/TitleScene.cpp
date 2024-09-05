@@ -5,12 +5,14 @@ using namespace WristerEngine::_3D;
 
 void TitleScene::Initialize()
 {
+	// UI•`‰æƒNƒ‰ƒX‚Ì‰Šú‰»
 	uiDrawer = std::make_unique<UIDrawerTitleScene>();
 	uiDrawer->Initialize();
 }
 
 void TitleScene::Update()
 {
+	// UI•`‰æ
 	uiDrawer->Update();
 }
 
