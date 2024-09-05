@@ -1,7 +1,6 @@
 #include "GamePlayScene.h"
 
 using namespace WristerEngine::_2D;
-using namespace WristerEngine::_3D;
 
 void GamePlayScene::Initialize()
 {

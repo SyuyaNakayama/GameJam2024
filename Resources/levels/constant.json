@@ -4,7 +4,8 @@
   "int[]": {
   },
   "float": {
-    "GroundHeight": 100
+    "GroundHeight": 100,
+    "PlayerMoveSpd": 3
   },
   "Vector2": {
     "WhitePicSize": [ 300, 200 ],
