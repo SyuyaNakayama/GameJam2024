@@ -3,12 +3,19 @@
 #include "Sprite.h"
 #include "OperateConfig.h"
 
+
 class Player : public WristerEngine::_2D::GameObject
 {
 	std::unique_ptr<WristerEngine::_2D::Sprite> sprite;
 	OperateConfig* operate = OperateConfig::GetInstance();
+	bool isHide = false; // ‰B‚ê‚Ä‚¢‚é‚©
+	WristerEngine::FrameTimer hideTimer; // ‰B‚ê‚Ä‚¢‚éŠÔ
 
-	void Move();
+	// ‚È‚ñ‚ç‚©‚ÌƒAƒNƒVƒ‡ƒ“
+	void (Player::*Action)() = nullptr;
+
+	void Move(); // ˆÚ“®
+	void Hide(); // ‰B‚ê‚é
 
 	// GameObject ‚ğ‰î‚µ‚ÄŒp³‚³‚ê‚Ü‚µ‚½
 	void Initialize() override;

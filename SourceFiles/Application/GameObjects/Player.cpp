@@ -17,6 +17,16 @@ void Player::Move()
 	else if (moveDir > 0) { sprite->isFlipX = false; }
 }
 
+void Player::Hide()
+{
+	sprite->isFlipY = true;
+	if (hideTimer.Update())
+	{
+		Action = nullptr; 
+		sprite->isFlipY = false;
+	}
+}
+
 void Player::Initialize()
 {
 	// 初期化
@@ -30,14 +40,26 @@ void Player::Initialize()
 void Player::Update()
 {
 	Move();
-	Vector2 toEyePlayer = sprite->position - Const(Vector2, "EnemyBeamStartPos");
-	float dot = Dot({ -1,0 }, Normalize(toEyePlayer));
-	Angle theta = Half(PI) - std::acos(dot);
 
-	theta = std::abs(theta - Angle(60));
+	// 地面に隠れる
+	if (operate->GetTrigger("Down")) 
+	{
+		Action = &Player::Hide; 
+		hideTimer = Const(int, "PlayerHideTime");
+	}
+	if (Action) { (this->*Action)(); }
+	else
+	{
+		Vector2 toEyePlayer = sprite->position - Const(Vector2, "EnemyBeamStartPos");
+		float dot = Dot({ -1,0 }, Normalize(toEyePlayer));
+		Angle theta = Half(PI) - std::acos(dot);
 
-	// ゲームオーバー
-	if (theta <= Angle(4)) { WristerEngine::SceneManager::GetInstance()->ChangeScene(Scene::GameOver); }
+		theta = std::abs(theta - Angle(60));
+
+		// ゲームオーバー
+		if (theta <= Angle(4)) { WristerEngine::SceneManager::GetInstance()->ChangeScene(Scene::GameOver); }
+	}
+
 	// スプライトの更新
 	sprite->Update();
 }
