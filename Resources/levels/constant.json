@@ -6,13 +6,13 @@
   "float": {
     "GroundHeight": 100,
     "PlayerMoveSpd": 3,
-    "EnemyPosX": 920
+    "EnemyPosX": 1020
   },
   "Vector2": {
     "WhitePicSize": [ 300, 200 ],
     "PlayerSize": [ 50, 50 ],
     "EnemySize": [ 150, 400 ],
-    "EnemyBeamStartPos": [ 900, 270 ]
+    "EnemyBeamStartPos": [ 960, 270 ]
   },
   "BitMapProp": {
   }

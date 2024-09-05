@@ -7,9 +7,14 @@ using namespace WristerEngine::_2D;
 
 void Player::Move()
 {
+	// 移動速度を計算
 	const float MOVE_SPD = Const(float, "PlayerMoveSpd");
 	float moveDir = (float)operate->GetPush("Right") - operate->GetPush("Left");
 	sprite->position += moveDir * MOVE_SPD;
+
+	// 向きを変える
+	if (moveDir < 0) { sprite->isFlipX = true; }
+	else if (moveDir > 0) { sprite->isFlipX = false; }
 }
 
 void Player::Initialize()
@@ -30,6 +35,8 @@ void Player::Update()
 	Angle theta = Half(PI) - std::acos(dot);
 
 	theta = std::abs(theta - Angle(60));
+
+	// ゲームオーバー
 	if (theta <= Angle(4)) { WristerEngine::SceneManager::GetInstance()->ChangeScene(Scene::GameOver); }
 	// スプライトの更新
 	sprite->Update();
