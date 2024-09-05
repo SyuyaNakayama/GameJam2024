@@ -12,6 +12,12 @@ void GamePlayScene::Initialize()
 
 void GamePlayScene::Update()
 {
+	if (OperateConfig::GetInstance()->GetTrigger("SceneChange")) {
+		sceneManager->ChangeScene(Scene::Play);
+		WristerEngine::Constant::GetInstance()->LoadConstants();
+		return;
+	}
+
 	stage.Update();
 	// UI•`‰æ
 	uiDrawer->Update();

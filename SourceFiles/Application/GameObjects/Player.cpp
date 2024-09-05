@@ -1,4 +1,7 @@
 #include "Player.h"
+#include <imgui.h>
+#include <cmath>
+#include "SceneManager.h"
 
 using namespace WristerEngine::_2D;
 
@@ -22,6 +25,12 @@ void Player::Initialize()
 void Player::Update()
 {
 	Move();
+	Vector2 toEyePlayer = sprite->position - Const(Vector2, "EnemyBeamStartPos");
+	float dot = Dot({ -1,0 }, Normalize(toEyePlayer));
+	Angle theta = Half(PI) - std::acos(dot);
+
+	theta = std::abs(theta - Angle(60));
+	if (theta <= Angle(4)) { WristerEngine::SceneManager::GetInstance()->ChangeScene(Scene::GameOver); }
 	// スプライトの更新
 	sprite->Update();
 }
