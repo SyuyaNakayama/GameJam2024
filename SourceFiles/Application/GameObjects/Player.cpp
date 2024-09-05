@@ -1,6 +1,6 @@
 #include "Player.h"
 
-void Player::Initialize(const ObjectData& objectData)
+void Player::Initialize()
 {
 	// ƒvƒŒƒCƒ„[‚Ì‰Šú‰»
 	playerSprite->size = constant->GetConstant<Vector2>("PlayerSize");
