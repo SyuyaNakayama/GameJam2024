@@ -13,7 +13,7 @@
     "WhitePicSize": [ 300, 200 ],
     "PlayerSize": [ 50, 50 ],
     "EnemySize": [ 150, 400 ],
-    "EnemyBeamStartPos": [ 960, 270 ]
+    "EnemyEyePos": [ 960, 270 ]
   },
   "BitMapProp": {
   }

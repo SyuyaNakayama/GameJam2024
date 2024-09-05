@@ -42,23 +42,15 @@ void Player::Update()
 	Move();
 
 	// 地面に隠れる
-	if (operate->GetTrigger("Down")) 
+	if (!Action)
 	{
-		Action = &Player::Hide; 
-		hideTimer = Const(int, "PlayerHideTime");
+		if (operate->GetTrigger("Down"))
+		{
+			Action = &Player::Hide;
+			hideTimer = Const(int, "PlayerHideTime");
+		}
 	}
 	if (Action) { (this->*Action)(); }
-	else
-	{
-		Vector2 toEyePlayer = sprite->position - Const(Vector2, "EnemyBeamStartPos");
-		float dot = Dot({ -1,0 }, Normalize(toEyePlayer));
-		Angle theta = Half(PI) - std::acos(dot);
-
-		theta = std::abs(theta - Angle(60));
-
-		// ゲームオーバー
-		if (theta <= Angle(4)) { WristerEngine::SceneManager::GetInstance()->ChangeScene(Scene::GameOver); }
-	}
 
 	// スプライトの更新
 	sprite->Update();

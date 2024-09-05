@@ -10,4 +10,7 @@ class Enemy : public BaseEnemy
 	void Initialize() override;
 	void Update() override;
 	void Draw() override { sprite->Draw(); eyeBeam->Draw(); }
+
+public:
+	const float* GetEyeAngle() const { return &eyeBeam->rotation; }
 };
