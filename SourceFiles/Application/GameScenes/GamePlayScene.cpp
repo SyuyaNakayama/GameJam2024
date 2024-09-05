@@ -5,6 +5,7 @@ using namespace WristerEngine::_3D;
 
 void GamePlayScene::Initialize()
 {
+	stage.Initialize();
 	// UI•`‰æƒNƒ‰ƒX‚Ì‰Šú‰»
 	uiDrawer = std::make_unique<UIDrawerGamePlayScene>();
 	uiDrawer->Initialize();
@@ -12,8 +13,16 @@ void GamePlayScene::Initialize()
 
 void GamePlayScene::Update()
 {
+	stage.Update();
 	// UI•`‰æ
 	uiDrawer->Update();
+}
+
+void GamePlayScene::Draw()
+{
+	stage.Draw();
+	// UI•`‰æ
+	uiDrawer->Draw();
 }
 
 void UIDrawerGamePlayScene::Initialize()

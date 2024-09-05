@@ -1,6 +1,7 @@
 #pragma once
 #include "BaseScene.h"
 #include "AbstractUIDrawer.h"
+#include "Stage.h"
 
 // UI描画クラス(GamePlayScene用)
 class UIDrawerGamePlayScene : public WristerEngine::_2D::AbstractUIDrawer
@@ -13,7 +14,11 @@ class UIDrawerGamePlayScene : public WristerEngine::_2D::AbstractUIDrawer
 // ゲームプレイシーン
 class GamePlayScene : public WristerEngine::BaseScene
 {
+	// ステージオブジェクト
+	Stage stage;
+
 	// BaseScene を介して継承されました
 	void Initialize() override;
 	void Update() override;
+	void Draw() override;
 };

@@ -262,8 +262,11 @@
     <ClCompile Include="SourceFiles\Engine\GameObject\BaseStage.cpp">
       <Filter>ソース ファイル\Engine\3d\Object</Filter>
     </ClCompile>
+    <ClCompile Include="SourceFiles\Application\Stage\Stage.cpp">
+      <Filter>ソース ファイル\Application\MyGame\Stage</Filter>
+    </ClCompile>
     <ClCompile Include="SourceFiles\Application\GameObjects\BaseEnemy.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Application\MyGame\Stage\GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -464,6 +467,9 @@
     </ClInclude>
     <ClInclude Include="SourceFiles\Engine\GameObject\BaseStage.h">
       <Filter>ソース ファイル\Engine\3d\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceFiles\Application\Stage\Stage.h">
+      <Filter>ソース ファイル\Application\MyGame\Stage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

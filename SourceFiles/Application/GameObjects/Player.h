@@ -9,4 +9,5 @@ class Player : public WristerEngine::_2D::GameObject
 	// GameObject ‚ð‰î‚µ‚ÄŒp³‚³‚ê‚Ü‚µ‚½
 	void Initialize() override;
 	void Update() override;
+	void Draw() { playerSprite->Draw(); }
 };
