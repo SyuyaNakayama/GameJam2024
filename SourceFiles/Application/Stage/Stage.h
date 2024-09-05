@@ -1,6 +1,6 @@
 #pragma once
 #include "Player.h"
-#include "BaseEnemy.h"
+#include "Enemy.h"
 
 class Stage
 {

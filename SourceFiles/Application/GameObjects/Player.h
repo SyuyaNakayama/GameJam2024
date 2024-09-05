@@ -5,7 +5,7 @@
 
 class Player : public WristerEngine::_2D::GameObject
 {
-	std::unique_ptr<WristerEngine::_2D::Sprite> playerSprite;
+	std::unique_ptr<WristerEngine::_2D::Sprite> sprite;
 	OperateConfig* operate = OperateConfig::GetInstance();
 
 	void Move();
@@ -13,5 +13,5 @@ class Player : public WristerEngine::_2D::GameObject
 	// GameObject ‚ð‰î‚µ‚ÄŒp³‚³‚ê‚Ü‚µ‚½
 	void Initialize() override;
 	void Update() override;
-	void Draw() { playerSprite->Draw(); }
+	void Draw() { sprite->Draw(); }
 };

@@ -30,6 +30,6 @@ void UIDrawerGamePlayScene::Initialize()
 	sprites["Ground"] = Sprite::Create("white1x1.png");
 	std::unique_ptr<Sprite>& s = sprites["Ground"];
 	s->size.x = WristerEngine::WIN_SIZE.x;
-	s->size.y = constant->GetConstant<float>("GroundHeight");
+	s->size.y = Const(float, "GroundHeight");
 	s->position.y = WristerEngine::WIN_SIZE.y - s->size.y;
 }
