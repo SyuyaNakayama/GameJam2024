@@ -49,12 +49,7 @@ bool OperateConfig::GetTrigger(const std::string& str)
 
 	bool key = false, pad = false;
 
-	if (str == "Select")
-	{
-		key = input->IsTrigger(Key::Return);
-		if (input->IsConnectGamePad()) { pad = input->IsTrigger(Pad::A); }
-	}
-	else if (str == "SceneChange")
+	if (str == "SceneChange")
 	{
 		key = input->IsTrigger(Key::Space);
 		if (input->IsConnectGamePad()) { pad = input->IsTrigger(Pad::X); }
@@ -63,6 +58,14 @@ bool OperateConfig::GetTrigger(const std::string& str)
 	{
 		key = input->IsTrigger(Key::H);
 		if (input->IsConnectGamePad()) { pad = input->IsTrigger(Pad::Y); }
+	}
+	else if (str == "Attack")
+	{
+		key = input->IsTrigger(Key::S);
+		if (input->IsConnectGamePad())
+		{
+			pad = input->IsTrigger(Pad::A);
+		}
 	}
 	else if (str == "Left")
 	{
@@ -98,24 +101,6 @@ bool OperateConfig::GetTrigger(const std::string& str)
 		{
 			float vertical = input->ConLStick(1.0f).y;
 			pad = vertical < 0.0f;
-		}
-	}
-	else if (str == "Left")
-	{
-		key = input->IsTrigger(Key::Left);
-		if (input->IsConnectGamePad())
-		{
-			float horizontal = input->ConLStick(1.0f).x;
-			pad = horizontal < 0.0f;
-		}
-	}
-	else if (str == "Right")
-	{
-		key = input->IsTrigger(Key::Right);
-		if (input->IsConnectGamePad())
-		{
-			float horizontal = input->ConLStick(1.0f).x;
-			pad = horizontal > 0.0f;
 		}
 	}
 

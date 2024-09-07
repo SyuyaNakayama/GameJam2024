@@ -9,9 +9,10 @@ class Stage
 	std::list<std::unique_ptr<WristerEngine::_2D::GameObject>> stageObjects;
 
 	const Player* pPlayer = nullptr;
-	const Vector2* playerPos = nullptr;
 	const Vector2* goalPos = nullptr;
 	const float* enemyEyeDir = nullptr;
+	std::unique_ptr<WristerEngine::_2D::Sprite> debugSprite;
+	std::unique_ptr<WristerEngine::_2D::Sprite> debugSprite2;
 
 	// ƒvƒŒƒCƒ„[‚Æ“G‚Ì•Ï”‚Ì‚â‚èæ‚è
 	void PlayerToEnemy();

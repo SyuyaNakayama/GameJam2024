@@ -22,8 +22,20 @@ void Player::Hide()
 	sprite->isFlipY = true;
 	if (hideTimer.Update())
 	{
-		Action = nullptr; 
+		Action = nullptr;
 		sprite->isFlipY = false;
+	}
+}
+
+void Player::Attack()
+{
+	attackArea->isInvisible = false;
+	attackArea->position = sprite->position;
+	attackArea->isFlipX = sprite->isFlipX;
+	if (hideTimer.Update())
+	{
+		attackArea->isInvisible = true;
+		Action = nullptr;
 	}
 }
 
@@ -35,23 +47,37 @@ void Player::Initialize()
 	sprite->position.y = WristerEngine::WIN_SIZE.y - Const(float, "GroundHeight");
 	sprite->anchorPoint = { 0.5f,1.0f };
 	sprite->color = { 1.0f,1.0f,1.0f,1.0f };
+
+	attackArea = Sprite::Create("white1x1.png");
+	attackArea->size = Const(Vector2, "PlayerSize");
+	attackArea->anchorPoint = { -0.5f,1.0f };
+	attackArea->color = { 1.0f,0.5f,0.5f,1.0f };
+	attackArea->isInvisible = true;
 }
 
 void Player::Update()
 {
 	Move();
 
-	// 地面に隠れる
 	if (!Action)
 	{
+		// 地面に隠れる
 		if (operate->GetTrigger("Down"))
 		{
 			Action = &Player::Hide;
 			hideTimer = Const(int, "PlayerHideTime");
+		}
+
+		// 攻撃
+		if (operate->GetTrigger("Attack"))
+		{
+			Action = &Player::Attack;
+			hideTimer = Const(int, "PlayerAttackTime");
 		}
 	}
 	if (Action) { (this->*Action)(); }
 
 	// スプライトの更新
 	sprite->Update();
+	attackArea->Update();
 }
