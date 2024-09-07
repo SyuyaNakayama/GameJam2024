@@ -24,6 +24,8 @@ void Player::Hide()
 	{
 		Action = nullptr;
 		sprite->isFlipY = false;
+		isCanUseHide = false;
+		hideCoolTimer = Const(int, "PlayerHideTime");
 	}
 }
 
@@ -32,10 +34,12 @@ void Player::Attack()
 	attackArea->isInvisible = false;
 	attackArea->position = sprite->position;
 	attackArea->isFlipX = sprite->isFlipX;
-	if (hideTimer.Update())
+	if (attackTimer.Update())
 	{
 		attackArea->isInvisible = true;
 		Action = nullptr;
+		isCanUseAttack = false;
+		attackCoolTimer= Const(int, "PlayerAttackTime");
 	}
 }
 
@@ -59,20 +63,29 @@ void Player::Update()
 {
 	Move();
 
+	if (!isCanUseHide)
+	{
+		isCanUseHide = hideCoolTimer.Update();
+	}
+	if (!isCanUseAttack)
+	{
+		isCanUseAttack = attackCoolTimer.Update();
+	}
+
 	if (!Action)
 	{
 		// ’n–Ê‚É‰B‚ê‚é
-		if (operate->GetTrigger("Down"))
+		if (operate->GetTrigger("Down") && isCanUseHide)
 		{
 			Action = &Player::Hide;
 			hideTimer = Const(int, "PlayerHideTime");
 		}
 
 		// UŒ‚
-		if (operate->GetTrigger("Attack"))
+		if (operate->GetTrigger("Attack") && isCanUseAttack)
 		{
 			Action = &Player::Attack;
-			hideTimer = Const(int, "PlayerAttackTime");
+			attackTimer = Const(int, "PlayerAttackTime");
 		}
 	}
 	if (Action) { (this->*Action)(); }

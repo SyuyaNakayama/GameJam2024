@@ -9,12 +9,17 @@ class Player : public WristerEngine::_2D::GameObject
 	std::unique_ptr<WristerEngine::_2D::Sprite> attackArea;
 	OperateConfig* operate = OperateConfig::GetInstance();
 	WristerEngine::FrameTimer hideTimer; // ‰B‚ê‚Ä‚¢‚éŠÔ
-	WristerEngine::FrameTimer attackTimer; // ‰B‚ê‚Ä‚¢‚éŠÔ
+	WristerEngine::FrameTimer attackTimer; // UŒ‚‚µ‚Ä‚¢‚éŠÔ
 
 	// ‚È‚ñ‚ç‚©‚ÌƒAƒNƒVƒ‡ƒ“
 	void (Player::* Action)() = nullptr;
 	void Hide(); // ‰B‚ê‚é
 	void Attack(); // UŒ‚
+	// ƒN[ƒ‹ƒ^ƒCƒ€
+	WristerEngine::FrameTimer hideCoolTimer;
+	WristerEngine::FrameTimer attackCoolTimer;
+
+	bool isCanUseHide = true, isCanUseAttack = true;
 
 	void Move(); // ˆÚ“®
 
