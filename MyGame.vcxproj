@@ -108,6 +108,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Goal.cpp" />
     <ClCompile Include="SourceFiles\Application\GameObjects\BaseEnemy.cpp" />
     <ClCompile Include="SourceFiles\Application\GameObjects\Enemy.cpp" />
     <ClCompile Include="SourceFiles\Application\GameObjects\Player.cpp" />
@@ -170,6 +171,7 @@
     <ClCompile Include="SourceFiles\Application\GameScenes\TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Goal.h" />
     <ClInclude Include="SourceFiles\Application\GameObjects\BaseEnemy.h" />
     <ClInclude Include="SourceFiles\Application\GameObjects\Enemy.h" />
     <ClInclude Include="SourceFiles\Application\GameObjects\Player.h" />
