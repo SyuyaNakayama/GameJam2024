@@ -12,11 +12,11 @@ void Enemy::Initialize()
 	sprite->anchorPoint = { 0.5f,1.0f };
 	sprite->color = { 1.0f,1.0f,1.0f,1.0f };
 
-	eyeBeam = Sprite::Create("white1x1.png");
+	eyeBeam = Sprite::Create("EyeBeam.png");
 	eyeBeam->size.y = 1000;
 	eyeBeam->position = Const(Vector2, "EnemyEyePos");
 	eyeBeam->anchorPoint = { 0.5f,0.0f };
-	eyeBeam->color = { 1.0f,0,0,1.0f };
+	eyeBeam->color = { 1.0f,1.0f,1.0f,1.0f };
 	eyeBeam->rotation = Angle(30);
 }
 
