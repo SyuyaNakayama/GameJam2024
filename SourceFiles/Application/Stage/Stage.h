@@ -1,6 +1,7 @@
 #pragma once
 #include "Player.h"
 #include "Enemy.h"
+#include "Goal.h"
 
 class Stage
 {
@@ -9,10 +10,13 @@ class Stage
 
 	const Player* pPlayer = nullptr;
 	const Vector2* playerPos = nullptr;
+	const Vector2* goalPos = nullptr;
 	const float* enemyEyeDir = nullptr;
 
 	// プレイヤーと敵の変数のやり取り
 	void PlayerToEnemy();
+	// プレイヤーとゴールの変数ややり取り
+	void PlayerToGoal();
 
 public:
 	// 初期化

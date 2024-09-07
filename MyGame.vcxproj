@@ -108,9 +108,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Goal.cpp" />
     <ClCompile Include="SourceFiles\Application\GameObjects\BaseEnemy.cpp" />
     <ClCompile Include="SourceFiles\Application\GameObjects\Enemy.cpp" />
+    <ClCompile Include="SourceFiles\Application\GameObjects\Goal.cpp" />
     <ClCompile Include="SourceFiles\Application\GameObjects\Player.cpp" />
     <ClCompile Include="SourceFiles\Application\GameScenes\ClearScene.cpp" />
     <ClCompile Include="SourceFiles\Application\GameScenes\GameOverScene.cpp" />
@@ -171,9 +171,9 @@
     <ClCompile Include="SourceFiles\Application\GameScenes\TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Goal.h" />
     <ClInclude Include="SourceFiles\Application\GameObjects\BaseEnemy.h" />
     <ClInclude Include="SourceFiles\Application\GameObjects\Enemy.h" />
+    <ClInclude Include="SourceFiles\Application\GameObjects\Goal.h" />
     <ClInclude Include="SourceFiles\Application\GameObjects\Player.h" />
     <ClInclude Include="SourceFiles\Application\GameScenes\ClearScene.h" />
     <ClInclude Include="SourceFiles\Application\GameScenes\GameOverScene.h" />

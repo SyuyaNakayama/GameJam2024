@@ -7,7 +7,8 @@
   "float": {
     "GroundHeight": 100,
     "PlayerMoveSpd": 3,
-    "EnemyPosX": 1020
+    "EnemyPosX": 1020,
+    "GoalPosX": 1200
   },
   "Vector2": {
     "WhitePicSize": [ 300, 200 ],

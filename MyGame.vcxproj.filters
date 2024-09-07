@@ -265,10 +265,10 @@
     <ClCompile Include="SourceFiles\Application\GameObjects\BaseEnemy.cpp">
       <Filter>ソース ファイル\Application\MyGame\Stage\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="Goal.cpp">
+    <ClCompile Include="SourceFiles\Application\GameObjects\Player.cpp">
       <Filter>ソース ファイル\Application\MyGame\Stage\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="SourceFiles\Application\GameObjects\Player.cpp">
+    <ClCompile Include="SourceFiles\Application\GameObjects\Goal.cpp">
       <Filter>ソース ファイル\Application\MyGame\Stage\GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
@@ -474,7 +474,7 @@
     <ClInclude Include="SourceFiles\Application\Stage\Stage.h">
       <Filter>ソース ファイル\Application\MyGame\Stage</Filter>
     </ClInclude>
-    <ClInclude Include="Goal.h">
+    <ClInclude Include="SourceFiles\Application\GameObjects\Goal.h">
       <Filter>ソース ファイル\Application\MyGame\Stage\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>

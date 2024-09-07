@@ -11,4 +11,7 @@ class Goal : public WristerEngine::_2D::GameObject
 	void Initialize() override;
 	void Update() override;
 	void Draw() { sprite->Draw(); }
+
+public:
+	const Vector2* GetPosition() const { return &sprite->position; }
 };

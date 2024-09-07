@@ -14,11 +14,25 @@ void Stage::PlayerToEnemy()
 	if (theta <= Angle(4)) { WristerEngine::SceneManager::GetInstance()->ChangeScene(Scene::GameOver); }
 }
 
+void Stage::PlayerToGoal() {
+	if (pPlayer->IsHide()) { return; }
+
+	//プレイヤーとゴールの位置関係を計算
+	Vector2 hit = *goalPos - *playerPos;
+	//ゲームクリア
+	if (hit.x <= 0 && hit.y <= 0) {
+		if (hit.x >= -WEConst(Vector2, "PlayerSize").x && hit.y >= -WEConst(Vector2, "PlayerSize").y) {
+			WristerEngine::SceneManager::GetInstance()->ChangeScene(Scene::Clear);
+		}
+	}
+}
+
 void Stage::Initialize()
 {
 	// オブジェクトの登録
 	stageObjects.push_back(std::make_unique<Player>());
 	stageObjects.push_back(std::make_unique<Enemy>());
+	stageObjects.push_back(std::make_unique<Goal>());
 	for (auto& obj : stageObjects) { obj->Initialize(); }
 
 	// プレイヤーと敵の情報を取得
@@ -34,6 +48,11 @@ void Stage::Initialize()
 			const Enemy* pEnemy = dynamic_cast<Enemy*>(obj.get());
 			enemyEyeDir = pEnemy->GetEyeAngle();
 		}
+		else if (dynamic_cast<Goal*>(obj.get()))
+		{
+			const Goal* pGoal = dynamic_cast<Goal*>(obj.get());
+			goalPos = pGoal->GetPosition();
+		}
 	}
 
 }
@@ -41,6 +60,7 @@ void Stage::Initialize()
 void Stage::Update()
 {
 	PlayerToEnemy();
+	PlayerToGoal();
 	for (auto& obj : stageObjects) { obj->Update(); }
 }
 
