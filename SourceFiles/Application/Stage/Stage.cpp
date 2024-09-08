@@ -14,7 +14,7 @@ void Stage::PlayerToEnemy()
 	theta = std::abs(theta - *enemyEyeDir);
 
 	// ゲームオーバー
-	if (theta <= Angle(4)) { WristerEngine::SceneManager::GetInstance()->ChangeScene(Scene::GameOver); }
+	//if (theta <= Angle(4)) { WristerEngine::SceneManager::GetInstance()->ChangeScene(Scene::GameOver); }
 
 	// 後で修正
 	// プレイヤーの左上端と右下端の座標を求める

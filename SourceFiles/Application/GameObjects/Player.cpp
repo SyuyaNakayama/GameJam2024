@@ -57,6 +57,12 @@ void Player::Initialize()
 	attackArea->anchorPoint = { -0.5f,1.0f };
 	attackArea->color = { 1.0f,0.5f,0.5f,1.0f };
 	attackArea->isInvisible = true;
+
+	// コライダーの設定
+	collisionAttribute = CollisionAttribute::Player;
+	collisionMask = CollisionMask::Player;
+	AddCollider(attackArea.get(), CollisionShapeType::Box);
+	AddCollider(sprite.get(), CollisionShapeType::Box);
 }
 
 void Player::Update()
@@ -93,4 +99,9 @@ void Player::Update()
 	// スプライトの更新
 	sprite->Update();
 	attackArea->Update();
+}
+
+void Player::OnCollision([[maybe_unused]] WristerEngine::_2D::ColliderGroup* group)
+{
+	ImGui::Text("Hit");
 }

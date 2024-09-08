@@ -2,8 +2,9 @@
 #include "GameObject.h"
 #include "Sprite.h"
 #include "OperateConfig.h"
+#include "Collider.h"
 
-class Player : public WristerEngine::_2D::GameObject
+class Player : public WristerEngine::_2D::GameObject, public WristerEngine::_2D::ColliderGroup
 {
 	std::unique_ptr<WristerEngine::_2D::Sprite> sprite;
 	std::unique_ptr<WristerEngine::_2D::Sprite> attackArea;
@@ -27,6 +28,7 @@ class Player : public WristerEngine::_2D::GameObject
 	void Initialize() override;
 	void Update() override;
 	void Draw() { sprite->Draw(); attackArea->Draw(); }
+	void OnCollision(WristerEngine::_2D::ColliderGroup* group) override;
 
 public:
 	bool IsHide() const { return Action == &Player::Hide; }

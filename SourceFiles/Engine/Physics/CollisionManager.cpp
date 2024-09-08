@@ -1,5 +1,6 @@
 #include "CollisionManager.h"
 #include <algorithm>
+#include "ImGuiManager.h"
 using namespace std;
 using namespace WristerEngine;
 
@@ -9,8 +10,16 @@ list<SphereCollider*> CollisionManager::sphereColliders;
 list<PlaneCollider*> CollisionManager::planeColliders;
 list<PolygonCollider*> CollisionManager::polygonColliders;
 list<RayCollider*> CollisionManager::rayColliders;
+list<_2D::ColliderGroup*> CollisionManager::_2DColliders;
 
 bool CollisionManager::CheckCollisionFiltering(BaseCollider* colliderA, BaseCollider* colliderB)
+{
+	return
+		(UINT)colliderA->GetCollisionAttribute() & (UINT)colliderB->GetCollisionMask() &&
+		(UINT)colliderB->GetCollisionAttribute() & (UINT)colliderA->GetCollisionMask();
+}
+
+bool CollisionManager::CheckCollisionFiltering(_2D::ColliderGroup* colliderA, _2D::ColliderGroup* colliderB)
 {
 	return
 		(UINT)colliderA->GetCollisionAttribute() & (UINT)colliderB->GetCollisionMask() &&
@@ -249,6 +258,57 @@ bool CollisionManager::CheckCollisionRayBox(RayCollider* colliderA, BoxCollider*
 	return CheckCollisionRayPolygon(colliderA, &pCollider);
 }
 
+bool WristerEngine::CollisionManager::CheckCollision2ColliderGroups(_2D::ColliderGroup* groupA, _2D::ColliderGroup* groupB)
+{
+	if (!CheckCollisionFiltering(groupA, groupB)) { return false; }
+
+	const auto& collidersA = groupA->GetColliders();
+	const auto& collidersB = groupB->GetColliders();
+
+	// 2つのコライダーグループの全てのコライダーと当たり判定を取る
+	auto itrA = collidersA.begin();
+	for (; itrA != collidersA.end(); itrA++)
+	{
+		auto itrB = collidersB.begin();
+		for (; itrB != collidersB.end(); itrB++)
+		{
+			// ボックスとボックスの当たり判定
+			if (itrA->get()->GetShapeType() == _2D::CollisionShapeType::Box)
+			{
+				if (itrB->get()->GetShapeType() == _2D::CollisionShapeType::Box)
+				{
+					const _2D::Sprite* transA = itrA->get()->GetTransform();
+					const _2D::Sprite* transB = itrB->get()->GetTransform();
+
+					Vector2 aPosLT, aPosRB;
+					aPosLT = aPosRB = transA->position;
+					aPosLT -= Vector2(transA->size.x * transA->anchorPoint.x, transA->size.y * transA->anchorPoint.y);
+					aPosRB += Vector2(transA->size.x * (1.0f - transA->anchorPoint.x), transA->size.y * (1.0f - transA->anchorPoint.y));
+					Vector2 aPosCenter = Half<Vector2>(aPosLT + aPosRB);
+
+
+					Vector2 bPosLT, bPosRB;
+					bPosLT = bPosRB = transB->position;
+					bPosLT -= Vector2(transB->size.x * transB->anchorPoint.x, transB->size.y * transB->anchorPoint.y);
+					bPosRB += Vector2(transB->size.x * (1.0f - transB->anchorPoint.x), transB->size.y * (1.0f - transB->anchorPoint.y));
+					Vector2 bPosCenter = Half(bPosLT + bPosRB);
+
+					_2D::ImGuiManager::PrintVector("aPosCenter", aPosCenter);
+					_2D::ImGuiManager::PrintVector("bPosCenter", bPosCenter);
+
+					if (std::abs(aPosCenter.x - bPosCenter.x) <= Half(transA->size.x + transB->size.x) &&
+						std::abs(aPosCenter.y - bPosCenter.y) <= Half(transA->size.y + transB->size.y))
+					{
+						return true;
+					}
+				}
+			}
+		}
+	}
+
+	return false;
+}
+
 void CollisionManager::CheckBoxCollisions()
 {
 	auto itrA = boxColliders.begin();
@@ -456,6 +516,23 @@ void CollisionManager::CheckRayCastCollision(RayCollider* collider)
 	nearly.OnCollision(collider);
 }
 
+void WristerEngine::CollisionManager::Check2DCollisions()
+{
+	auto itrA = _2DColliders.begin();
+	for (; itrA != _2DColliders.end(); itrA++)
+	{
+		list<_2D::ColliderGroup*>::iterator itrB = itrA;
+		itrB++;
+		for (; itrB != _2DColliders.end(); itrB++)
+		{
+			if (!CheckCollision2ColliderGroups(*itrA, *itrB)) { continue; }
+
+			(*itrA)->OnCollision(*itrB);
+			(*itrB)->OnCollision(*itrA);
+		}
+	}
+}
+
 void CollisionManager::CheckAllCollisions()
 {
 	CheckBoxCollisions();
@@ -467,4 +544,5 @@ void CollisionManager::CheckAllCollisions()
 	CheckRayPolygonCollisions();
 	CheckRaySphereCollisions();
 	CheckRayBoxCollisions();
+	Check2DCollisions();
 }

@@ -1,7 +1,8 @@
 #pragma once
 #include "BaseEnemy.h"
+#include "Collider.h"
 
-class Enemy : public BaseEnemy
+class Enemy : public BaseEnemy, public WristerEngine::_2D::ColliderGroup
 {
 	std::unique_ptr<WristerEngine::_2D::Sprite> sprite;
 	std::unique_ptr<WristerEngine::_2D::Sprite> eyeBeam;
