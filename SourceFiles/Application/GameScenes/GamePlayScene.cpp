@@ -25,10 +25,9 @@ void GamePlayScene::Update()
 
 void GamePlayScene::Draw()
 {
+	stage.Draw();
 	// UI•`‰æ
 	uiDrawer->Draw();
-
-	stage.Draw();
 }
 
 void UIDrawerGamePlayScene::Initialize()
