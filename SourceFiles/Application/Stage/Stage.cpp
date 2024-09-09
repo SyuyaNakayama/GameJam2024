@@ -18,26 +18,31 @@ void Stage::PlayerToEnemy()
 
 	// 後で修正
 	// プレイヤーの左上端と右下端の座標を求める
-	//const Sprite* pSprite = pPlayer->GetSprite();
-	//Vector2 pPosLT, pPosRB;
-	//pPosLT = pPosRB = pSprite->position;
-	//pPosLT -= Vector2(pSprite->size.x * pSprite->anchorPoint.x, pSprite->size.y * pSprite->anchorPoint.y);
-	//pPosRB += Vector2(pSprite->size.x * (1.0f - pSprite->anchorPoint.x), pSprite->size.y * (1.0f - pSprite->anchorPoint.y));
+	const Sprite* pSprite = pPlayer->GetSprite();
+	Vector2 pPosLT, pPosRB;
+	pPosLT = pPosRB = pSprite->position;
+	pPosLT -= Vector2(pSprite->size.x * pSprite->anchorPoint.x, pSprite->size.y * pSprite->anchorPoint.y);
+	pPosRB += Vector2(pSprite->size.x * (1.0f - pSprite->anchorPoint.x), pSprite->size.y * (1.0f - pSprite->anchorPoint.y));
 
-	//debugSprite = Sprite::Create("white1x1.png", WEConst(Vector2, "EnemyEyePos"));
-	//debugSprite->size.x = 1000;
-	//debugSprite->rotation = Angle(90 + 4) + *enemyEyeDir;
-	//debugSprite->Update();
+	debugSprite = Sprite::Create("white1x1.png", WEConst(Vector2, "EnemyEyePos"));
+	debugSprite->size.x = 1000;
+	debugSprite->rotation = Angle(90 + 4) + *enemyEyeDir;
+	debugSprite->Update();
 
-	//Vector2 vec = Normalize(Vector2(std::cos(debugSprite->rotation), std::sin(debugSprite->rotation)));
-	//debugSprite2 = Sprite::Create("white1x1.png", WEConst(Vector2, "EnemyEyePos"));
-	//debugSprite2->size *= 10;
-	//debugSprite2->position = WEConst(Vector2, "EnemyEyePos") + vec * 300;
-	//debugSprite2->Update();
+	Vector2 vec = Normalize(Vector2(std::cos(debugSprite->rotation), std::sin(debugSprite->rotation)));
+	debugSprite2 = Sprite::Create("white1x1.png", WEConst(Vector2, "EnemyEyePos"));
+	debugSprite2->SetCenterAnchor();
+	debugSprite2->size *= 10;
 
-	//Vector2 toEyePlayerRB = pPosRB - WEConst(Vector2, "EnemyEyePos");
-	//float crossRB = Dot(vec, Normalize(toEyePlayerRB));
-	//if (crossRB <= 0) { ImGui::Text("Hit!(RB)"); }
+
+	Vector2 toEyePlayerRB = Normalize(pPosRB - WEConst(Vector2, "EnemyEyePos"));
+	float dis = 300;
+	ImGui::SliderFloat("debugSprite2", &dis, 0, 1000);
+	debugSprite2->position = WEConst(Vector2, "EnemyEyePos") + toEyePlayerRB * dis;
+	debugSprite2->Update();
+	float crossRB = Dot(vec, Normalize(toEyePlayerRB));
+	if (crossRB <= 0) { ImGui::Text("Hit!(RB)"); }
+	ImGui::Text("%f", crossRB);
 }
 
 void Stage::PlayerToGoal() {
@@ -102,6 +107,6 @@ void Stage::Update()
 void Stage::Draw()
 {
 	for (auto& obj : stageObjects) { obj->Draw(); }
-	//debugSprite->Draw();
-	//debugSprite2->Draw();
+	debugSprite->Draw();
+	debugSprite2->Draw();
 }

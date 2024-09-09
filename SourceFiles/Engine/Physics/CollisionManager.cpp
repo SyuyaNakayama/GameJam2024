@@ -281,26 +281,26 @@ bool WristerEngine::CollisionManager::CheckCollision2ColliderGroups(_2D::Collide
 			{
 				if (itrB->get()->GetShapeType() == _2D::CollisionShapeType::Box)
 				{
-					const _2D::Sprite* transA = itrA->get()->GetTransform();
-					const _2D::Sprite* transB = itrB->get()->GetTransform();
+					std::array<const _2D::Sprite*, 2> trans = { itrA->get()->GetTransform(),itrB->get()->GetTransform() };
+					std::array<Vector2, 2> posCenter;
 
-					Vector2 aPosLT, aPosRB;
-					aPosLT = aPosRB = transA->position;
-					aPosLT -= Vector2(transA->size.x * transA->anchorPoint.x, transA->size.y * transA->anchorPoint.y);
-					aPosRB += Vector2(transA->size.x * (1.0f - transA->anchorPoint.x), transA->size.y * (1.0f - transA->anchorPoint.y));
-					Vector2 aPosCenter = Half<Vector2>(aPosLT + aPosRB);
+					// 中心点を計算
+					for (size_t i = 0; i < trans.size(); i++)
+					{
+						Vector2 posLT, posRB;
+						posLT = posRB = trans[i]->position;
+						// 差分
+						Vector2 ltSub = Vector2(trans[i]->size.x * trans[i]->anchorPoint.x, trans[i]->size.y * trans[i]->anchorPoint.y);
+						Vector2 rbSub = Vector2(trans[i]->size.x * (1.0f - trans[i]->anchorPoint.x), trans[i]->size.y * (1.0f - trans[i]->anchorPoint.y));
+						if (trans[i]->isFlipX) { ltSub.x = -ltSub.x; rbSub.x = -rbSub.x; }
+						if (trans[i]->isFlipY) { ltSub.y = -ltSub.y; rbSub.y = -rbSub.y; }
+						posLT -= ltSub; posRB += rbSub;
+						// 中心点を代入
+						posCenter[i] = Half<Vector2>(posLT + posRB);
+					}
 
-					Vector2 bPosLT, bPosRB;
-					bPosLT = bPosRB = transB->position;
-					bPosLT -= Vector2(transB->size.x * transB->anchorPoint.x, transB->size.y * transB->anchorPoint.y);
-					bPosRB += Vector2(transB->size.x * (1.0f - transB->anchorPoint.x), transB->size.y * (1.0f - transB->anchorPoint.y));
-					Vector2 bPosCenter = Half(bPosLT + bPosRB);
-
-					_2D::ImGuiManager::PrintVector("aPosCenter", aPosCenter);
-					_2D::ImGuiManager::PrintVector("bPosCenter", bPosCenter);
-
-					if (std::abs(aPosCenter.x - bPosCenter.x) <= Half(transA->size.x + transB->size.x) &&
-						std::abs(aPosCenter.y - bPosCenter.y) <= Half(transA->size.y + transB->size.y))
+					if (std::abs(posCenter[0].x - posCenter[1].x) <= Half(trans[0]->size.x + trans[1]->size.x) &&
+						std::abs(posCenter[0].y - posCenter[1].y) <= Half(trans[0]->size.y + trans[1]->size.y))
 					{
 						// コリジョンペアの登録
 						groupA->AddCollisionPair(aIndex, bIndex);
