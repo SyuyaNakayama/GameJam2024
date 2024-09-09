@@ -18,6 +18,11 @@ void Enemy::Initialize()
 	eyeBeam->anchorPoint = { 0.5f,0.0f };
 	eyeBeam->color = { 1.0f,1.0f,1.0f,1.0f };
 	eyeBeam->rotation = Angle(30);
+
+	// コライダーの設定
+	collisionAttribute = CollisionAttribute::Enemy;
+	collisionMask = CollisionMask::Enemy;
+	AddCollider(sprite.get(), CollisionShapeType::Box);
 }
 
 void Enemy::Update()

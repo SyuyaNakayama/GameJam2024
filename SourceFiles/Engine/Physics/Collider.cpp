@@ -17,6 +17,7 @@ PlaneCollider::PlaneCollider() { CollisionManager::PushCollider(this); }
 PlaneCollider::~PlaneCollider() { CollisionManager::PopCollider(this); }
 IncludeCollider::IncludeCollider() { CollisionManager::PushCollider(this); }
 IncludeCollider::~IncludeCollider() { CollisionManager::PopCollider(this); }
+WristerEngine::_2D::ColliderGroup::ColliderGroup() { CollisionManager::PushCollider(this); }
 
 void PolygonCollider::SetVertices()
 {
@@ -79,3 +80,24 @@ void PolygonCollider::UpdateVertices()
 //		tri.ComputeNormal();
 //	}
 //}
+
+void WristerEngine::_2D::Base2DCollider::Initialize(Sprite* transform_, CollisionShapeType shapeType_)
+{
+	transform = transform_;
+	shapeType = shapeType_;
+}
+
+void WristerEngine::_2D::ColliderGroup::AddCollider(Sprite* transform, CollisionShapeType shapeType)
+{
+	std::unique_ptr<Base2DCollider> newCollider = std::make_unique<Base2DCollider>();
+	newCollider->Initialize(transform, shapeType);
+	colliders.push_back(move(newCollider));
+	//switch (shapeType)
+	//{
+	//case WristerEngine::_2D::CollisionShapeType::Box:
+	//	newCollider=std::make_unique<>
+	//	break;
+	//default:
+	//	break;
+	//}
+}

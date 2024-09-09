@@ -4,15 +4,14 @@
 #include <vector>
 #include <array>
 #include <memory>
+#include "Sprite.h"
 
 // コライダーの属性
 enum class CollisionAttribute
 {
 	Player = 0b1,
-	Block = 0b1 << 1,
-	Ground = 0b1 << 2,
-	Object = 0b1 << 3,
-	Goal = 0b1 << 4,
+	Enemy = 0b1 << 1,
+	Goal = 0b1 << 2,
 	All = -1
 };
 
@@ -21,14 +20,68 @@ enum class CollisionMask
 {
 	None = 0,
 	All = -1,
-	Player = CollisionMask::All,
-	Block = (int)CollisionAttribute::Player | (int)CollisionAttribute::Object,
-	Object = (int)CollisionMask::All,
-	Goal = (int)CollisionAttribute::Player | (int)CollisionAttribute::Object,
+	Player = CollisionAttribute::Enemy,
+	Enemy = (int)CollisionAttribute::Player,
+	Goal = (int)CollisionAttribute::Player
 };
 
 namespace WristerEngine
 {
+	namespace _2D
+	{
+		enum class CollisionShapeType
+		{
+			Unknown,
+			Box,
+		};
+
+		class ColliderGroup;
+
+		class Base2DCollider
+		{
+		private:
+			Sprite* transform;
+			CollisionShapeType shapeType = CollisionShapeType::Unknown;
+
+		public:
+			virtual ~Base2DCollider() = default;
+
+			// 初期化
+			void Initialize(Sprite* transform, CollisionShapeType shapeType);
+
+			// getter
+			const Sprite* GetTransform() const { return transform; }
+			CollisionShapeType GetShapeType() const { return shapeType; }
+		};
+
+		class ColliderGroup
+		{
+		protected:
+			std::list<std::unique_ptr<Base2DCollider>> colliders;
+			CollisionAttribute collisionAttribute = CollisionAttribute::All;
+			CollisionMask collisionMask = CollisionMask::All;
+
+		public:
+			// コンストラクタ
+			ColliderGroup();
+
+			// コライダーの追加
+			void AddCollider(Sprite* transform, CollisionShapeType shapeType);
+
+			// getter
+			CollisionAttribute GetCollisionAttribute() const { return collisionAttribute; }
+			CollisionMask GetCollisionMask() const { return collisionMask; }
+			const std::list<std::unique_ptr<Base2DCollider>>& GetColliders() const { return colliders; }
+
+			// 衝突コールバック関数
+			virtual void OnCollision([[maybe_unused]] ColliderGroup* colliderGroup) {}
+
+			//class BoxCollider : public Base2DCollider
+			//{
+			//};
+		};
+	}
+
 	class BoxCollider;
 	class SphereCollider;
 	class PlaneCollider;
