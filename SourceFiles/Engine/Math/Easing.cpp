@@ -62,11 +62,32 @@ void Easing::Initialize(int easeTime, Type type_)
 
 float Easing::Update()
 {
-	if (isFinish) { return Easing::MAX; }
-	x = timer.GetTimeRate();
+	if (isFinish)
+	{
+		if (isLoop)
+		{
+			if (loopInterval.Update())
+			{
+				isFinish = false;
+				isPostLoop = !isPostLoop;
+				if (isPostLoop) { return Easing::MAX; }
+				else { return 0.0f; }
+			}
+		}
+		if (!isPostLoop) { return Easing::MAX; }
+		else { return 0.0f; }
+	}
+	if (!isPostLoop) { x = timer.GetTimeRate(); }
+	else { x = timer.GetRemainTimeRate(); }
 	float easeNum = (this->*Ease[(int)type])();
 	isFinish = timer.Update();
 	return easeNum;
+}
+
+void WristerEngine::Easing::SetLoop(int loopInterval_)
+{
+	isLoop = true;
+	loopInterval = loopInterval_;
 }
 
 float LoopEasing::Cos()

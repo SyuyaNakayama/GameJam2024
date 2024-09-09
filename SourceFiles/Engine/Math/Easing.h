@@ -26,6 +26,9 @@ namespace WristerEngine
 		float x = 0; // イージングの割合
 		Type type = Type::Sqrt;
 		bool isFinish = false;
+		bool isLoop = false;
+		bool isPostLoop = false;
+		FrameTimer loopInterval;
 
 		// イージングの関数テーブル
 		static float (Easing::* Ease[])();
@@ -61,6 +64,12 @@ namespace WristerEngine
 
 		// 終了したか
 		bool IsFinish() const { return isFinish; }
+
+		/// <summary>
+		/// ループを設定
+		/// </summary>
+		/// <param name="loopInterval">ループ開始までの間隔</param>
+		void SetLoop(int loopInterval);
 	};
 
 	// ループするイージング

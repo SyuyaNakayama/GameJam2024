@@ -139,8 +139,6 @@ void Player::Update()
 	hide->Update();
 	ui_attack->Update();
 	ui_dive->Update();
-
-	ImGui::Text("%d", colliders.size());
 }
 
 void Player::OnCollision([[maybe_unused]] WristerEngine::_2D::ColliderGroup* group)

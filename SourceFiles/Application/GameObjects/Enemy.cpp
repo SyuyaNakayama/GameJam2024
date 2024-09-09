@@ -25,6 +25,9 @@ void Enemy::Initialize()
 	hpGauge->position = Const(Vector2, "EnemyGaugePos");
 	hpGauge->color = { 0,1,0,1 };
 
+	beamRotEasing.Initialize(120, WristerEngine::Easing::Type::EaseInOutBack);
+	beamRotEasing.SetLoop(30);
+
 	// コライダーの設定
 	collisionAttribute = CollisionAttribute::Enemy;
 	collisionMask = CollisionMask::Enemy;
@@ -34,6 +37,7 @@ void Enemy::Initialize()
 void Enemy::Update()
 {
 	hpGauge->size.x = Const(Vector2, "EnemyGaugeSize").x * hpRate;
+	eyeBeam->rotation = beamRotEasing.Update() * Angle(30) + Angle(30);
 
 	// スプライトの更新
 	sprite->Update();
@@ -53,7 +57,7 @@ void Enemy::OnCollision([[maybe_unused]] WristerEngine::_2D::ColliderGroup* coll
 	for (auto pair : collisionPair[0])
 	{
 		if (collider->GetColliderName(pair) != "attack") { return; }
-		
+
 		hpRate -= 0.01f;
 	}
 }
