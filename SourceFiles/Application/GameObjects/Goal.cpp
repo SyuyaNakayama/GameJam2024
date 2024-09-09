@@ -19,4 +19,5 @@ void Goal::Update()
 {
 	// スプライトの更新
 	sprite->Update();
+	
 }

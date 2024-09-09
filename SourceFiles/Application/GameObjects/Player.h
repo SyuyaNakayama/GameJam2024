@@ -7,6 +7,7 @@
 class Player : public WristerEngine::_2D::GameObject, public WristerEngine::_2D::ColliderGroup
 {
 	std::unique_ptr<WristerEngine::_2D::Sprite> sprite;
+	std::unique_ptr<WristerEngine::_2D::Sprite> sprites;
 	std::unique_ptr<WristerEngine::_2D::Sprite> attackArea;
 	OperateConfig* operate = OperateConfig::GetInstance();
 	WristerEngine::FrameTimer hideTimer; // ‰B‚ê‚Ä‚¢‚éŽžŠÔ
@@ -27,7 +28,7 @@ class Player : public WristerEngine::_2D::GameObject, public WristerEngine::_2D:
 	// GameObject ‚ð‰î‚µ‚ÄŒp³‚³‚ê‚Ü‚µ‚½
 	void Initialize() override;
 	void Update() override;
-	void Draw() { sprite->Draw(); attackArea->Draw(); }
+	void Draw() { sprites->Draw(); sprite->Draw(); attackArea->Draw(); }
 	void OnCollision(WristerEngine::_2D::ColliderGroup* group) override;
 
 public:

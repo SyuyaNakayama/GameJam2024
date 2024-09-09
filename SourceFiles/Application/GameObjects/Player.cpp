@@ -45,6 +45,10 @@ void Player::Attack()
 
 void Player::Initialize()
 {
+	sprites = Sprite::Create("background.png");
+	sprites->size.x = WristerEngine::WIN_SIZE.x;
+	sprites->size.y = WristerEngine::WIN_SIZE.y;
+	sprites->isInvisible = false;
 	// 初期化
 	sprite = Sprite::Create("TestPlayer.png");
 	sprite->size = Const(Vector2, "PlayerSize");
@@ -97,6 +101,7 @@ void Player::Update()
 	if (Action) { (this->*Action)(); }
 
 	// スプライトの更新
+	sprites->Update();
 	sprite->Update();
 	attackArea->Update();
 }

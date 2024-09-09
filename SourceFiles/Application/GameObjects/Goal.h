@@ -6,11 +6,12 @@
 class Goal : public WristerEngine::_2D::GameObject
 {
 	std::unique_ptr<WristerEngine::_2D::Sprite> sprite;
+	std::unique_ptr<WristerEngine::_2D::Sprite> sprites;
 
 	// GameObject ‚ð‰î‚µ‚ÄŒp³‚³‚ê‚Ü‚µ‚½
 	void Initialize() override;
 	void Update() override;
-	void Draw() { sprite->Draw(); }
+	void Draw() { sprite->Draw();  }
 
 public:
 	const Vector2* GetPosition() const { return &sprite->position; }

@@ -39,9 +39,5 @@ void UIDrawerGamePlayScene::Initialize()
 	s->size.y = Const(float, "GroundHeight");
 	s->position.y = WristerEngine::WIN_SIZE.y - s->size.y;
 
-	sprites["BackGround"] = Sprite::Create("background.png");
-	std::unique_ptr<Sprite>& bg = sprites["BackGround"];
-	bg->size.x = WristerEngine::WIN_SIZE.x;
-	bg->size.y = WristerEngine::WIN_SIZE.y;
-	bg->isInvisible = true;
+	
 }
