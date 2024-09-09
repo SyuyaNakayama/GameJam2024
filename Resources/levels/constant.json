@@ -1,7 +1,8 @@
 {
   "int": {
     "PlayerHideTime": 120,
-    "PlayerAttackTime": 60
+    "PlayerAttackTime": 60,
+    "PlayerAnimationTimer":60
   },
   "int[]": {
   },
