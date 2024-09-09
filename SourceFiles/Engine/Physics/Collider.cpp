@@ -81,16 +81,17 @@ void PolygonCollider::UpdateVertices()
 //	}
 //}
 
-void WristerEngine::_2D::Base2DCollider::Initialize(Sprite* transform_, CollisionShapeType shapeType_)
+void WristerEngine::_2D::Base2DCollider::Initialize(Sprite* transform_, CollisionShapeType shapeType_, const std::string& colliderName_)
 {
 	transform = transform_;
 	shapeType = shapeType_;
+	colliderName = colliderName_;
 }
 
-void WristerEngine::_2D::ColliderGroup::AddCollider(Sprite* transform, CollisionShapeType shapeType)
+void WristerEngine::_2D::ColliderGroup::AddCollider(Sprite* transform, CollisionShapeType shapeType, const std::string& colliderName)
 {
 	std::unique_ptr<Base2DCollider> newCollider = std::make_unique<Base2DCollider>();
-	newCollider->Initialize(transform, shapeType);
+	newCollider->Initialize(transform, shapeType, colliderName);
 	colliders.push_back(move(newCollider));
 	//switch (shapeType)
 	//{
@@ -100,6 +101,11 @@ void WristerEngine::_2D::ColliderGroup::AddCollider(Sprite* transform, Collision
 	//default:
 	//	break;
 	//}
+}
+
+void WristerEngine::_2D::ColliderGroup::DeleteCollider(const std::string& colliderName)
+{
+	colliders.remove_if([&](const std::unique_ptr<Base2DCollider>& collider) { return collider->GetColliderName() == colliderName; });
 }
 
 void WristerEngine::_2D::ColliderGroup::AddCollisionPair(size_t myIndex, size_t youIndex)
@@ -114,4 +120,14 @@ void WristerEngine::_2D::ColliderGroup::DeletePair()
 		pair.second.clear();
 	}
 	collisionPair.clear();
+}
+
+const std::string WristerEngine::_2D::ColliderGroup::GetColliderName(size_t index) const
+{
+	auto itr = colliders.begin();
+	for (size_t i = 0; i < index; i++)
+	{
+		itr++;
+	}
+	return itr->get()->GetColliderName();
 }

@@ -43,16 +43,18 @@ namespace WristerEngine
 		private:
 			Sprite* transform;
 			CollisionShapeType shapeType = CollisionShapeType::Unknown;
+			std::string colliderName;
 
 		public:
 			virtual ~Base2DCollider() = default;
 
 			// 初期化
-			void Initialize(Sprite* transform, CollisionShapeType shapeType);
+			void Initialize(Sprite* transform, CollisionShapeType shapeType, const std::string& colliderName);
 
 			// getter
 			const Sprite* GetTransform() const { return transform; }
 			CollisionShapeType GetShapeType() const { return shapeType; }
+			const std::string GetColliderName() const { return colliderName; }
 		};
 
 		class ColliderGroup
@@ -68,17 +70,18 @@ namespace WristerEngine
 			ColliderGroup();
 
 			// コライダーの追加
-			void AddCollider(Sprite* transform, CollisionShapeType shapeType);
-
+			void AddCollider(Sprite* transform, CollisionShapeType shapeType, const std::string& colliderName);
+			// コライダーの削除
+			void DeleteCollider(const std::string& colliderName);
 			// コリジョンペアの追加
 			void AddCollisionPair(size_t myIndex, size_t youIndex);
-
 			// コリジョンペアの追加
 			void DeletePair();
 
 			// getter
 			CollisionAttribute GetCollisionAttribute() const { return collisionAttribute; }
 			CollisionMask GetCollisionMask() const { return collisionMask; }
+			const std::string GetColliderName(size_t index) const;
 			const std::list<std::unique_ptr<Base2DCollider>>& GetColliders() const { return colliders; }
 
 			// 衝突コールバック関数

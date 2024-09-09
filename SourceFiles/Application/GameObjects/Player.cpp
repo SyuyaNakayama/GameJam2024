@@ -39,7 +39,8 @@ void Player::Attack()
 		attackArea->isInvisible = true;
 		Action = nullptr;
 		isCanUseAttack = false;
-		attackCoolTimer= Const(int, "PlayerAttackTime");
+		attackCoolTimer = Const(int, "PlayerAttackTime");
+		DeleteCollider("attack");
 	}
 }
 
@@ -65,8 +66,8 @@ void Player::Initialize()
 	// コライダーの設定
 	collisionAttribute = CollisionAttribute::Player;
 	collisionMask = CollisionMask::Player;
-	AddCollider(attackArea.get(), CollisionShapeType::Box);
-	AddCollider(sprite.get(), CollisionShapeType::Box);
+	AddCollider(sprite.get(), CollisionShapeType::Box, "body");
+
 }
 
 void Player::Update()
@@ -96,6 +97,7 @@ void Player::Update()
 		{
 			Action = &Player::Attack;
 			attackTimer = Const(int, "PlayerAttackTime");
+			AddCollider(attackArea.get(), CollisionShapeType::Box, "attack");
 		}
 	}
 	if (Action) { (this->*Action)(); }
@@ -104,9 +106,10 @@ void Player::Update()
 	sprites->Update();
 	sprite->Update();
 	attackArea->Update();
+
+	ImGui::Text("%d", colliders.size());
 }
 
 void Player::OnCollision([[maybe_unused]] WristerEngine::_2D::ColliderGroup* group)
 {
-	ImGui::Text("Hit");
 }

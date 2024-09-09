@@ -23,7 +23,7 @@ void Enemy::Initialize()
 	// コライダーの設定
 	collisionAttribute = CollisionAttribute::Enemy;
 	collisionMask = CollisionMask::Enemy;
-	AddCollider(sprite.get(), CollisionShapeType::Box);
+	AddCollider(sprite.get(), CollisionShapeType::Box, "body");
 }
 
 void Enemy::Update()
@@ -35,8 +35,8 @@ void Enemy::Update()
 
 void Enemy::OnCollision([[maybe_unused]] WristerEngine::_2D::ColliderGroup* collider)
 {
-	for (auto pair: collisionPair[0])
+	for (auto pair : collisionPair[0])
 	{
-		ImGui::Text("%d", pair);
+		ImGui::Text("%s", collider->GetColliderName(pair).c_str());
 	}
 }
