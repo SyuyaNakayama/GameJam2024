@@ -546,7 +546,6 @@ void WristerEngine::CollisionManager::Check2DCollisions()
 
 void CollisionManager::CheckAllCollisions()
 {
-
 	CheckBoxCollisions();
 	CheckIncludeCollisions();
 	CheckSphereCollisions();

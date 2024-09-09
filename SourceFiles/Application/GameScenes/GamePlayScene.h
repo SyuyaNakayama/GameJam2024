@@ -16,6 +16,7 @@ class GamePlayScene : public WristerEngine::BaseScene
 {
 	// ステージオブジェクト
 	Stage stage;
+public:
 
 	// BaseScene を介して継承されました
 	void Initialize() override;

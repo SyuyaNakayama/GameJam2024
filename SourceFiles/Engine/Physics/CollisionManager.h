@@ -46,6 +46,7 @@ namespace WristerEngine
 		static void PopCollider(PlaneCollider* collider) { planeColliders.remove(collider); }
 		static void PopCollider(PolygonCollider* collider) { polygonColliders.remove(collider); }
 		static void PopCollider(RayCollider* collider) { rayColliders.remove(collider); }
+		static void PopCollider(_2D::ColliderGroup* collider) { _2DColliders.remove(collider); }
 		// Ží—Þ•Ê“–‚½‚è”»’è
 		static void CheckBoxCollisions();
 		static void CheckIncludeCollisions();

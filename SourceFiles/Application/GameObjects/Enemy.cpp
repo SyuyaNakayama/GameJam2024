@@ -20,6 +20,10 @@ void Enemy::Initialize()
 	eyeBeam->color = { 1.0f,1.0f,1.0f,1.0f };
 	eyeBeam->rotation = Angle(30);
 
+	hpGauge = Sprite::Create("white1x1.png");
+	hpGauge->size = Const(Vector2, "EnemyGaugeSize");
+	hpGauge->position = Const(Vector2, "EnemyGaugePos");
+
 	// コライダーの設定
 	collisionAttribute = CollisionAttribute::Enemy;
 	collisionMask = CollisionMask::Enemy;
@@ -28,15 +32,27 @@ void Enemy::Initialize()
 
 void Enemy::Update()
 {
+	hpGauge->size.x = Const(Vector2, "EnemyGaugeSize").x * hpRate;
+
 	// スプライトの更新
 	sprite->Update();
 	eyeBeam->Update();
+	hpGauge->Update();
+}
+
+void Enemy::Draw()
+{
+	sprite->Draw(); 
+	eyeBeam->Draw();
+	hpGauge->Draw();
 }
 
 void Enemy::OnCollision([[maybe_unused]] WristerEngine::_2D::ColliderGroup* collider)
 {
 	for (auto pair : collisionPair[0])
 	{
-		ImGui::Text("%s", collider->GetColliderName(pair).c_str());
+		if (collider->GetColliderName(pair) != "attack") { return; }
+		
+		hpRate -= 0.01f;
 	}
 }
