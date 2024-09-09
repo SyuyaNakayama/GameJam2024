@@ -20,8 +20,8 @@ void Stage::PlayerToGoal() {
 	//プレイヤーとゴールの位置関係を計算
 	Vector2 hit = *goalPos - *playerPos;
 	//ゲームクリア
-	if (hit.x <= 0 && hit.y <= 0) {
-		if (hit.x >= -WEConst(Vector2, "PlayerSize").x && hit.y >= -WEConst(Vector2, "PlayerSize").y) {
+	if (hit.x < WEConst(Vector2, "PlayerSize").x / 2 && hit.y <= WEConst(Vector2, "PlayerSize").y / 2) {
+		if (hit.x > -WEConst(Vector2, "PlayerSize").x /2 && hit.y >= -WEConst(Vector2, "PlayerSize").y /2) {
 			WristerEngine::SceneManager::GetInstance()->ChangeScene(Scene::Clear);
 		}
 	}
