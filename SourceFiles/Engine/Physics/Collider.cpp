@@ -19,6 +19,12 @@ IncludeCollider::IncludeCollider() { CollisionManager::PushCollider(this); }
 IncludeCollider::~IncludeCollider() { CollisionManager::PopCollider(this); }
 WristerEngine::_2D::ColliderGroup::ColliderGroup() { CollisionManager::PushCollider(this); }
 
+WristerEngine::_2D::ColliderGroup::~ColliderGroup()
+{
+	colliders.clear();
+	CollisionManager::PopCollider(this);
+}
+
 void PolygonCollider::SetVertices()
 {
 	Vector3 objPos = worldTransform->translation;

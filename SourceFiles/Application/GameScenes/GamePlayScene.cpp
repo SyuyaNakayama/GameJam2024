@@ -33,11 +33,12 @@ void GamePlayScene::Draw()
 void UIDrawerGamePlayScene::Initialize()
 {
 	// ’n–Ê‚ÌUI‚Ì‰Šú‰»
-	sprites["Ground"] = Sprite::Create("white1x1.png");
+	sprites["Ground"] = Sprite::Create("block.png");
 	std::unique_ptr<Sprite>& s = sprites["Ground"];
+	s->position.y = WristerEngine::WIN_SIZE.y - Const(float, "GroundHeight");
+	s->textureSize.x *= (WristerEngine::WIN_SIZE.x / s->size.x);
+	s->textureSize.y *= (Const(float, "GroundHeight") / s->size.y);
 	s->size.x = WristerEngine::WIN_SIZE.x;
 	s->size.y = Const(float, "GroundHeight");
-	s->position.y = WristerEngine::WIN_SIZE.y - s->size.y;
-
 	
 }

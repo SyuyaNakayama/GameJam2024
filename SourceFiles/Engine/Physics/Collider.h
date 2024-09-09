@@ -46,8 +46,6 @@ namespace WristerEngine
 			std::string colliderName;
 
 		public:
-			virtual ~Base2DCollider() = default;
-
 			// 初期化
 			void Initialize(Sprite* transform, CollisionShapeType shapeType, const std::string& colliderName);
 
@@ -68,6 +66,8 @@ namespace WristerEngine
 		public:
 			// コンストラクタ
 			ColliderGroup();
+			// 仮想デストラクタ
+			virtual ~ColliderGroup();
 
 			// コライダーの追加
 			void AddCollider(Sprite* transform, CollisionShapeType shapeType, const std::string& colliderName);
