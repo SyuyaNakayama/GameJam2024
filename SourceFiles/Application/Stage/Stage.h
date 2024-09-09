@@ -16,7 +16,7 @@ class Stage
 
 	// プレイヤーと敵の変数のやり取り
 	void PlayerToEnemy();
-	// プレイヤーとゴールの変数ややり取り
+	// プレイヤーとゴールの変数のやり取り
 	void PlayerToGoal();
 	// 敵が死んでるかの検出と消滅
 	void EnemyDie();
