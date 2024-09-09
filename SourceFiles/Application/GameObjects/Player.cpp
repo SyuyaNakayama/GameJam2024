@@ -63,6 +63,22 @@ void Player::Initialize()
 	attackArea->color = { 1.0f,0.5f,0.5f,1.0f };
 	attackArea->isInvisible = true;
 
+	//UIのスプライト初期化設定
+	ui_attack = Sprite::Create("ui_attack.png");
+	ui_attack->size = Const(Vector2, "PlayerSize");
+	ui_attack->SetRect(Const(float, "PlayerSize"), Vector2(0, 0));
+	ui_attack->position = Vector2(WristerEngine::WIN_SIZE.x - Const(float,"PlayerSize"), WristerEngine::WIN_SIZE.y - Const(float, "PlayerSize"));
+	ui_attack->position = Vector2(0, 0);
+	ui_attack->anchorPoint = { 0.5f,1.0f };
+	ui_attack->SetAnimation(4, 0);
+
+	ui_dive = Sprite::Create("ui_dive.png");
+	ui_dive->SetRect(Const(float, "PlayerSize"), Vector2(0, 0));
+	ui_dive->size = Const(Vector2, "PlayerSize");
+	ui_dive->position = Vector2(WristerEngine::WIN_SIZE.x - Const(float, "PlayerSize"), WristerEngine::WIN_SIZE.y - Const(float, "PlayerSize") * 2);
+	ui_dive->anchorPoint = { 0.5f,1.0f };
+	ui_dive->SetAnimation(4, 0);
+
 	// コライダーの設定
 	collisionAttribute = CollisionAttribute::Player;
 	collisionMask = CollisionMask::Player;
@@ -90,6 +106,7 @@ void Player::Update()
 		{
 			Action = &Player::Hide;
 			hideTimer = Const(int, "PlayerHideTime");
+			//ui_dive->SetAnimation(4, 1);
 		}
 
 		// 攻撃
@@ -98,6 +115,7 @@ void Player::Update()
 			Action = &Player::Attack;
 			attackTimer = Const(int, "PlayerAttackTime");
 			AddCollider(attackArea.get(), CollisionShapeType::Box, "attack");
+			//ui_attack->SetAnimation(4, 1);
 		}
 	}
 	if (Action) { (this->*Action)(); }
@@ -106,6 +124,8 @@ void Player::Update()
 	sprites->Update();
 	sprite->Update();
 	attackArea->Update();
+	ui_attack->Update();
+	ui_dive->Update();
 
 	ImGui::Text("%d", colliders.size());
 }

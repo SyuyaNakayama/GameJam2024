@@ -13,6 +13,10 @@ class Player : public WristerEngine::_2D::GameObject, public WristerEngine::_2D:
 	WristerEngine::FrameTimer hideTimer; // ‰B‚ê‚Ä‚¢‚éŠÔ
 	WristerEngine::FrameTimer attackTimer; // UŒ‚‚µ‚Ä‚¢‚éŠÔ
 
+	//UI
+	std::unique_ptr<WristerEngine::_2D::Sprite> ui_attack;
+	std::unique_ptr<WristerEngine::_2D::Sprite> ui_dive;
+
 	// ‚È‚ñ‚ç‚©‚ÌƒAƒNƒVƒ‡ƒ“
 	void (Player::* Action)() = nullptr;
 	void Hide(); // ‰B‚ê‚é
