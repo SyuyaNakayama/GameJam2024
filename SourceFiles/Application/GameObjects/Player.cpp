@@ -10,7 +10,7 @@ void Player::Move()
 	// 移動速度を計算
 	float moveDir = (float)operate->GetPush("Right") - operate->GetPush("Left");
 	sprite->position += moveDir * Const(float, "PlayerMoveSpd");
-
+	hide->position.x = sprite->position.x;
 	// 向きを変える
 	if (moveDir < 0) { sprite->isFlipX = true; }
 	else if (moveDir > 0) { sprite->isFlipX = false; }
@@ -19,10 +19,12 @@ void Player::Move()
 void Player::Hide()
 {
 	sprite->isFlipY = true;
+	hide->isFlipY = false;
 	if (hideTimer.Update())
 	{
 		Action = nullptr;
 		sprite->isFlipY = false;
+		hide->isFlipY = true;
 		isCanUseHide = false;
 		hideCoolTimer = Const(int, "PlayerHideTime");
 	}
@@ -62,6 +64,13 @@ void Player::Initialize()
 	attackArea->color = { 1.0f,0.5f,0.5f,1.0f };
 	attackArea->isInvisible = true;
 
+	hide = Sprite::Create("Dive.png");
+	hide->SetRect(Const(Vector2, "UIIconSize"), { 0,0 });
+	hide->size = Const(Vector2, "PlayerSize");
+	hide->position.y = WristerEngine::WIN_SIZE.y - Const(float, "GroundHeight");
+	hide->anchorPoint = { 0.5f,1.0f };
+	hide->isFlipY = true;
+
 	//UIのスプライト初期化設定
 	ui_attack = Sprite::Create("ui_attack.png");
 	ui_attack->size = Const(Vector2, "UIAllSize");
@@ -79,6 +88,9 @@ void Player::Initialize()
 	collisionAttribute = CollisionAttribute::Player;
 	collisionMask = CollisionMask::Player;
 	AddCollider(sprite.get(), CollisionShapeType::Box, "body");
+
+	//アニメーション時間
+	animTime = Const(int, "PlayerAnimationTimer");
 
 }
 
@@ -118,10 +130,13 @@ void Player::Update()
 	}
 	if (Action) { (this->*Action)(); }
 
+	Animations();
+
 	// スプライトの更新
 	sprites->Update();
 	sprite->Update();
 	attackArea->Update();
+	hide->Update();
 	ui_attack->Update();
 	ui_dive->Update();
 
@@ -167,5 +182,19 @@ void Player::UITimer() {
 		else {
 			ui_dive->SetRect(Const(Vector2, "UIIconSize"), { 0,0 });
 		}
+	}
+}
+
+void Player::Animations() {
+	animTime--;
+	if (animTime < 31) {
+		hide->SetRect(Const(Vector2, "UIIconSize"), { 0,0 });
+	}
+	else {
+		hide->SetRect(Const(Vector2, "UIIconSize"), { 32,0 });
+	}
+
+	if (animTime < 0) {
+		animTime = Const(int, "PlayerAnimationTimer");
 	}
 }

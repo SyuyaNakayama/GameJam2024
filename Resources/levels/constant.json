@@ -2,6 +2,7 @@
   "int": {
     "PlayerHideTime": 120,
     "PlayerAttackTime": 60,
+    "PlayerAnimationTimer": 60,
     "EnemyEyeFOV": 3
   },
   "int[]": {
