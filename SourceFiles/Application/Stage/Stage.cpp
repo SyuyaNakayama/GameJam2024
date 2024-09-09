@@ -7,16 +7,10 @@ void Stage::PlayerToEnemy()
 {
 	if (pPlayer->IsHide()) { return; }
 
-	// プレイヤーと敵の目線方向のなす角θを求める
-	Vector2 toEyePlayer = pPlayer->GetSprite()->position - WEConst(Vector2, "EnemyEyePos");
-	float dot = Dot({ 0,1 }, Normalize(toEyePlayer));
-	Angle theta = std::acos(dot);
-	theta = std::abs(theta - *enemyEyeDir);
-
-	// ゲームオーバー
-	//if (theta <= Angle(4)) { WristerEngine::SceneManager::GetInstance()->ChangeScene(Scene::GameOver); }
-
-	// 後で修正
+	// 敵視野角を計算
+	float leftRot = Angle(90 + WEConst(int,"EnemyEyeFOV")) + *enemyEyeDir;
+	float rightRot = Angle(90 - WEConst(int, "EnemyEyeFOV")) + *enemyEyeDir;
+	
 	// プレイヤーの左上端と右下端の座標を求める
 	const Sprite* pSprite = pPlayer->GetSprite();
 	Vector2 pPosLT, pPosRB;
@@ -24,25 +18,18 @@ void Stage::PlayerToEnemy()
 	pPosLT -= Vector2(pSprite->size.x * pSprite->anchorPoint.x, pSprite->size.y * pSprite->anchorPoint.y);
 	pPosRB += Vector2(pSprite->size.x * (1.0f - pSprite->anchorPoint.x), pSprite->size.y * (1.0f - pSprite->anchorPoint.y));
 
-	debugSprite = Sprite::Create("white1x1.png", WEConst(Vector2, "EnemyEyePos"));
-	debugSprite->size.x = 1000;
-	debugSprite->rotation = Angle(90 + 4) + *enemyEyeDir;
-	debugSprite->Update();
+	// 左上の接触判定
+	Vector2 vec = Normalize(Vector2(std::cos(rightRot), std::sin(rightRot)));
+	Vector2 toEyePlayerLT = Normalize(pPosLT - WEConst(Vector2, "EnemyEyePos"));
+	float crossLT = Cross(vec, Normalize(toEyePlayerLT));
 
-	Vector2 vec = Normalize(Vector2(std::cos(debugSprite->rotation), std::sin(debugSprite->rotation)));
-	debugSprite2 = Sprite::Create("white1x1.png", WEConst(Vector2, "EnemyEyePos"));
-	debugSprite2->SetCenterAnchor();
-	debugSprite2->size *= 10;
-
-
+	// 右下の接触判定
+	vec = Normalize(Vector2(std::cos(leftRot), std::sin(leftRot)));
 	Vector2 toEyePlayerRB = Normalize(pPosRB - WEConst(Vector2, "EnemyEyePos"));
-	float dis = 300;
-	ImGui::SliderFloat("debugSprite2", &dis, 0, 1000);
-	debugSprite2->position = WEConst(Vector2, "EnemyEyePos") + toEyePlayerRB * dis;
-	debugSprite2->Update();
-	float crossRB = Dot(vec, Normalize(toEyePlayerRB));
-	if (crossRB <= 0) { ImGui::Text("Hit!(RB)"); }
-	ImGui::Text("%f", crossRB);
+	float crossRB = Cross(vec, Normalize(toEyePlayerRB));
+	
+	// ゲームオーバー
+	if (crossRB <= 0&& crossLT >= 0) { WristerEngine::SceneManager::GetInstance()->ChangeScene(Scene::GameOver); }
 }
 
 void Stage::PlayerToGoal() {
@@ -107,6 +94,4 @@ void Stage::Update()
 void Stage::Draw()
 {
 	for (auto& obj : stageObjects) { obj->Draw(); }
-	debugSprite->Draw();
-	debugSprite2->Draw();
 }
