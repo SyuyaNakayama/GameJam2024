@@ -65,19 +65,16 @@ void Player::Initialize()
 
 	//UIのスプライト初期化設定
 	ui_attack = Sprite::Create("ui_attack.png");
-	ui_attack->size = Const(Vector2, "PlayerSize");
-	ui_attack->SetRect(Const(float, "PlayerSize"), Vector2(0, 0));
-	ui_attack->position = Vector2(WristerEngine::WIN_SIZE.x - Const(float,"PlayerSize"), WristerEngine::WIN_SIZE.y - Const(float, "PlayerSize"));
-	ui_attack->position = Vector2(0, 0);
+	ui_attack->size = Const(Vector2, "UIAllSize");
+	ui_attack->SetRect(Const(Vector2,"UIIconSize"), {0,0});
+	ui_attack->position = Vector2(WristerEngine::WIN_SIZE.x - Const(float,"PlayerSize"), WristerEngine::WIN_SIZE.y / 2 - Const(float, "PlayerSize"));
 	ui_attack->anchorPoint = { 0.5f,1.0f };
-	ui_attack->SetAnimation(4, 0);
 
 	ui_dive = Sprite::Create("ui_dive.png");
-	ui_dive->SetRect(Const(float, "PlayerSize"), Vector2(0, 0));
-	ui_dive->size = Const(Vector2, "PlayerSize");
-	ui_dive->position = Vector2(WristerEngine::WIN_SIZE.x - Const(float, "PlayerSize"), WristerEngine::WIN_SIZE.y - Const(float, "PlayerSize") * 2);
+	ui_dive->size = Const(Vector2, "UIAllSize");
+	ui_dive->SetRect(Const(Vector2, "UIIconSize"), { 0,0 });
+	ui_dive->position = Vector2(WristerEngine::WIN_SIZE.x - Const(float, "PlayerSize"), WristerEngine::WIN_SIZE.y / 2 + Const(float, "PlayerSize"));
 	ui_dive->anchorPoint = { 0.5f,1.0f };
-	ui_dive->SetAnimation(4, 0);
 
 	// コライダーの設定
 	collisionAttribute = CollisionAttribute::Player;
@@ -99,23 +96,25 @@ void Player::Update()
 		isCanUseAttack = attackCoolTimer.Update();
 	}
 
+	UITimer();
+
 	if (!Action)
 	{
 		// 地面に隠れる
 		if (operate->GetTrigger("Down") && isCanUseHide)
 		{
+			ui_dive->SetRect(Const(Vector2, "UIIconSize"), { 32,0 });
 			Action = &Player::Hide;
 			hideTimer = Const(int, "PlayerHideTime");
-			//ui_dive->SetAnimation(4, 1);
 		}
 
 		// 攻撃
 		if (operate->GetTrigger("Attack") && isCanUseAttack)
 		{
+			ui_attack->SetRect(Const(Vector2, "UIIconSize"), { 32,0 });
 			Action = &Player::Attack;
 			attackTimer = Const(int, "PlayerAttackTime");
 			AddCollider(attackArea.get(), CollisionShapeType::Box, "attack");
-			//ui_attack->SetAnimation(4, 1);
 		}
 	}
 	if (Action) { (this->*Action)(); }
@@ -132,4 +131,35 @@ void Player::Update()
 
 void Player::OnCollision([[maybe_unused]] WristerEngine::_2D::ColliderGroup* group)
 {
+}
+
+void Player::UITimer() {
+	if (!isCanUseAttack) {
+		if (Const(int, "PlayerAttackTime") / 3 >= attackCoolTimer.GetRemainTime() && 1 < attackCoolTimer.GetRemainTime()) {
+			ui_attack->SetRect(Const(Vector2, "UIIconSize"), { 96,0 });
+		}
+		else if (Const(int, "PlayerAttackTime") / 3 * 2 >= attackCoolTimer.GetRemainTime() && Const(int, "PlayerAttackTime") / 3 < attackCoolTimer.GetRemainTime()) {
+			ui_attack->SetRect(Const(Vector2, "UIIconSize"), { 64,0 });
+		}
+		else if (Const(int, "PlayerAttackTime") / 3 * 2 < attackCoolTimer.GetRemainTime()) {
+			ui_attack->SetRect(Const(Vector2, "UIIconSize"), { 32,0 });
+		}
+		else {
+			ui_attack->SetRect(Const(Vector2, "UIIconSize"), { 0,0 });
+		}
+	}
+	if (!isCanUseHide) {
+		if (Const(int, "PlayerHideTime") / 3 >= hideCoolTimer.GetRemainTime() && 1 < hideCoolTimer.GetRemainTime()) {
+			ui_dive->SetRect(Const(Vector2, "UIIconSize"), { 96,0 });
+		}
+		else if (Const(int, "PlayerHideTime") / 3 * 2 >= hideCoolTimer.GetRemainTime() && Const(int, "PlayerHideTime") / 3 < hideCoolTimer.GetRemainTime()) {
+			ui_dive->SetRect(Const(Vector2, "UIIconSize"), { 64,0 });
+		}
+		else if (Const(int, "PlayerHideTime") / 3 * 2 < hideCoolTimer.GetRemainTime()) {
+			ui_dive->SetRect(Const(Vector2, "UIIconSize"), { 32,0 });
+		}
+		else {
+			ui_dive->SetRect(Const(Vector2, "UIIconSize"), { 0,0 });
+		}
+	}
 }

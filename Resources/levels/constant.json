@@ -17,7 +17,9 @@
     "EnemySize": [ 150, 400 ],
     "EnemyEyePos": [ 960, 270 ],
     "EnemyGaugeSize": [ 150, 30 ],
-    "EnemyGaugePos": [ 945, 170 ]
+    "EnemyGaugePos": [ 945, 170 ],
+    "UIAllSize": [ 300, 75 ],
+    "UIIconSize": [32,32]
   },
   "BitMapProp": {
   }

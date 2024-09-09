@@ -29,10 +29,12 @@ class Player : public WristerEngine::_2D::GameObject, public WristerEngine::_2D:
 
 	void Move(); // 移動
 
+	void UITimer();	//UIでのクールタイム視覚化
+
 	// GameObject を介して継承されました
 	void Initialize() override;
 	void Update() override;
-	void Draw() { sprites->Draw(); sprite->Draw(); attackArea->Draw(); }
+	void Draw() { sprites->Draw(); sprite->Draw(); attackArea->Draw(); ui_attack->Draw(); ui_dive->Draw(); }
 	void OnCollision(WristerEngine::_2D::ColliderGroup* group) override;
 
 public:
