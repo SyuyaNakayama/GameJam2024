@@ -47,10 +47,20 @@ void Stage::PlayerToGoal() {
 	Vector2 hit = *goalPos - pPlayer->GetSprite()->position;
 	//ƒQ[ƒ€ƒNƒŠƒA
 	if (hit.x < WEConst(Vector2, "PlayerSize").x / 2 && hit.y <= WEConst(Vector2, "PlayerSize").y / 2) {
-		if (hit.x > -WEConst(Vector2, "PlayerSize").x /2 && hit.y >= -WEConst(Vector2, "PlayerSize").y /2) {
+		if (hit.x > -WEConst(Vector2, "PlayerSize").x / 2 && hit.y >= -WEConst(Vector2, "PlayerSize").y / 2) {
 			WristerEngine::SceneManager::GetInstance()->ChangeScene(Scene::Clear);
 		}
 	}
+}
+
+void Stage::EnemyDie()
+{
+	stageObjects.remove_if([](const std::unique_ptr<WristerEngine::_2D::GameObject>& obj)
+		{
+			if (dynamic_cast<Enemy*>(obj.get()) == nullptr) { return false; }
+			const Enemy* pEnemy = dynamic_cast<Enemy*>(obj.get());
+			return pEnemy->IsDead();
+		});
 }
 
 void Stage::Initialize()
@@ -79,13 +89,13 @@ void Stage::Initialize()
 			goalPos = pGoal->GetPosition();
 		}
 	}
-
 }
 
 void Stage::Update()
 {
 	PlayerToEnemy();
 	PlayerToGoal();
+	EnemyDie();
 	for (auto& obj : stageObjects) { obj->Update(); }
 }
 

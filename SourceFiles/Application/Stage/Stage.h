@@ -18,6 +18,8 @@ class Stage
 	void PlayerToEnemy();
 	// プレイヤーとゴールの変数ややり取り
 	void PlayerToGoal();
+	// 敵が死んでるかの検出と消滅
+	void EnemyDie();
 
 public:
 	// 初期化
