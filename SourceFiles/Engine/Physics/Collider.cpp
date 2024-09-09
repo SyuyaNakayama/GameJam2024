@@ -101,3 +101,17 @@ void WristerEngine::_2D::ColliderGroup::AddCollider(Sprite* transform, Collision
 	//	break;
 	//}
 }
+
+void WristerEngine::_2D::ColliderGroup::AddCollisionPair(size_t myIndex, size_t youIndex)
+{
+	collisionPair[myIndex].push_back(youIndex);
+}
+
+void WristerEngine::_2D::ColliderGroup::DeletePair()
+{
+	for (auto& pair : collisionPair)
+	{
+		pair.second.clear();
+	}
+	collisionPair.clear();
+}

@@ -265,12 +265,16 @@ bool WristerEngine::CollisionManager::CheckCollision2ColliderGroups(_2D::Collide
 	const auto& collidersA = groupA->GetColliders();
 	const auto& collidersB = groupB->GetColliders();
 
+	bool isHit = false;
+	size_t aIndex = 0;
+
 	// 2つのコライダーグループの全てのコライダーと当たり判定を取る
 	auto itrA = collidersA.begin();
-	for (; itrA != collidersA.end(); itrA++)
+	for (; itrA != collidersA.end(); itrA++, aIndex++)
 	{
 		auto itrB = collidersB.begin();
-		for (; itrB != collidersB.end(); itrB++)
+		size_t bIndex = 0;
+		for (; itrB != collidersB.end(); itrB++, bIndex++)
 		{
 			// ボックスとボックスの当たり判定
 			if (itrA->get()->GetShapeType() == _2D::CollisionShapeType::Box)
@@ -286,7 +290,6 @@ bool WristerEngine::CollisionManager::CheckCollision2ColliderGroups(_2D::Collide
 					aPosRB += Vector2(transA->size.x * (1.0f - transA->anchorPoint.x), transA->size.y * (1.0f - transA->anchorPoint.y));
 					Vector2 aPosCenter = Half<Vector2>(aPosLT + aPosRB);
 
-
 					Vector2 bPosLT, bPosRB;
 					bPosLT = bPosRB = transB->position;
 					bPosLT -= Vector2(transB->size.x * transB->anchorPoint.x, transB->size.y * transB->anchorPoint.y);
@@ -299,14 +302,17 @@ bool WristerEngine::CollisionManager::CheckCollision2ColliderGroups(_2D::Collide
 					if (std::abs(aPosCenter.x - bPosCenter.x) <= Half(transA->size.x + transB->size.x) &&
 						std::abs(aPosCenter.y - bPosCenter.y) <= Half(transA->size.y + transB->size.y))
 					{
-						return true;
+						// コリジョンペアの登録
+						groupA->AddCollisionPair(aIndex, bIndex);
+						groupB->AddCollisionPair(bIndex, aIndex);
+						isHit = true;
 					}
 				}
 			}
 		}
 	}
 
-	return false;
+	return isHit;
 }
 
 void CollisionManager::CheckBoxCollisions()
@@ -518,6 +524,11 @@ void CollisionManager::CheckRayCastCollision(RayCollider* collider)
 
 void WristerEngine::CollisionManager::Check2DCollisions()
 {
+	for (auto& collider : _2DColliders)
+	{
+		collider->DeletePair();
+	}
+
 	auto itrA = _2DColliders.begin();
 	for (; itrA != _2DColliders.end(); itrA++)
 	{
@@ -535,6 +546,7 @@ void WristerEngine::CollisionManager::Check2DCollisions()
 
 void CollisionManager::CheckAllCollisions()
 {
+
 	CheckBoxCollisions();
 	CheckIncludeCollisions();
 	CheckSphereCollisions();

@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include <imgui.h>
 
 using namespace WristerEngine::_2D;
 
@@ -30,4 +31,12 @@ void Enemy::Update()
 	// スプライトの更新
 	sprite->Update();
 	eyeBeam->Update();
+}
+
+void Enemy::OnCollision([[maybe_unused]] WristerEngine::_2D::ColliderGroup* collider)
+{
+	for (auto pair: collisionPair[0])
+	{
+		ImGui::Text("%d", pair);
+	}
 }

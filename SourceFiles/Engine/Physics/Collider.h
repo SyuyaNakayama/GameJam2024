@@ -5,6 +5,7 @@
 #include <array>
 #include <memory>
 #include "Sprite.h"
+#include <map>
 
 // コライダーの属性
 enum class CollisionAttribute
@@ -60,6 +61,7 @@ namespace WristerEngine
 			std::list<std::unique_ptr<Base2DCollider>> colliders;
 			CollisionAttribute collisionAttribute = CollisionAttribute::All;
 			CollisionMask collisionMask = CollisionMask::All;
+			std::map<size_t, std::vector<size_t>> collisionPair;
 
 		public:
 			// コンストラクタ
@@ -67,6 +69,12 @@ namespace WristerEngine
 
 			// コライダーの追加
 			void AddCollider(Sprite* transform, CollisionShapeType shapeType);
+
+			// コリジョンペアの追加
+			void AddCollisionPair(size_t myIndex, size_t youIndex);
+
+			// コリジョンペアの追加
+			void DeletePair();
 
 			// getter
 			CollisionAttribute GetCollisionAttribute() const { return collisionAttribute; }

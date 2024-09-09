@@ -11,6 +11,7 @@ class Enemy : public BaseEnemy, public WristerEngine::_2D::ColliderGroup
 	void Initialize() override;
 	void Update() override;
 	void Draw() override { sprite->Draw(); eyeBeam->Draw(); }
+	void OnCollision(WristerEngine::_2D::ColliderGroup* collider) override;
 
 public:
 	const float* GetEyeAngle() const { return &eyeBeam->rotation; }
