@@ -8,9 +8,8 @@ using namespace WristerEngine::_2D;
 void Player::Move()
 {
 	// ˆÚ“®‘¬“x‚ðŒvŽZ
-	const float MOVE_SPD = Const(float, "PlayerMoveSpd");
 	float moveDir = (float)operate->GetPush("Right") - operate->GetPush("Left");
-	sprite->position += moveDir * MOVE_SPD;
+	sprite->position += moveDir * Const(float, "PlayerMoveSpd");
 
 	// Œü‚«‚ð•Ï‚¦‚é
 	if (moveDir < 0) { sprite->isFlipX = true; }
@@ -131,6 +130,13 @@ void Player::Update()
 
 void Player::OnCollision([[maybe_unused]] WristerEngine::_2D::ColliderGroup* group)
 {
+	for (auto pair : collisionPair[0])
+	{
+		if (group->GetColliderName(pair) == "body")
+		{
+			sprite->position -= Const(float, "PlayerMoveSpd");
+		}
+	}
 }
 
 void Player::UITimer() {

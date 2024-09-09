@@ -23,6 +23,7 @@ void Enemy::Initialize()
 	hpGauge = Sprite::Create("white1x1.png");
 	hpGauge->size = Const(Vector2, "EnemyGaugeSize");
 	hpGauge->position = Const(Vector2, "EnemyGaugePos");
+	hpGauge->color = { 0,1,0,1 };
 
 	// コライダーの設定
 	collisionAttribute = CollisionAttribute::Enemy;
@@ -42,7 +43,7 @@ void Enemy::Update()
 
 void Enemy::Draw()
 {
-	sprite->Draw(); 
+	sprite->Draw();
 	eyeBeam->Draw();
 	hpGauge->Draw();
 }
