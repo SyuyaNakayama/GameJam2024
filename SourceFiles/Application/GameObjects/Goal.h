@@ -6,7 +6,6 @@
 class Goal : public WristerEngine::_2D::GameObject
 {
 	std::unique_ptr<WristerEngine::_2D::Sprite> sprite;
-	std::unique_ptr<WristerEngine::_2D::Sprite> sprites;
 
 	// GameObject ‚ğ‰î‚µ‚ÄŒp³‚³‚ê‚Ü‚µ‚½
 	void Initialize() override;
