@@ -5,7 +5,7 @@ using namespace WristerEngine::_2D;
 
 void Enemy::Initialize()
 {
-	// 初期化
+	// 敵
 	sprite = Sprite::Create("TestEnemy.png");
 	sprite->size = Const(Vector2, "EnemySize");
 	sprite->position.x = Const(float, "EnemyPosX");
@@ -13,20 +13,22 @@ void Enemy::Initialize()
 	sprite->anchorPoint = { 0.5f,1.0f };
 	sprite->color = { 1.0f,1.0f,1.0f,1.0f };
 
+	// ビーム
 	eyeBeam = Sprite::Create("EyeBeam.png");
 	eyeBeam->size.y = 1000;
 	eyeBeam->position = Const(Vector2, "EnemyEyePos");
 	eyeBeam->anchorPoint = { 0.5f,0.0f };
 	eyeBeam->color = { 1.0f,1.0f,1.0f,1.0f };
 	eyeBeam->rotation = Angle(30);
+	
+	beamRotEasing.Initialize(120, WristerEngine::Easing::Type::Linear);
+	beamRotEasing.SetLoop(30);
 
+	// HPゲージ
 	hpGauge = Sprite::Create("white1x1.png");
 	hpGauge->size = Const(Vector2, "EnemyGaugeSize");
 	hpGauge->position = Const(Vector2, "EnemyGaugePos");
 	hpGauge->color = { 0,1,0,1 };
-
-	beamRotEasing.Initialize(120, WristerEngine::Easing::Type::EaseInOutBack);
-	beamRotEasing.SetLoop(30);
 
 	// コライダーの設定
 	collisionAttribute = CollisionAttribute::Enemy;

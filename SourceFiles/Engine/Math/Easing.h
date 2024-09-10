@@ -10,6 +10,7 @@ namespace WristerEngine
 	public:
 		enum class Type
 		{
+			Linear,
 			Sqrt, // √x
 			OutElastic,
 			OutBounce,
@@ -33,6 +34,8 @@ namespace WristerEngine
 		// イージングの関数テーブル
 		static float (Easing::* Ease[])();
 
+		// 線形
+		float Linear() { return x; }
 		// √x
 		float Sqrt() { return std::sqrtf(x); }
 		// https://easings.net/ja#easeOutElastic

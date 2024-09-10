@@ -8,6 +8,7 @@
   "int[]": {
   },
   "float": {
+    "PlayerStartPosX": 100,
     "GroundHeight": 100,
     "PlayerMoveSpd": 3,
     "EnemyPosX": 1020,

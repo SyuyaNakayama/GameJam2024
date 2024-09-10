@@ -7,6 +7,7 @@ const float Easing::MAX = 1.0f;
 
 float(Easing::* Easing::Ease[])() =
 {
+	&Easing::Linear,
 	&Easing::Sqrt,
 	&Easing::OutElastic,
 	&Easing::OutBounce,
