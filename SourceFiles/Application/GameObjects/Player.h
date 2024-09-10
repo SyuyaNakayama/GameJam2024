@@ -13,6 +13,7 @@ class Player : public WristerEngine::_2D::GameObject, public WristerEngine::_2D:
 	OperateConfig* operate = OperateConfig::GetInstance();
 	WristerEngine::FrameTimer hideTimer; // ‰B‚ê‚Ä‚¢‚éŠÔ
 	WristerEngine::FrameTimer attackTimer; // UŒ‚‚µ‚Ä‚¢‚éŠÔ
+	bool isGoal = false;
 
 	//UI
 	std::unique_ptr<WristerEngine::_2D::Sprite> ui_attack;
@@ -44,4 +45,5 @@ class Player : public WristerEngine::_2D::GameObject, public WristerEngine::_2D:
 public:
 	bool IsHide() const { return Action == &Player::Hide; }
 	const WristerEngine::_2D::Sprite* GetSprite() const { return sprite.get(); }
+	bool IsGoal() const { return isGoal; }
 };

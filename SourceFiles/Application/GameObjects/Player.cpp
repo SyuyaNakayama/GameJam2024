@@ -2,6 +2,7 @@
 #include <imgui.h>
 #include <cmath>
 #include "SceneManager.h"
+#include "ShareValue.h"
 
 using namespace WristerEngine::_2D;
 
@@ -75,8 +76,8 @@ void Player::Initialize()
 	//UI‚ÌƒXƒvƒ‰ƒCƒg‰Šú‰»Ý’è
 	ui_attack = Sprite::Create("ui_attack.png");
 	ui_attack->size = Const(Vector2, "UIAllSize");
-	ui_attack->SetRect(Const(Vector2,"UIIconSize"), {0,0});
-	ui_attack->position = Vector2(WristerEngine::WIN_SIZE.x - Const(float,"PlayerSize"), WristerEngine::WIN_SIZE.y / 2 - Const(float, "PlayerSize"));
+	ui_attack->SetRect(Const(Vector2, "UIIconSize"), { 0,0 });
+	ui_attack->position = Vector2(WristerEngine::WIN_SIZE.x - Const(float, "PlayerSize"), WristerEngine::WIN_SIZE.y / 2 - Const(float, "PlayerSize"));
 	ui_attack->anchorPoint = { 0.5f,1.0f };
 
 	ui_dive = Sprite::Create("ui_dive.png");
@@ -145,9 +146,15 @@ void Player::OnCollision([[maybe_unused]] WristerEngine::_2D::ColliderGroup* gro
 {
 	for (auto pair : collisionPair[0])
 	{
+		// “G‚Æ‚ÌÚG
 		if (group->GetColliderName(pair) == "body")
 		{
 			sprite->position -= Const(float, "PlayerMoveSpd");
+		}
+		// ƒS[ƒ‹
+		if (group->GetColliderName(pair) == "Goal" && !IsHide())
+		{
+			ShareValue::GetInstance()->isGoal = true;
 		}
 	}
 }

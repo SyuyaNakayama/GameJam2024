@@ -8,9 +8,9 @@ void Stage::PlayerToEnemy()
 	if (pPlayer->IsHide()) { return; }
 
 	// 敵視野角を計算
-	float leftRot = Angle(90 + WEConst(int,"EnemyEyeFOV")) + *enemyEyeDir;
+	float leftRot = Angle(90 + WEConst(int, "EnemyEyeFOV")) + *enemyEyeDir;
 	float rightRot = Angle(90 - WEConst(int, "EnemyEyeFOV")) + *enemyEyeDir;
-	
+
 	// プレイヤーの左上端と右下端の座標を求める
 	const Sprite* pSprite = pPlayer->GetSprite();
 	Vector2 pPosLT, pPosRB;
@@ -27,22 +27,9 @@ void Stage::PlayerToEnemy()
 	vec = Normalize(Vector2(std::cos(leftRot), std::sin(leftRot)));
 	Vector2 toEyePlayerRB = Normalize(pPosRB - WEConst(Vector2, "EnemyEyePos"));
 	float crossRB = Cross(vec, Normalize(toEyePlayerRB));
-	
+
 	// ゲームオーバー
-	if (crossRB <= 0&& crossLT >= 0) { WristerEngine::SceneManager::GetInstance()->ChangeScene(Scene::GameOver); }
-}
-
-void Stage::PlayerToGoal() {
-	if (pPlayer->IsHide()) { return; }
-
-	//プレイヤーとゴールの位置関係を計算
-	//Vector2 hit = *goalPos - pPlayer->GetSprite()->position;
-	////ゲームクリア
-	//if (hit.x < WEConst(Vector2, "PlayerSize").x / 2 && hit.y <= WEConst(Vector2, "PlayerSize").y / 2) {
-	//	if (hit.x > -WEConst(Vector2, "PlayerSize").x / 2 && hit.y >= -WEConst(Vector2, "PlayerSize").y / 2) {
-	//		WristerEngine::SceneManager::GetInstance()->ChangeScene(Scene::Clear);
-	//	}
-	//}
+	if (crossRB <= 0 && crossLT >= 0) { WristerEngine::SceneManager::GetInstance()->ChangeScene(Scene::GameOver); }
 }
 
 void Stage::EnemyDie()
@@ -86,7 +73,6 @@ void Stage::Initialize()
 void Stage::Update()
 {
 	PlayerToEnemy();
-	PlayerToGoal();
 	EnemyDie();
 	for (auto& obj : stageObjects) { obj->Update(); }
 }
