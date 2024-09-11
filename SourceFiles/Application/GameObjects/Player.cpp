@@ -111,13 +111,25 @@ void Player::InitializeUI() {
 	ui_coolTime2->SetRect(Const(Vector2, "UIIconSize"), { 0, 0 });
 	ui_coolTime2->position = Vector2(WristerEngine::WIN_SIZE.x - Const(float, "PlayerSize"), WristerEngine::WIN_SIZE.y / 2 + Const(float, "PlayerSize"));
 	ui_coolTime2->anchorPoint = { 0.5f,1.25f };
-
+	//クールタイムカウントダウン
 	coolCutPosA = 1.0f;
 	coolCutPosH = 3.0f;
 	countCoolTimeA = 0;
 	countCoolTimeH = 0;;
 	coolTimeCountStartA = false;
 	coolTimeCountStartH = false;
+	//UI SPACE
+	ui_key_space = Sprite::Create("key.png");
+	ui_key_space->size = Const(Vector2, "KeyAllSize");
+	ui_key_space->SetRect(Const(Vector2, "UIIconSize"), { 0,0 });
+	ui_key_space->position = Vector2(WristerEngine::WIN_SIZE.x - Const(float, "PlayerSize") * 2, WristerEngine::WIN_SIZE.y / 2 - Const(float, "PlayerSize"));
+	ui_key_space->anchorPoint = { 1.0f,1.0f };
+	//UI DOWN
+	ui_key_down = Sprite::Create("key.png");
+	ui_key_down->size = Const(Vector2, "KeyAllSize");
+	ui_key_down->SetRect(Const(Vector2, "UIIconSize"), { 32,0 });
+	ui_key_down->position = Vector2(WristerEngine::WIN_SIZE.x - Const(float, "PlayerSize") * 2, WristerEngine::WIN_SIZE.y / 2 + Const(float, "PlayerSize"));
+	ui_key_down->anchorPoint = { 1.0f,1.0f };
 }
 
 void Player::Update()
@@ -184,6 +196,8 @@ void Player::Update()
 	ui_dive->Update();
 	ui_coolTime1->Update();
 	ui_coolTime2->Update();
+	ui_key_space->Update();
+	ui_key_down->Update();
 }
 
 void Player::Draw() 
@@ -194,6 +208,8 @@ void Player::Draw()
 	hide->Draw(); 
 	ui_attack->Draw();
 	ui_dive->Draw(); 
+	ui_key_space->Draw();
+	ui_key_down->Draw();
 	if (coolTimeCountStartA) {
 		ui_coolTime1->Draw();
 	}

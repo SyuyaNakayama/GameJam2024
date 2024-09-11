@@ -20,6 +20,8 @@ class Player : public WristerEngine::_2D::GameObject, public WristerEngine::_2D:
 	std::unique_ptr<WristerEngine::_2D::Sprite> ui_dive;
 	std::unique_ptr<WristerEngine::_2D::Sprite> ui_coolTime1;
 	std::unique_ptr<WristerEngine::_2D::Sprite> ui_coolTime2;
+	std::unique_ptr<WristerEngine::_2D::Sprite> ui_key_space;
+	std::unique_ptr<WristerEngine::_2D::Sprite> ui_key_down;
 
 	// ‚È‚ñ‚ç‚©‚ÌƒAƒNƒVƒ‡ƒ“
 	void (Player::* Action)() = nullptr;

@@ -23,7 +23,8 @@
     "EnemyGaugePos": [ 945, 170 ],
     "UIAllSize": [ 300, 75 ],
     "UIIconSize": [ 32, 32 ],
-    "CoolTimeAllSize": [450,50]
+    "CoolTimeAllSize": [ 450, 50 ],
+    "KeyAllSize":[100,50]
   },
   "BitMapProp": {
   }
