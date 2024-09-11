@@ -33,13 +33,17 @@ class Player : public WristerEngine::_2D::GameObject, public WristerEngine::_2D:
 
 	bool isCanUseHide = true, isCanUseAttack = true;
 
+	//アニメーション変数
 	int animTime;
+	//クールタイム
 	float coolCutPosA;
 	float coolCutPosH;
 	int countCoolTimeA;
 	int countCoolTimeH;
 	bool coolTimeCountStartA;
 	bool coolTimeCountStartH;
+	//攻撃判定
+	float attackCutPos;
 
 	void Move(); // 移動
 	void UITimer();	//UIでのクールタイム視覚化

@@ -36,6 +36,11 @@ void Player::Attack()
 	attackArea->isInvisible = false;
 	attackArea->position = sprite->position;
 	attackArea->isFlipX = sprite->isFlipX;
+	attackArea->SetRect(Const(Vector2, "UIIconSize"), { 32 * attackCutPos,0 });
+	attackCutPos += 1.0f;
+	if (attackCutPos > 3.0f) {
+		attackCutPos = 0.0f;
+	}
 	if (attackTimer.Update())
 	{
 		attackArea->isInvisible = true;
@@ -66,6 +71,7 @@ void Player::Initialize()
 	attackArea->anchorPoint = { -0.5f,1.0f };
 	attackArea->color = { 1.0f,0.5f,0.5f,1.0f };
 	attackArea->isInvisible = true;
+	attackCutPos = 0.0f;
 
 	hide = Sprite::Create("Dive.png");
 	hide->SetRect(Const(Vector2, "UIIconSize"), { 0,0 });
