@@ -21,6 +21,7 @@ namespace WristerEngine
 		static bool CheckCollisionFiltering(BaseCollider* colliderA, BaseCollider* colliderB);
 		static bool CheckCollisionFiltering(_2D::ColliderGroup* colliderA, _2D::ColliderGroup* colliderB);
 		static bool Check2DCollision2Boxes(const std::array<_2D::Base2DCollider*, 2>& colliders);
+		static bool Check2DCollisionBox2Rays(const std::array<_2D::Base2DCollider*, 2>& colliders);
 		static bool CheckCollision2Boxes(BoxCollider* colliderA, BoxCollider* colliderB);
 		static bool CheckCollision2IncludeObjects(IncludeCollider* colliderA, IncludeCollider* colliderB);
 		static bool CheckCollision2Spheres(SphereCollider* colliderA, SphereCollider* colliderB);

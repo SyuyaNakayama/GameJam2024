@@ -7,7 +7,7 @@ const float ONE_DEG_RAD = PI / 180.0f; // 1°のラジアン変換
 // 角度
 class Angle
 {
-	float angle;
+	float angle = 0;
 
 	// 度数法をラジアンに変換
 	float ToRadian(int deg) { return (float)deg * ONE_DEG_RAD; }

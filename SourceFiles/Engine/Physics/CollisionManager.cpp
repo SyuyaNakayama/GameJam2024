@@ -1,6 +1,7 @@
 #include "CollisionManager.h"
 #include <algorithm>
 #include "ImGuiManager.h"
+#include <imgui.h>
 using namespace std;
 using namespace WristerEngine;
 
@@ -28,14 +29,20 @@ bool CollisionManager::CheckCollisionFiltering(_2D::ColliderGroup* colliderA, _2
 
 bool WristerEngine::CollisionManager::Check2DCollision2Boxes(const std::array<_2D::Base2DCollider*, 2>& colliders)
 {
+	std::array<const _2D::BoxCollider*, 2> box2DColliders{};
+	for (size_t i = 0; i < colliders.size(); i++)
+	{
+		box2DColliders[i] = dynamic_cast<_2D::BoxCollider*>(colliders[i]);
+	}
+
 	std::array<Vector2, 2> posCenter;
 	std::array<const _2D::Sprite*, 2> trans{};
 
-	for (size_t i = 0; i < colliders.size(); i++)
+	for (size_t i = 0; i < box2DColliders.size(); i++)
 	{
-		trans[i] = colliders[i]->GetTransform();
+		trans[i] = box2DColliders[i]->GetTransform();
 		// 中心点を計算
-		auto pos = colliders[i]->GetLTRB();
+		auto pos = box2DColliders[i]->GetLTRB();
 		posCenter[i] = Half<Vector2>(pos["LT"] + pos["RB"]);
 	}
 
@@ -46,6 +53,48 @@ bool WristerEngine::CollisionManager::Check2DCollision2Boxes(const std::array<_2
 		return true;
 	}
 	return false;
+}
+
+bool WristerEngine::CollisionManager::Check2DCollisionBox2Rays(const std::array<_2D::Base2DCollider*, 2>& colliders)
+{
+	const _2D::TwoRayCollider* rayCollider = nullptr;
+	const _2D::BoxCollider* boxCollider = nullptr;
+	for (auto collider : colliders)
+	{
+		if (collider->GetShapeType() == _2D::CollisionShapeType::Box)
+		{
+			boxCollider = dynamic_cast<_2D::BoxCollider*>(collider);
+		}
+		if (collider->GetShapeType() == _2D::CollisionShapeType::TwoRay)
+		{
+			rayCollider = dynamic_cast<_2D::TwoRayCollider*>(collider);
+		}
+	}
+
+	const _2D::Sprite* rayTrans = rayCollider->GetTransform();
+
+	// 視野角を計算
+	float leftRot = Angle(90) + rayCollider->GetFOV() + rayTrans->rotation;
+	float rightRot = Angle(90) - rayCollider->GetFOV() + rayTrans->rotation;
+
+	// ボックスの左上端と右下端の座標を求める
+	const _2D::Sprite* pSprite = boxCollider->GetTransform();
+	Vector2 pPosLT, pPosRB;
+	pPosLT = pPosRB = pSprite->position;
+	pPosLT -= Vector2(pSprite->size.x * pSprite->anchorPoint.x, pSprite->size.y * pSprite->anchorPoint.y);
+	pPosRB += Vector2(pSprite->size.x * (1.0f - pSprite->anchorPoint.x), pSprite->size.y * (1.0f - pSprite->anchorPoint.y));
+
+	// 左上の接触判定
+	Vector2 vec = Normalize(Vector2(std::cos(rightRot), std::sin(rightRot)));
+	Vector2 toEyePlayerLT = Normalize(pPosLT - rayTrans->position);
+	float crossLT = Cross(vec, Normalize(toEyePlayerLT));
+
+	// 右下の接触判定
+	vec = Normalize(Vector2(std::cos(leftRot), std::sin(leftRot)));
+	Vector2 toEyePlayerRB = Normalize(pPosRB - rayTrans->position);
+	float crossRB = Cross(vec, Normalize(toEyePlayerRB));
+
+	return crossRB <= 0 && crossLT >= 0;
 }
 
 bool CollisionManager::CheckCollision2Boxes(BoxCollider* colliderA, BoxCollider* colliderB)
@@ -307,6 +356,11 @@ bool WristerEngine::CollisionManager::CheckCollision2ColliderGroups(_2D::Collide
 			if (shapeTypeCount[_2D::CollisionShapeType::Box] == 2)
 			{
 				isHitPair = Check2DCollision2Boxes({ itrA->get(),itrB->get() });
+			}
+			// ボックスと2レイの当たり判定
+			else if (shapeTypeCount[_2D::CollisionShapeType::Box] == shapeTypeCount[_2D::CollisionShapeType::TwoRay])
+			{
+				isHitPair = Check2DCollisionBox2Rays({ itrA->get(),itrB->get() });
 			}
 
 			if (isHitPair)

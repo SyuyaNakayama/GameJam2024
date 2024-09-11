@@ -12,8 +12,6 @@ class Stage
 	const Vector2* goalPos = nullptr;
 	const float* enemyEyeDir = nullptr;
 
-	// プレイヤーと敵の変数のやり取り
-	void PlayerToEnemy();
 	// 敵が死んでるかの検出と消滅
 	void EnemyDie();
 

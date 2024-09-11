@@ -239,6 +239,11 @@ void Player::OnCollision([[maybe_unused]] WristerEngine::_2D::ColliderGroup* gro
 		{
 			ShareValue::GetInstance()->isGoal = true;
 		}
+		// ゲームオーバー
+		if (group->GetColliderName(pair) == "eyeBeam" && !IsHide())
+		{
+			ShareValue::GetInstance()->isGameOver = true;
+		}
 	}
 }
 
@@ -261,7 +266,6 @@ void Player::UITimer() {
 			coolCutPosA = 1.0f;
 			countCoolTimeA = 0;
 			coolTimeCountStartA = false;
-
 		}
 	}
 	if (coolTimeCountStartH) {

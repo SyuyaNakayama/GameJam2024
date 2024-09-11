@@ -62,8 +62,9 @@ void Enemy::OnCollision([[maybe_unused]] WristerEngine::_2D::ColliderGroup* coll
 {
 	for (auto pair : collisionPair[0])
 	{
-		if (collider->GetColliderName(pair) != "attack") { return; }
-
-		hpRate -= 0.01f;
+		if (collider->GetColliderName(pair) == "attack")
+		{
+			hpRate -= 0.01f;
+		}
 	}
 }

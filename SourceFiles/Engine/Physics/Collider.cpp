@@ -94,7 +94,7 @@ void WristerEngine::_2D::Base2DCollider::Initialize(Sprite* transform_, Collisio
 	colliderName = colliderName_;
 }
 
-std::map<std::string, Vector2> WristerEngine::_2D::Base2DCollider::GetLTRB() const
+std::map<std::string, Vector2> WristerEngine::_2D::BoxCollider::GetLTRB() const
 {
 	std::map<std::string, Vector2> ans;
 	ans["LT"] = ans["RB"] = transform->position;
@@ -114,7 +114,7 @@ void WristerEngine::_2D::ColliderGroup::AddCollider(Sprite* transform, Collision
 	switch (shapeType)
 	{
 	case WristerEngine::_2D::CollisionShapeType::Box:
-		newCollider = std::make_unique<Base2DCollider>();
+		newCollider = std::make_unique<_2D::BoxCollider>();
 		break;
 	case WristerEngine::_2D::CollisionShapeType::TwoRay:
 		assert(option);

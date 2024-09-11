@@ -1,37 +1,9 @@
 #include "Stage.h"
 #include "ShareValue.h"
 #include <imgui.h>
+#include "ImGuiManager.h"
 
 using namespace WristerEngine::_2D;
-
-void Stage::PlayerToEnemy()
-{
-	if (pPlayer->IsHide()) { return; }
-
-	// 敵視野角を計算
-	float leftRot = Angle(90 + WEConst(int, "EnemyEyeFOV")) + *enemyEyeDir;
-	float rightRot = Angle(90 - WEConst(int, "EnemyEyeFOV")) + *enemyEyeDir;
-
-	// プレイヤーの左上端と右下端の座標を求める
-	const Sprite* pSprite = pPlayer->GetSprite();
-	Vector2 pPosLT, pPosRB;
-	pPosLT = pPosRB = pSprite->position;
-	pPosLT -= Vector2(pSprite->size.x * pSprite->anchorPoint.x, pSprite->size.y * pSprite->anchorPoint.y);
-	pPosRB += Vector2(pSprite->size.x * (1.0f - pSprite->anchorPoint.x), pSprite->size.y * (1.0f - pSprite->anchorPoint.y));
-
-	// 左上の接触判定
-	Vector2 vec = Normalize(Vector2(std::cos(rightRot), std::sin(rightRot)));
-	Vector2 toEyePlayerLT = Normalize(pPosLT - WEConst(Vector2, "EnemyEyePos"));
-	float crossLT = Cross(vec, Normalize(toEyePlayerLT));
-
-	// 右下の接触判定
-	vec = Normalize(Vector2(std::cos(leftRot), std::sin(leftRot)));
-	Vector2 toEyePlayerRB = Normalize(pPosRB - WEConst(Vector2, "EnemyEyePos"));
-	float crossRB = Cross(vec, Normalize(toEyePlayerRB));
-
-	// ゲームオーバー
-	if (crossRB <= 0 && crossLT >= 0) { ShareValue::GetInstance()->isGameOver = true; }
-}
 
 void Stage::EnemyDie()
 {
@@ -73,7 +45,6 @@ void Stage::Initialize()
 
 void Stage::Update()
 {
-	PlayerToEnemy();
 	EnemyDie();
 	for (auto& obj : stageObjects) { obj->Update(); }
 }
