@@ -60,8 +60,9 @@ void Player::Initialize()
 	sprite->anchorPoint = { 0.5f,1.0f };
 	sprite->color = { 1.0f,1.0f,1.0f,1.0f };
 
-	attackArea = Sprite::Create("white1x1.png");
-	attackArea->size = Const(Vector2, "PlayerSize");
+	attackArea = Sprite::Create("attack_effect.png");
+	attackArea->size = Const(Vector2, "EffectSize");
+	attackArea->SetRect(Const(Vector2, "UIIconSize"), { 0,0 });
 	attackArea->anchorPoint = { -0.5f,1.0f };
 	attackArea->color = { 1.0f,0.5f,0.5f,1.0f };
 	attackArea->isInvisible = true;
