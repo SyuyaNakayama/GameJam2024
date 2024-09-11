@@ -111,6 +111,7 @@
     <ClCompile Include="SourceFiles\Application\GameObjects\BaseEnemy.cpp" />
     <ClCompile Include="SourceFiles\Application\GameObjects\Enemy.cpp" />
     <ClCompile Include="SourceFiles\Application\GameObjects\Goal.cpp" />
+    <ClCompile Include="SourceFiles\Application\GameObjects\MyGameObject.cpp" />
     <ClCompile Include="SourceFiles\Application\GameObjects\Player.cpp" />
     <ClCompile Include="SourceFiles\Application\GameScenes\ClearScene.cpp" />
     <ClCompile Include="SourceFiles\Application\GameScenes\GameOverScene.cpp" />
@@ -118,6 +119,7 @@
     <ClCompile Include="SourceFiles\Application\GameScenes\OperateConfig.cpp" />
     <ClCompile Include="SourceFiles\Application\GameScenes\SceneFactory.cpp" />
     <ClCompile Include="SourceFiles\Application\MyGame\MyGame.cpp" />
+    <ClCompile Include="SourceFiles\Application\Stage\LevelLoader.cpp" />
     <ClCompile Include="SourceFiles\Application\Stage\Stage.cpp" />
     <ClCompile Include="SourceFiles\Engine\GameObject\BaseStage.cpp" />
     <ClCompile Include="SourceFiles\Engine\Scene\BasePauseMenu.cpp" />
@@ -175,6 +177,7 @@
     <ClInclude Include="SourceFiles\Application\GameObjects\BaseEnemy.h" />
     <ClInclude Include="SourceFiles\Application\GameObjects\Enemy.h" />
     <ClInclude Include="SourceFiles\Application\GameObjects\Goal.h" />
+    <ClInclude Include="SourceFiles\Application\GameObjects\MyGameObject.h" />
     <ClInclude Include="SourceFiles\Application\GameObjects\Player.h" />
     <ClInclude Include="SourceFiles\Application\GameScenes\ClearScene.h" />
     <ClInclude Include="SourceFiles\Application\GameScenes\GameOverScene.h" />
@@ -184,6 +187,7 @@
     <ClInclude Include="SourceFiles\Application\GameScenes\SceneFactory.h" />
     <ClInclude Include="SourceFiles\Application\GameScenes\TitleScene.h" />
     <ClInclude Include="SourceFiles\Application\MyGame\MyGame.h" />
+    <ClInclude Include="SourceFiles\Application\Stage\LevelLoader.h" />
     <ClInclude Include="SourceFiles\Application\Stage\Stage.h" />
     <ClInclude Include="SourceFiles\Application\MyGame\ShareValue.h" />
     <ClInclude Include="SourceFiles\Engine\GameObject\BaseStage.h" />

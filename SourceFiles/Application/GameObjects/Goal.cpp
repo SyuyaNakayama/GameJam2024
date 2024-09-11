@@ -5,14 +5,11 @@
 
 using namespace WristerEngine::_2D;
 
-void Goal::Initialize() 
+void Goal::Initialize(const ObjectData& objData)
 {
 	// ‰Šú‰»
 	sprite = Sprite::Create("TestGoal.png");
-	sprite->size = Const(Vector2, "PlayerSize");
-	sprite->position.x = Const(float, "GoalPosX");
-	sprite->position.y = WristerEngine::WIN_SIZE.y - Const(float, "GroundHeight");
-	sprite->anchorPoint = { 0.5f,1.0f };
+	MyGameObject::Initialize(objData);
 
 	collisionAttribute = CollisionAttribute::Goal;
 	collisionMask = CollisionMask::Goal;

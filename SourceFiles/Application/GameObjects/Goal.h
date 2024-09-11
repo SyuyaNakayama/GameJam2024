@@ -1,15 +1,12 @@
 #pragma once
-#include "GameObject.h"
-#include "Sprite.h"
+#include "MyGameObject.h"
 #include "OperateConfig.h"
 #include "Collider.h"
 
-class Goal : public WristerEngine::_2D::GameObject, public WristerEngine::_2D::ColliderGroup
+class Goal : public MyGameObject
 {
-	std::unique_ptr<WristerEngine::_2D::Sprite> sprite;
-
 	// GameObject ‚ð‰î‚µ‚ÄŒp³‚³‚ê‚Ü‚µ‚½
-	void Initialize() override;
+	void Initialize(const ObjectData& objData) override;
 	void Update() override;
 	void Draw() { sprite->Draw(); }
 

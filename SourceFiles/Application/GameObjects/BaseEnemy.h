@@ -1,6 +1,7 @@
 #pragma once
-#include "GameObject.h"
+#include "MyGameObject.h"
 
-class BaseEnemy : public WristerEngine::_2D::GameObject
+class BaseEnemy : public MyGameObject
 {
+protected:
 };

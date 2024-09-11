@@ -1,12 +1,11 @@
 #pragma once
-#include "GameObject.h"
+#include "MyGameObject.h"
 #include "Sprite.h"
 #include "OperateConfig.h"
 #include "Collider.h"
 
-class Player : public WristerEngine::_2D::GameObject, public WristerEngine::_2D::ColliderGroup
+class Player : public MyGameObject
 {
-	std::unique_ptr<WristerEngine::_2D::Sprite> sprite;
 	std::unique_ptr<WristerEngine::_2D::Sprite> sprites;
 	std::unique_ptr<WristerEngine::_2D::Sprite> attackArea;
 	std::unique_ptr<WristerEngine::_2D::Sprite> hide;	//潜っている時のスプライト
@@ -51,7 +50,7 @@ class Player : public WristerEngine::_2D::GameObject, public WristerEngine::_2D:
 	void InitializeUI();//長くなりそうなのでUI部分の初期化だけ別個用意
 
 	// GameObject を介して継承されました
-	void Initialize() override;
+	void Initialize(const ObjectData& objData) override;
 	void Update() override;
 	void Draw();
 	void OnCollision(WristerEngine::_2D::ColliderGroup* group) override;

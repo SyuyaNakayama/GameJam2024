@@ -86,6 +86,9 @@
     <Filter Include="ソース ファイル\Application\Stage\GameObjects">
       <UniqueIdentifier>{557e78e9-4f96-4221-9e83-7dc4a08a70df}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Application\LevelLoader">
+      <UniqueIdentifier>{380d0a60-c217-4f2b-bce8-ce52fb8219be}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SourceFiles\Engine\Math\Matrix4.cpp">
@@ -273,6 +276,12 @@
     </ClCompile>
     <ClCompile Include="SourceFiles\Application\GameScenes\TutorialScene.cpp">
       <Filter>ソース ファイル\Application\GameScenes</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceFiles\Application\Stage\LevelLoader.cpp">
+      <Filter>ソース ファイル\Application\LevelLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceFiles\Application\GameObjects\MyGameObject.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -486,6 +495,10 @@
     <ClInclude Include="SourceFiles\Application\GameScenes\TutorialScene.h">
       <Filter>ソース ファイル\Application\GameScenes</Filter>
     </ClInclude>
+    <ClInclude Include="SourceFiles\Application\Stage\LevelLoader.h">
+      <Filter>ソース ファイル\Application\LevelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceFiles\Application\GameObjects\MyGameObject.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\levels\constant.json">

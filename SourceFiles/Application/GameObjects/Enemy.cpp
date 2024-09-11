@@ -3,15 +3,11 @@
 
 using namespace WristerEngine::_2D;
 
-void Enemy::Initialize()
+void Enemy::Initialize(const ObjectData& objData)
 {
 	// “G
 	sprite = Sprite::Create("pillar.png");
-	sprite->size = Const(Vector2, "EnemySize");
-	sprite->position.x = Const(float, "EnemyPosX");
-	sprite->position.y = WristerEngine::WIN_SIZE.y - Const(float, "GroundHeight");
-	sprite->anchorPoint = { 0.5f,1.0f };
-	sprite->color = { 1.0f,1.0f,1.0f,1.0f };
+	MyGameObject::Initialize(objData);
 
 	// ƒr[ƒ€
 	eyeBeam = Sprite::Create("EyeBeam.png");
@@ -58,7 +54,7 @@ void Enemy::Draw()
 	hpGauge->Draw();
 }
 
-void Enemy::OnCollision([[maybe_unused]] WristerEngine::_2D::ColliderGroup* collider)
+void Enemy::OnCollision(WristerEngine::_2D::ColliderGroup* collider)
 {
 	for (auto pair : collisionPair[0])
 	{

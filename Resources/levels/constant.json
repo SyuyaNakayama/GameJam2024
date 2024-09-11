@@ -8,16 +8,12 @@
   "int[]": {
   },
   "float": {
-    "PlayerStartPosX": 100,
     "GroundHeight": 100,
-    "PlayerMoveSpd": 3,
-    "EnemyPosX": 1020,
-    "GoalPosX": 1200
+    "PlayerMoveSpd": 3
   },
   "Vector2": {
     "WhitePicSize": [ 300, 200 ],
     "PlayerSize": [ 50, 50 ],
-    "EnemySize": [ 100, 400 ],
     "EnemyEyePos": [ 960, 270 ],
     "EnemyGaugeSize": [ 150, 30 ],
     "EnemyGaugePos": [ 945, 170 ],

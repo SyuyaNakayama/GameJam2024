@@ -11,7 +11,7 @@ namespace WristerEngine::_3D
 		// ステージ上にあるゲーム表示物
 		std::list<GameObject> stageObjects;
 		// Jsonから読み込んだデータ
-		ObjectData objData;
+		//ObjectData objData;
 
 	protected:
 		// 固有初期化

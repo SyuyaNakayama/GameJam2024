@@ -1,8 +1,8 @@
 #pragma once
-#include "LevelLoader.h"
 #include "Input.h"
 #include "SceneManager.h"
 #include "Constant.h"
+#include "LevelLoader.h"
 
 namespace WristerEngine
 {
@@ -14,12 +14,13 @@ namespace WristerEngine
 		protected:
 			Input* input = Input::GetInstance();
 			Constant* constant = Constant::GetInstance();
+			std::unique_ptr<Sprite> sprite;
 
 		public:
 			// 仮想デストラクタ
 			virtual ~GameObject() = default;
 			// 初期化(純粋仮想関数)
-			virtual void Initialize() = 0;
+			virtual void Initialize(const ObjectData& objData) = 0;
 			// 更新(純粋仮想関数)
 			virtual void Update() = 0;
 			// 描画(純粋仮想関数)
@@ -45,7 +46,7 @@ namespace WristerEngine
 			/// 初期化(純粋仮想関数)
 			/// </summary>
 			/// <param name="objectData">Jsonファイルから読み込んだデータ</param>
-			virtual void Initialize(const ObjectData& objectData) = 0;
+			//virtual void Initialize(const ObjectData& objectData) = 0;
 			// 更新(純粋仮想関数)
 			virtual void Update() = 0;
 			// 現在のシーンを取得

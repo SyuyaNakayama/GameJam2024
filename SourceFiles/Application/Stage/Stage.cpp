@@ -17,11 +17,21 @@ void Stage::EnemyDie()
 
 void Stage::Initialize()
 {
-	// オブジェクトの登録
-	stageObjects.push_back(std::make_unique<Player>());
-	stageObjects.push_back(std::make_unique<Enemy>());
-	stageObjects.push_back(std::make_unique<Goal>());
-	for (auto& obj : stageObjects) { obj->Initialize(); }
+	std::vector<ObjectData> objects = levelLoader.LoadLevel("stage1");
+
+	for (auto obj : objects)
+	{
+		std::unique_ptr<GameObject> stageObject;
+
+		if (obj.name == "Player") { stageObject = std::make_unique<Player>(); }
+		else if (obj.name == "Enemy") { stageObject = std::make_unique<Enemy>(); }
+		else if (obj.name == "Goal") { stageObject = std::make_unique<Goal>(); }
+		assert(stageObject);
+
+		// オブジェクトの登録
+		stageObject->Initialize(obj);
+		stageObjects.push_back(std::move(stageObject));
+	}
 }
 
 void Stage::Update()

@@ -51,7 +51,7 @@ void Player::Attack()
 	}
 }
 
-void Player::Initialize()
+void Player::Initialize(const ObjectData& objData)
 {
 	sprites = Sprite::Create("background.png");
 	sprites->size.x = WristerEngine::WIN_SIZE.x;
@@ -59,11 +59,7 @@ void Player::Initialize()
 	sprites->isInvisible = false;
 	// ‰Šú‰»
 	sprite = Sprite::Create("player.png");
-	sprite->size = Const(Vector2, "PlayerSize");
-	sprite->position.x = Const(float, "PlayerStartPosX");
-	sprite->position.y = WristerEngine::WIN_SIZE.y - Const(float, "GroundHeight");
-	sprite->anchorPoint = { 0.5f,1.0f };
-	sprite->color = { 1.0f,1.0f,1.0f,1.0f };
+	MyGameObject::Initialize(objData);
 
 	attackArea = Sprite::Create("attack_effect.png");
 	attackArea->size = Const(Vector2, "EffectSize");
@@ -75,7 +71,7 @@ void Player::Initialize()
 
 	hide = Sprite::Create("Dive.png");
 	hide->SetRect(Const(Vector2, "UIIconSize"), { 0,0 });
-	hide->size = Const(Vector2, "PlayerSize");
+	hide->size = objData.size;
 	hide->position.y = WristerEngine::WIN_SIZE.y - Const(float, "GroundHeight");
 	hide->anchorPoint = { 0.5f,1.0f };
 	hide->isFlipY = true;
@@ -225,7 +221,7 @@ void Player::Draw()
 	}
 }
 
-void Player::OnCollision([[maybe_unused]] WristerEngine::_2D::ColliderGroup* group)
+void Player::OnCollision(WristerEngine::_2D::ColliderGroup* group)
 {
 	for (auto pair : collisionPair[0])
 	{
