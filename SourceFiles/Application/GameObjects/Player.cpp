@@ -52,7 +52,7 @@ void Player::Initialize()
 	sprites->size.y = WristerEngine::WIN_SIZE.y;
 	sprites->isInvisible = false;
 	// ‰Šú‰»
-	sprite = Sprite::Create("TestPlayer.png");
+	sprite = Sprite::Create("player.png");
 	sprite->size = Const(Vector2, "PlayerSize");
 	sprite->position.y = WristerEngine::WIN_SIZE.y - Const(float, "GroundHeight");
 	sprite->anchorPoint = { 0.5f,1.0f };
