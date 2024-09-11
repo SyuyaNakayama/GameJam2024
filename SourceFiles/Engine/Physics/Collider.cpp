@@ -94,19 +94,24 @@ void WristerEngine::_2D::Base2DCollider::Initialize(Sprite* transform_, Collisio
 	colliderName = colliderName_;
 }
 
-void WristerEngine::_2D::ColliderGroup::AddCollider(Sprite* transform, CollisionShapeType shapeType, const std::string& colliderName)
+void WristerEngine::_2D::ColliderGroup::AddCollider(Sprite* transform, CollisionShapeType shapeType, const std::string& colliderName, const Option* option)
 {
-	std::unique_ptr<Base2DCollider> newCollider = std::make_unique<Base2DCollider>();
+	std::unique_ptr<Base2DCollider> newCollider;
+	switch (shapeType)
+	{
+	case WristerEngine::_2D::CollisionShapeType::Box:
+		newCollider = std::make_unique<Base2DCollider>();
+		break;
+	case WristerEngine::_2D::CollisionShapeType::TwoRay:
+		assert(option);
+		newCollider = std::make_unique<TwoRayCollider>(option->fov);
+		break;
+	default:
+		break;
+	}
+
 	newCollider->Initialize(transform, shapeType, colliderName);
 	colliders.push_back(move(newCollider));
-	//switch (shapeType)
-	//{
-	//case WristerEngine::_2D::CollisionShapeType::Box:
-	//	newCollider=std::make_unique<>
-	//	break;
-	//default:
-	//	break;
-	//}
 }
 
 void WristerEngine::_2D::ColliderGroup::DeleteCollider(const std::string& colliderName)

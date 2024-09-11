@@ -20,7 +20,7 @@ void Enemy::Initialize()
 	eyeBeam->anchorPoint = { 0.5f,0.0f };
 	eyeBeam->color = { 1.0f,1.0f,1.0f,1.0f };
 	eyeBeam->rotation = Angle(30);
-	
+
 	beamRotEasing.Initialize(120, WristerEngine::Easing::Type::Linear);
 	beamRotEasing.SetLoop(30);
 
@@ -34,6 +34,10 @@ void Enemy::Initialize()
 	collisionAttribute = CollisionAttribute::Enemy;
 	collisionMask = CollisionMask::Enemy;
 	AddCollider(sprite.get(), CollisionShapeType::Box, "body");
+
+	Option option{};
+	option.fov = Const(int, "EnemyEyeFOV");
+	AddCollider(eyeBeam.get(), CollisionShapeType::TwoRay, "eyeBeam", &option);
 }
 
 void Enemy::Update()
