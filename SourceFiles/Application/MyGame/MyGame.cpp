@@ -14,10 +14,10 @@ void MyGame::Initialize()
 {
 	windowName = L"クアッドホッケー";
 	Framework::Initialize();
-#ifdef _DEBUG
+#ifdef NDEBUG
 	sceneManager->ChangeScene(Scene::Play, false, false, false);
 #endif // _DEBUG
-#ifdef NDEBUG
+#ifdef _DEBUG
 	sceneManager->ChangeScene(Scene::Title, false, false, false);
 #endif // NDEBUG
 

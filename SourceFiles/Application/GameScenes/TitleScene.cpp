@@ -13,7 +13,7 @@ void TitleScene::Initialize()
 void TitleScene::Update()
 {
 	if (operate->GetTrigger("SceneChange")) {
-		sceneManager->ChangeScene(Scene::Play);
+		sceneManager->ChangeScene(Scene::Tutorial);
 	}
 	// UI•`‰æ
 	uiDrawer->Update();

@@ -271,6 +271,9 @@
     <ClCompile Include="SourceFiles\Application\GameObjects\Goal.cpp">
       <Filter>ソース ファイル\Application\Stage\GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="SourceFiles\Application\GameScenes\TutorialScene.cpp">
+      <Filter>ソース ファイル\Application\GameScenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SourceFiles\Engine\Math\Matrix4.h">
@@ -479,6 +482,9 @@
     </ClInclude>
     <ClInclude Include="SourceFiles\Application\MyGame\ShareValue.h">
       <Filter>ソース ファイル\Application\MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceFiles\Application\GameScenes\TutorialScene.h">
+      <Filter>ソース ファイル\Application\GameScenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

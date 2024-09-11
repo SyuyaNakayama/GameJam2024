@@ -1,24 +1,23 @@
-#include "GamePlayScene.h"
+#include "TutorialScene.h"
 #include "ShareValue.h"
 #include "CollisionManager.h"
 
 using namespace WristerEngine::_2D;
 
-void GamePlayScene::Initialize()
+void TutorialScene::Initialize()
 {
-	ShareValue::GetInstance()->isGoal = false;
 	stage.Initialize();
-	// UI描画クラスの初期化
-	uiDrawer = std::make_unique<UIDrawerGamePlayScene>();
+
+	uiDrawer = std::make_unique<UIDrawerTutorialScene>();
 	uiDrawer->Initialize();
 }
 
-void GamePlayScene::Update()
+void TutorialScene::Update()
 {
 	// リセット
 	if (OperateConfig::GetInstance()->GetTrigger("Pause"))
 	{
-		sceneManager->ChangeScene(Scene::Play);
+		sceneManager->ChangeScene(Scene::Tutorial);
 		WristerEngine::Constant::GetInstance()->LoadConstants();
 		return;
 	}
@@ -26,7 +25,7 @@ void GamePlayScene::Update()
 	if (ShareValue::GetInstance()->isGoal)
 	{
 		ShareValue::GetInstance()->isGoal = false;
-		sceneManager->ChangeScene(Scene::Clear);
+		sceneManager->ChangeScene(Scene::Play);
 		return;
 	}
 
@@ -36,24 +35,21 @@ void GamePlayScene::Update()
 		return;
 	}
 
-
-
 	stage.Update();
-	// UI描画
+
 	uiDrawer->Update();
 }
 
-void GamePlayScene::Draw()
+void TutorialScene::Draw()
 {
 	stage.Draw();
-	// UI描画
 	uiDrawer->Draw();
 }
 
-void UIDrawerGamePlayScene::Initialize()
+void UIDrawerTutorialScene::Initialize()
 {
 	// 地面のUIの初期化
-	sprites["Ground"] = Sprite::Create("brick.png");
+	sprites["Ground"] = Sprite::Create("block.png");
 	std::unique_ptr<Sprite>& s = sprites["Ground"];
 	s->position.y = WristerEngine::WIN_SIZE.y - Const(float, "GroundHeight");
 	s->textureSize.x *= (WristerEngine::WIN_SIZE.x / s->size.x);

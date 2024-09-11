@@ -169,6 +169,7 @@
     <ClCompile Include="SourceFiles\Engine\Physics\Physics.cpp" />
     <ClCompile Include="SourceFiles\Engine\Scene\SceneManager.cpp" />
     <ClCompile Include="SourceFiles\Application\GameScenes\TitleScene.cpp" />
+    <ClCompile Include="SourceFiles\Application\GameScenes\TutorialScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SourceFiles\Application\GameObjects\BaseEnemy.h" />
@@ -240,6 +241,7 @@
     <ClInclude Include="SourceFiles\Engine\Physics\Collider.h" />
     <ClInclude Include="SourceFiles\Engine\Physics\CollisionManager.h" />
     <ClInclude Include="SourceFiles\Engine\Scene\SceneManager.h" />
+    <ClInclude Include="SourceFiles\Application\GameScenes\TutorialScene.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\levels\constant.json" />
