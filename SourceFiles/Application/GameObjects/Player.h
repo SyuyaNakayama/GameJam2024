@@ -18,6 +18,8 @@ class Player : public WristerEngine::_2D::GameObject, public WristerEngine::_2D:
 	//UI
 	std::unique_ptr<WristerEngine::_2D::Sprite> ui_attack;
 	std::unique_ptr<WristerEngine::_2D::Sprite> ui_dive;
+	std::unique_ptr<WristerEngine::_2D::Sprite> ui_coolTime1;
+	std::unique_ptr<WristerEngine::_2D::Sprite> ui_coolTime2;
 
 	// なんらかのアクション
 	void (Player::* Action)() = nullptr;
@@ -30,17 +32,22 @@ class Player : public WristerEngine::_2D::GameObject, public WristerEngine::_2D:
 	bool isCanUseHide = true, isCanUseAttack = true;
 
 	int animTime;
+	float coolCutPosA;
+	float coolCutPosH;
+	int countCoolTimeA;
+	int countCoolTimeH;
+	bool coolTimeCountStartA;
+	bool coolTimeCountStartH;
 
 	void Move(); // 移動
-
 	void UITimer();	//UIでのクールタイム視覚化
-
 	void Animations();	//プレイヤーのアニメーション周り
+	void InitializeUI();//長くなりそうなのでUI部分の初期化だけ別個用意
 
 	// GameObject を介して継承されました
 	void Initialize() override;
 	void Update() override;
-	void Draw() { sprites->Draw(); sprite->Draw(); attackArea->Draw(); hide->Draw();  ui_attack->Draw(); ui_dive->Draw(); }
+	void Draw();
 	void OnCollision(WristerEngine::_2D::ColliderGroup* group) override;
 public:
 	bool IsHide() const { return Action == &Player::Hide; }
