@@ -94,6 +94,20 @@ void WristerEngine::_2D::Base2DCollider::Initialize(Sprite* transform_, Collisio
 	colliderName = colliderName_;
 }
 
+std::map<std::string, Vector2> WristerEngine::_2D::Base2DCollider::GetLTRB() const
+{
+	std::map<std::string, Vector2> ans;
+	ans["LT"] = ans["RB"] = transform->position;
+	// ·•ª
+	Vector2 ltSub = Vector2(transform->size.x * transform->anchorPoint.x, transform->size.y * transform->anchorPoint.y);
+	Vector2 rbSub = Vector2(transform->size.x * (1.0f - transform->anchorPoint.x), transform->size.y * (1.0f - transform->anchorPoint.y));
+	if (transform->isFlipX) { ltSub.x = -ltSub.x; rbSub.x = -rbSub.x; }
+	if (transform->isFlipY) { ltSub.y = -ltSub.y; rbSub.y = -rbSub.y; }
+	ans["LT"] -= ltSub;
+	ans["RB"] += rbSub;
+	return ans;
+}
+
 void WristerEngine::_2D::ColliderGroup::AddCollider(Sprite* transform, CollisionShapeType shapeType, const std::string& colliderName, const Option* option)
 {
 	std::unique_ptr<Base2DCollider> newCollider;

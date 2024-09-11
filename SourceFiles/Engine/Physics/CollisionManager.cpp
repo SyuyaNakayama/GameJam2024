@@ -26,6 +26,28 @@ bool CollisionManager::CheckCollisionFiltering(_2D::ColliderGroup* colliderA, _2
 		(UINT)colliderB->GetCollisionAttribute() & (UINT)colliderA->GetCollisionMask();
 }
 
+bool WristerEngine::CollisionManager::Check2DCollision2Boxes(const std::array<_2D::Base2DCollider*, 2>& colliders)
+{
+	std::array<Vector2, 2> posCenter;
+	std::array<const _2D::Sprite*, 2> trans{};
+
+	for (size_t i = 0; i < colliders.size(); i++)
+	{
+		trans[i] = colliders[i]->GetTransform();
+		// 中心点を計算
+		auto pos = colliders[i]->GetLTRB();
+		posCenter[i] = Half<Vector2>(pos["LT"] + pos["RB"]);
+	}
+
+	// 当たり判定
+	if (std::abs(posCenter[0].x - posCenter[1].x) <= Half(trans[0]->size.x + trans[1]->size.x) &&
+		std::abs(posCenter[0].y - posCenter[1].y) <= Half(trans[0]->size.y + trans[1]->size.y))
+	{
+		return true;
+	}
+	return false;
+}
+
 bool CollisionManager::CheckCollision2Boxes(BoxCollider* colliderA, BoxCollider* colliderB)
 {
 	if (!CheckCollisionFiltering(colliderA, colliderB)) { return false; }
@@ -265,54 +287,39 @@ bool WristerEngine::CollisionManager::CheckCollision2ColliderGroups(_2D::Collide
 	const auto& collidersA = groupA->GetColliders();
 	const auto& collidersB = groupB->GetColliders();
 
-	bool isHit = false;
+	bool isHitGroup = false;
 	size_t aIndex = 0;
 
 	// 2つのコライダーグループの全てのコライダーと当たり判定を取る
+	std::map<_2D::CollisionShapeType, size_t> shapeTypeCount;
 	auto itrA = collidersA.begin();
 	for (; itrA != collidersA.end(); itrA++, aIndex++)
 	{
+		bool isHitPair = false;
 		auto itrB = collidersB.begin();
 		size_t bIndex = 0;
 		for (; itrB != collidersB.end(); itrB++, bIndex++)
 		{
+			shapeTypeCount.clear();
+			shapeTypeCount[itrA->get()->GetShapeType()]++;
+			shapeTypeCount[itrB->get()->GetShapeType()]++;
 			// ボックスとボックスの当たり判定
-			if (itrA->get()->GetShapeType() == _2D::CollisionShapeType::Box)
+			if (shapeTypeCount[_2D::CollisionShapeType::Box] == 2)
 			{
-				if (itrB->get()->GetShapeType() == _2D::CollisionShapeType::Box)
-				{
-					std::array<const _2D::Sprite*, 2> trans = { itrA->get()->GetTransform(),itrB->get()->GetTransform() };
-					std::array<Vector2, 2> posCenter;
+				isHitPair = Check2DCollision2Boxes({ itrA->get(),itrB->get() });
+			}
 
-					// 中心点を計算
-					for (size_t i = 0; i < trans.size(); i++)
-					{
-						Vector2 posLT, posRB;
-						posLT = posRB = trans[i]->position;
-						// 差分
-						Vector2 ltSub = Vector2(trans[i]->size.x * trans[i]->anchorPoint.x, trans[i]->size.y * trans[i]->anchorPoint.y);
-						Vector2 rbSub = Vector2(trans[i]->size.x * (1.0f - trans[i]->anchorPoint.x), trans[i]->size.y * (1.0f - trans[i]->anchorPoint.y));
-						if (trans[i]->isFlipX) { ltSub.x = -ltSub.x; rbSub.x = -rbSub.x; }
-						if (trans[i]->isFlipY) { ltSub.y = -ltSub.y; rbSub.y = -rbSub.y; }
-						posLT -= ltSub; posRB += rbSub;
-						// 中心点を代入
-						posCenter[i] = Half<Vector2>(posLT + posRB);
-					}
-
-					if (std::abs(posCenter[0].x - posCenter[1].x) <= Half(trans[0]->size.x + trans[1]->size.x) &&
-						std::abs(posCenter[0].y - posCenter[1].y) <= Half(trans[0]->size.y + trans[1]->size.y))
-					{
-						// コリジョンペアの登録
-						groupA->AddCollisionPair(aIndex, bIndex);
-						groupB->AddCollisionPair(bIndex, aIndex);
-						isHit = true;
-					}
-				}
+			if (isHitPair)
+			{
+				// コリジョンペアの登録
+				groupA->AddCollisionPair(aIndex, bIndex);
+				groupB->AddCollisionPair(bIndex, aIndex);
+				isHitGroup = true;
 			}
 		}
 	}
 
-	return isHit;
+	return isHitGroup;
 }
 
 void CollisionManager::CheckBoxCollisions()

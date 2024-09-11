@@ -59,6 +59,8 @@ namespace WristerEngine
 			const Sprite* GetTransform() const { return transform; }
 			CollisionShapeType GetShapeType() const { return shapeType; }
 			const std::string GetColliderName() const { return colliderName; }
+			// 左上端と右下端の座標を求める
+			std::map<std::string, Vector2> GetLTRB() const;
 		};
 
 		class ColliderGroup
