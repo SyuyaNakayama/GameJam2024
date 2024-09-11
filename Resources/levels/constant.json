@@ -17,7 +17,7 @@
   "Vector2": {
     "WhitePicSize": [ 300, 200 ],
     "PlayerSize": [ 50, 50 ],
-    "EnemySize": [ 150, 400 ],
+    "EnemySize": [ 100, 400 ],
     "EnemyEyePos": [ 960, 270 ],
     "EnemyGaugeSize": [ 150, 30 ],
     "EnemyGaugePos": [ 945, 170 ],

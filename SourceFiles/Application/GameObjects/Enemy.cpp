@@ -6,7 +6,7 @@ using namespace WristerEngine::_2D;
 void Enemy::Initialize()
 {
 	// “G
-	sprite = Sprite::Create("TestEnemy.png");
+	sprite = Sprite::Create("pillar.png");
 	sprite->size = Const(Vector2, "EnemySize");
 	sprite->position.x = Const(float, "EnemyPosX");
 	sprite->position.y = WristerEngine::WIN_SIZE.y - Const(float, "GroundHeight");

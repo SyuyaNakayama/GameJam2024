@@ -52,7 +52,7 @@ void GamePlayScene::Draw()
 void UIDrawerGamePlayScene::Initialize()
 {
 	// ’n–Ê‚ÌUI‚Ì‰Šú‰»
-	sprites["Ground"] = Sprite::Create("block.png");
+	sprites["Ground"] = Sprite::Create("brick.png");
 	std::unique_ptr<Sprite>& s = sprites["Ground"];
 	s->position.y = WristerEngine::WIN_SIZE.y - Const(float, "GroundHeight");
 	s->textureSize.x *= (WristerEngine::WIN_SIZE.x / s->size.x);
