@@ -1,4 +1,6 @@
 #include "GamePlayScene.h"
+#include "ShareValue.h"
+#include "CollisionManager.h"
 
 using namespace WristerEngine::_2D;
 
@@ -12,11 +14,28 @@ void GamePlayScene::Initialize()
 
 void GamePlayScene::Update()
 {
-	if (OperateConfig::GetInstance()->GetTrigger("SceneChange")) {
+	// ƒŠƒZƒbƒg
+	if (OperateConfig::GetInstance()->GetTrigger("SceneChange"))
+	{
 		sceneManager->ChangeScene(Scene::Play);
 		WristerEngine::Constant::GetInstance()->LoadConstants();
 		return;
 	}
+
+	if (ShareValue::GetInstance()->isGoal)
+	{
+		ShareValue::GetInstance()->isGoal = false;
+		sceneManager->ChangeScene(Scene::Clear);
+		return;
+	}
+
+	if (ShareValue::GetInstance()->isGameOver)
+	{
+		sceneManager->ChangeScene(Scene::GameOver);
+		return;
+	}
+
+
 
 	stage.Update();
 	// UI•`‰æ
@@ -40,5 +59,4 @@ void UIDrawerGamePlayScene::Initialize()
 	s->textureSize.y *= (Const(float, "GroundHeight") / s->size.y);
 	s->size.x = WristerEngine::WIN_SIZE.x;
 	s->size.y = Const(float, "GroundHeight");
-	
 }

@@ -2,6 +2,7 @@
 #include <imgui.h>
 #include <cmath>
 #include "SceneManager.h"
+#include "ShareValue.h"
 
 using namespace WristerEngine::_2D;
 
@@ -54,6 +55,7 @@ void Player::Initialize()
 	// 初期化
 	sprite = Sprite::Create("player.png");
 	sprite->size = Const(Vector2, "PlayerSize");
+	sprite->position.x = Const(float, "PlayerStartPosX");
 	sprite->position.y = WristerEngine::WIN_SIZE.y - Const(float, "GroundHeight");
 	sprite->anchorPoint = { 0.5f,1.0f };
 	sprite->color = { 1.0f,1.0f,1.0f,1.0f };
@@ -74,8 +76,8 @@ void Player::Initialize()
 	//UIのスプライト初期化設定
 	ui_attack = Sprite::Create("ui_attack.png");
 	ui_attack->size = Const(Vector2, "UIAllSize");
-	ui_attack->SetRect(Const(Vector2,"UIIconSize"), {0,0});
-	ui_attack->position = Vector2(WristerEngine::WIN_SIZE.x - Const(float,"PlayerSize"), WristerEngine::WIN_SIZE.y / 2 - Const(float, "PlayerSize"));
+	ui_attack->SetRect(Const(Vector2, "UIIconSize"), { 0,0 });
+	ui_attack->position = Vector2(WristerEngine::WIN_SIZE.x - Const(float, "PlayerSize"), WristerEngine::WIN_SIZE.y / 2 - Const(float, "PlayerSize"));
 	ui_attack->anchorPoint = { 0.5f,1.0f };
 
 	ui_dive = Sprite::Create("ui_dive.png");
@@ -91,7 +93,6 @@ void Player::Initialize()
 
 	//アニメーション時間
 	animTime = Const(int, "PlayerAnimationTimer");
-
 }
 
 void Player::Update()
@@ -145,9 +146,15 @@ void Player::OnCollision([[maybe_unused]] WristerEngine::_2D::ColliderGroup* gro
 {
 	for (auto pair : collisionPair[0])
 	{
+		// 敵との接触
 		if (group->GetColliderName(pair) == "body")
 		{
 			sprite->position -= Const(float, "PlayerMoveSpd");
+		}
+		// ゴール
+		if (group->GetColliderName(pair) == "Goal" && !IsHide())
+		{
+			ShareValue::GetInstance()->isGoal = true;
 		}
 	}
 }

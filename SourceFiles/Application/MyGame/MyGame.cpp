@@ -5,6 +5,8 @@
 #include "MyGame.h"
 #include "ParticleManager.h"
 #include "Scene.h"
+#include "ShareValue.h"
+#include <imgui.h>
 using namespace WristerEngine::_2D;
 using namespace WristerEngine::_3D;
 

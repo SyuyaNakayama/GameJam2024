@@ -184,6 +184,7 @@
     <ClInclude Include="SourceFiles\Application\GameScenes\TitleScene.h" />
     <ClInclude Include="SourceFiles\Application\MyGame\MyGame.h" />
     <ClInclude Include="SourceFiles\Application\Stage\Stage.h" />
+    <ClInclude Include="SourceFiles\Application\MyGame\ShareValue.h" />
     <ClInclude Include="SourceFiles\Engine\GameObject\BaseStage.h" />
     <ClInclude Include="SourceFiles\Engine\Scene\BasePauseMenu.h" />
     <ClInclude Include="SourceFiles\Engine\2d\AbstractUIDrawer.h" />

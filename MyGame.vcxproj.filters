@@ -68,22 +68,22 @@
     <Filter Include="ソース ファイル\Application\MyGame">
       <UniqueIdentifier>{b5ea781b-bf15-41e2-8d03-160a065ad9c1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Application\MyGame\GameScenes">
-      <UniqueIdentifier>{8a5860b0-ee27-40a4-ba1c-84d967692147}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Application\MyGame\Scene">
-      <UniqueIdentifier>{77d3ded4-46d2-45b6-9eee-12dfb1aa9551}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Application\MyGame\OperateConfig">
-      <UniqueIdentifier>{f18eb109-dcfa-4e9f-a55c-78bd1b4b1b56}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\リソース ファイル">
       <UniqueIdentifier>{87941c2a-f2f5-45f0-9d9e-d5dc5507b36a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Application\MyGame\Stage">
+    <Filter Include="ソース ファイル\Application\GameScenes">
+      <UniqueIdentifier>{8a5860b0-ee27-40a4-ba1c-84d967692147}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Application\OperateConfig">
+      <UniqueIdentifier>{f18eb109-dcfa-4e9f-a55c-78bd1b4b1b56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Application\Scene">
+      <UniqueIdentifier>{77d3ded4-46d2-45b6-9eee-12dfb1aa9551}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Application\Stage">
       <UniqueIdentifier>{84480062-ec1e-41d2-a2ab-fe7882a30d90}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Application\MyGame\Stage\GameObjects">
+    <Filter Include="ソース ファイル\Application\Stage\GameObjects">
       <UniqueIdentifier>{557e78e9-4f96-4221-9e83-7dc4a08a70df}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -236,40 +236,40 @@
       <Filter>ソース ファイル\Application\MyGame</Filter>
     </ClCompile>
     <ClCompile Include="SourceFiles\Application\GameScenes\SceneFactory.cpp">
-      <Filter>ソース ファイル\Application\MyGame\Scene</Filter>
+      <Filter>ソース ファイル\Application\Scene</Filter>
     </ClCompile>
     <ClCompile Include="SourceFiles\Application\GameScenes\OperateConfig.cpp">
-      <Filter>ソース ファイル\Application\MyGame\OperateConfig</Filter>
+      <Filter>ソース ファイル\Application\OperateConfig</Filter>
     </ClCompile>
     <ClCompile Include="SourceFiles\Application\GameScenes\GameOverScene.cpp">
-      <Filter>ソース ファイル\Application\MyGame\GameScenes</Filter>
+      <Filter>ソース ファイル\Application\GameScenes</Filter>
     </ClCompile>
     <ClCompile Include="SourceFiles\Application\GameScenes\GamePlayScene.cpp">
-      <Filter>ソース ファイル\Application\MyGame\GameScenes</Filter>
+      <Filter>ソース ファイル\Application\GameScenes</Filter>
     </ClCompile>
     <ClCompile Include="SourceFiles\Application\GameScenes\TitleScene.cpp">
-      <Filter>ソース ファイル\Application\MyGame\GameScenes</Filter>
+      <Filter>ソース ファイル\Application\GameScenes</Filter>
     </ClCompile>
     <ClCompile Include="SourceFiles\Application\GameScenes\ClearScene.cpp">
-      <Filter>ソース ファイル\Application\MyGame\GameScenes</Filter>
+      <Filter>ソース ファイル\Application\GameScenes</Filter>
     </ClCompile>
     <ClCompile Include="SourceFiles\Application\GameObjects\Enemy.cpp">
-      <Filter>ソース ファイル\Application\MyGame\Stage\GameObjects</Filter>
+      <Filter>ソース ファイル\Application\Stage\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="SourceFiles\Engine\GameObject\BaseStage.cpp">
       <Filter>ソース ファイル\Engine\3d\Object</Filter>
     </ClCompile>
     <ClCompile Include="SourceFiles\Application\Stage\Stage.cpp">
-      <Filter>ソース ファイル\Application\MyGame\Stage</Filter>
+      <Filter>ソース ファイル\Application\Stage</Filter>
     </ClCompile>
     <ClCompile Include="SourceFiles\Application\GameObjects\BaseEnemy.cpp">
-      <Filter>ソース ファイル\Application\MyGame\Stage\GameObjects</Filter>
+      <Filter>ソース ファイル\Application\Stage\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="SourceFiles\Application\GameObjects\Player.cpp">
-      <Filter>ソース ファイル\Application\MyGame\Stage\GameObjects</Filter>
+      <Filter>ソース ファイル\Application\Stage\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="SourceFiles\Application\GameObjects\Goal.cpp">
-      <Filter>ソース ファイル\Application\MyGame\Stage\GameObjects</Filter>
+      <Filter>ソース ファイル\Application\Stage\GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -439,43 +439,46 @@
       <Filter>ソース ファイル\Application\MyGame</Filter>
     </ClInclude>
     <ClInclude Include="SourceFiles\Application\GameScenes\Scene.h">
-      <Filter>ソース ファイル\Application\MyGame\Scene</Filter>
+      <Filter>ソース ファイル\Application\Scene</Filter>
     </ClInclude>
     <ClInclude Include="SourceFiles\Application\GameScenes\SceneFactory.h">
-      <Filter>ソース ファイル\Application\MyGame\Scene</Filter>
+      <Filter>ソース ファイル\Application\Scene</Filter>
     </ClInclude>
     <ClInclude Include="SourceFiles\Application\GameScenes\OperateConfig.h">
-      <Filter>ソース ファイル\Application\MyGame\OperateConfig</Filter>
+      <Filter>ソース ファイル\Application\OperateConfig</Filter>
     </ClInclude>
     <ClInclude Include="SourceFiles\Application\GameScenes\GameOverScene.h">
-      <Filter>ソース ファイル\Application\MyGame\GameScenes</Filter>
+      <Filter>ソース ファイル\Application\GameScenes</Filter>
     </ClInclude>
     <ClInclude Include="SourceFiles\Application\GameScenes\GamePlayScene.h">
-      <Filter>ソース ファイル\Application\MyGame\GameScenes</Filter>
+      <Filter>ソース ファイル\Application\GameScenes</Filter>
     </ClInclude>
     <ClInclude Include="SourceFiles\Application\GameScenes\TitleScene.h">
-      <Filter>ソース ファイル\Application\MyGame\GameScenes</Filter>
+      <Filter>ソース ファイル\Application\GameScenes</Filter>
     </ClInclude>
     <ClInclude Include="SourceFiles\Application\GameScenes\ClearScene.h">
-      <Filter>ソース ファイル\Application\MyGame\GameScenes</Filter>
+      <Filter>ソース ファイル\Application\GameScenes</Filter>
     </ClInclude>
     <ClInclude Include="SourceFiles\Application\GameObjects\BaseEnemy.h">
-      <Filter>ソース ファイル\Application\MyGame\Stage\GameObjects</Filter>
+      <Filter>ソース ファイル\Application\Stage\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="SourceFiles\Application\GameObjects\Enemy.h">
-      <Filter>ソース ファイル\Application\MyGame\Stage\GameObjects</Filter>
+      <Filter>ソース ファイル\Application\Stage\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="SourceFiles\Application\GameObjects\Player.h">
-      <Filter>ソース ファイル\Application\MyGame\Stage\GameObjects</Filter>
+      <Filter>ソース ファイル\Application\Stage\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="SourceFiles\Engine\GameObject\BaseStage.h">
       <Filter>ソース ファイル\Engine\3d\Object</Filter>
     </ClInclude>
     <ClInclude Include="SourceFiles\Application\Stage\Stage.h">
-      <Filter>ソース ファイル\Application\MyGame\Stage</Filter>
+      <Filter>ソース ファイル\Application\Stage</Filter>
     </ClInclude>
     <ClInclude Include="SourceFiles\Application\GameObjects\Goal.h">
-      <Filter>ソース ファイル\Application\MyGame\Stage\GameObjects</Filter>
+      <Filter>ソース ファイル\Application\Stage\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceFiles\Application\MyGame\ShareValue.h">
+      <Filter>ソース ファイル\Application\MyGame</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

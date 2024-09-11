@@ -21,7 +21,7 @@ enum class CollisionMask
 {
 	None = 0,
 	All = -1,
-	Player = CollisionAttribute::Enemy,
+	Player = (int)CollisionAttribute::Enemy | (int)CollisionAttribute::Goal,
 	Enemy = (int)CollisionAttribute::Player,
 	Goal = (int)CollisionAttribute::Player
 };
