@@ -94,19 +94,38 @@ void WristerEngine::_2D::Base2DCollider::Initialize(Sprite* transform_, Collisio
 	colliderName = colliderName_;
 }
 
-void WristerEngine::_2D::ColliderGroup::AddCollider(Sprite* transform, CollisionShapeType shapeType, const std::string& colliderName)
+std::map<std::string, Vector2> WristerEngine::_2D::Base2DCollider::GetLTRB() const
 {
-	std::unique_ptr<Base2DCollider> newCollider = std::make_unique<Base2DCollider>();
+	std::map<std::string, Vector2> ans;
+	ans["LT"] = ans["RB"] = transform->position;
+	// ·•ª
+	Vector2 ltSub = Vector2(transform->size.x * transform->anchorPoint.x, transform->size.y * transform->anchorPoint.y);
+	Vector2 rbSub = Vector2(transform->size.x * (1.0f - transform->anchorPoint.x), transform->size.y * (1.0f - transform->anchorPoint.y));
+	if (transform->isFlipX) { ltSub.x = -ltSub.x; rbSub.x = -rbSub.x; }
+	if (transform->isFlipY) { ltSub.y = -ltSub.y; rbSub.y = -rbSub.y; }
+	ans["LT"] -= ltSub;
+	ans["RB"] += rbSub;
+	return ans;
+}
+
+void WristerEngine::_2D::ColliderGroup::AddCollider(Sprite* transform, CollisionShapeType shapeType, const std::string& colliderName, const Option* option)
+{
+	std::unique_ptr<Base2DCollider> newCollider;
+	switch (shapeType)
+	{
+	case WristerEngine::_2D::CollisionShapeType::Box:
+		newCollider = std::make_unique<Base2DCollider>();
+		break;
+	case WristerEngine::_2D::CollisionShapeType::TwoRay:
+		assert(option);
+		newCollider = std::make_unique<TwoRayCollider>(option->fov);
+		break;
+	default:
+		break;
+	}
+
 	newCollider->Initialize(transform, shapeType, colliderName);
 	colliders.push_back(move(newCollider));
-	//switch (shapeType)
-	//{
-	//case WristerEngine::_2D::CollisionShapeType::Box:
-	//	newCollider=std::make_unique<>
-	//	break;
-	//default:
-	//	break;
-	//}
 }
 
 void WristerEngine::_2D::ColliderGroup::DeleteCollider(const std::string& colliderName)

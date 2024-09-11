@@ -22,6 +22,7 @@ public:
 	void operator-=(float rad) { angle -= rad; }
 	void operator-=(int deg) { angle -= ToRadian(deg); }
 	operator float() { return angle; }
+	Angle() = default;
 	Angle(float rad) { angle = rad; } // ƒ‰ƒWƒAƒ“‘ã“ü
 	Angle(int deg) { angle = ToRadian(deg); } // “x”‘ã“ü
 };

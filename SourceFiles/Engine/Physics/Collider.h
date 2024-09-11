@@ -34,6 +34,12 @@ namespace WristerEngine
 		{
 			Unknown,
 			Box,
+			TwoRay
+		};
+
+		struct Option
+		{
+			Angle fov;
 		};
 
 		class ColliderGroup;
@@ -41,7 +47,7 @@ namespace WristerEngine
 		class Base2DCollider
 		{
 		private:
-			Sprite* transform;
+			Sprite* transform = nullptr;
 			CollisionShapeType shapeType = CollisionShapeType::Unknown;
 			std::string colliderName;
 
@@ -53,6 +59,8 @@ namespace WristerEngine
 			const Sprite* GetTransform() const { return transform; }
 			CollisionShapeType GetShapeType() const { return shapeType; }
 			const std::string GetColliderName() const { return colliderName; }
+			// 左上端と右下端の座標を求める
+			std::map<std::string, Vector2> GetLTRB() const;
 		};
 
 		class ColliderGroup
@@ -70,7 +78,7 @@ namespace WristerEngine
 			virtual ~ColliderGroup();
 
 			// コライダーの追加
-			void AddCollider(Sprite* transform, CollisionShapeType shapeType, const std::string& colliderName);
+			void AddCollider(Sprite* transform, CollisionShapeType shapeType, const std::string& colliderName, const Option* option = nullptr);
 			// コライダーの削除
 			void DeleteCollider(const std::string& colliderName);
 			// コリジョンペアの追加
@@ -87,9 +95,13 @@ namespace WristerEngine
 			// 衝突コールバック関数
 			virtual void OnCollision([[maybe_unused]] ColliderGroup* colliderGroup) {}
 
-			//class BoxCollider : public Base2DCollider
-			//{
-			//};
+			// 1点から2方向に延びる線分との当たり判定（まだ不完全）
+			class TwoRayCollider : public Base2DCollider
+			{
+				Angle fov; // 視野角
+			public:
+				TwoRayCollider(Angle fov) : fov(fov) {}
+			};
 		};
 	}
 

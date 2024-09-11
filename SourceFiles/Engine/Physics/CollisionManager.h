@@ -20,6 +20,7 @@ namespace WristerEngine
 		// 個別当たり判定
 		static bool CheckCollisionFiltering(BaseCollider* colliderA, BaseCollider* colliderB);
 		static bool CheckCollisionFiltering(_2D::ColliderGroup* colliderA, _2D::ColliderGroup* colliderB);
+		static bool Check2DCollision2Boxes(const std::array<_2D::Base2DCollider*, 2>& colliders);
 		static bool CheckCollision2Boxes(BoxCollider* colliderA, BoxCollider* colliderB);
 		static bool CheckCollision2IncludeObjects(IncludeCollider* colliderA, IncludeCollider* colliderB);
 		static bool CheckCollision2Spheres(SphereCollider* colliderA, SphereCollider* colliderB);
@@ -29,7 +30,6 @@ namespace WristerEngine
 		static bool CheckCollisionRayPolygon(RayCollider* colliderA, PolygonCollider* colliderB, float* distance = nullptr);
 		static bool CheckCollisionRaySphere(RayCollider* colliderA, SphereCollider* colliderB, float* distance = nullptr, Vector3* inter = nullptr);
 		static bool CheckCollisionRayBox(RayCollider* colliderA, BoxCollider* colliderB);
-		static bool CheckCollision2ColliderGroups(_2D::ColliderGroup* groupA, _2D::ColliderGroup* groupB);
 
 		CollisionManager() = delete;
 		// コライダー登録関数
@@ -62,6 +62,7 @@ namespace WristerEngine
 		static void CheckRayBoxCollisions();
 		static void CheckRayCastCollision(RayCollider* collider);
 		static void Check2DCollisions();
+		static bool CheckCollision2ColliderGroups(_2D::ColliderGroup* groupA, _2D::ColliderGroup* groupB);
 		// 全当たり判定
 		static void CheckAllCollisions();
 	};
