@@ -11,6 +11,7 @@ private:
 
 public:
 	bool isGoal = false;
+	bool isGameOver = false;
 
 	static ShareValue* GetInstance() { static ShareValue obj; return &obj; }
 };

@@ -40,6 +40,8 @@ namespace WristerEngine
 		static void PushCollider(PolygonCollider* collider) { polygonColliders.push_back(collider); }
 		static void PushCollider(RayCollider* collider) { rayColliders.push_back(collider); }
 		static void PushCollider(_2D::ColliderGroup* collider) { _2DColliders.push_back(collider); }
+
+		// コライダー削除関数
 		static void PopCollider(BoxCollider* collider) { boxColliders.remove(collider); }
 		static void PopCollider(IncludeCollider* collider) { includeColliders.remove(collider); }
 		static void PopCollider(SphereCollider* collider) { sphereColliders.remove(collider); }
@@ -47,6 +49,7 @@ namespace WristerEngine
 		static void PopCollider(PolygonCollider* collider) { polygonColliders.remove(collider); }
 		static void PopCollider(RayCollider* collider) { rayColliders.remove(collider); }
 		static void PopCollider(_2D::ColliderGroup* collider) { _2DColliders.remove(collider); }
+		static void PopAll2DCollider() { _2DColliders.clear(); }
 		// 種類別当たり判定
 		static void CheckBoxCollisions();
 		static void CheckIncludeCollisions();

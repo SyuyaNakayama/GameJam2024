@@ -1,4 +1,5 @@
 #include "Stage.h"
+#include "ShareValue.h"
 #include <imgui.h>
 
 using namespace WristerEngine::_2D;
@@ -29,7 +30,7 @@ void Stage::PlayerToEnemy()
 	float crossRB = Cross(vec, Normalize(toEyePlayerRB));
 
 	// ゲームオーバー
-	if (crossRB <= 0 && crossLT >= 0) { WristerEngine::SceneManager::GetInstance()->ChangeScene(Scene::GameOver); }
+	if (crossRB <= 0 && crossLT >= 0) { ShareValue::GetInstance()->isGameOver = true; }
 }
 
 void Stage::EnemyDie()

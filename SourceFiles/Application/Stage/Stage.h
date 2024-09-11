@@ -18,6 +18,8 @@ class Stage
 	void EnemyDie();
 
 public:
+	~Stage() { stageObjects.clear(); }
+
 	// ‰Šú‰»
 	void Initialize();
 	// XV

@@ -1,5 +1,6 @@
 #include "GamePlayScene.h"
 #include "ShareValue.h"
+#include "CollisionManager.h"
 
 using namespace WristerEngine::_2D;
 
@@ -21,12 +22,20 @@ void GamePlayScene::Update()
 		return;
 	}
 
-	if (ShareValue::GetInstance()->isGoal) 
+	if (ShareValue::GetInstance()->isGoal)
 	{
 		ShareValue::GetInstance()->isGoal = false;
 		sceneManager->ChangeScene(Scene::Clear);
 		return;
 	}
+
+	if (ShareValue::GetInstance()->isGameOver)
+	{
+		sceneManager->ChangeScene(Scene::GameOver);
+		return;
+	}
+
+
 
 	stage.Update();
 	// UI•`‰æ

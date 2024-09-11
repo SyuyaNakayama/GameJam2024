@@ -1,11 +1,12 @@
 #include "GameOverScene.h"
 #include "SceneManager.h"
+#include "ShareValue.h"
 
 using namespace WristerEngine::_2D;
-using namespace WristerEngine::_3D;
 
 void GameOverScene::Initialize()
 {
+	ShareValue::GetInstance()->isGameOver = false;
 	// UI•`‰æƒNƒ‰ƒX‚Ì‰Šú‰»
 	uiDrawer = std::make_unique<UIDrawerGameOverScene>();
 	uiDrawer->Initialize();

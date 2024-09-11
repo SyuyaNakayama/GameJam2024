@@ -29,7 +29,7 @@ void SceneManager::Update()
 		if (scene)
 		{
 			scene->Finalize();
-			scene.release();
+			scene.reset();
 		}
 
 		scene = sceneFactory->CreateScene(nextScene);
