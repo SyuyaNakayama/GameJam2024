@@ -8,10 +8,6 @@ class Stage
 	// ステージ上にあるゲーム表示物
 	std::list<std::unique_ptr<WristerEngine::_2D::GameObject>> stageObjects;
 
-	const Player* pPlayer = nullptr;
-	const Vector2* goalPos = nullptr;
-	const float* enemyEyeDir = nullptr;
-
 	// 敵が死んでるかの検出と消滅
 	void EnemyDie();
 

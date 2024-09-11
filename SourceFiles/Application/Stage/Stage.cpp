@@ -22,25 +22,6 @@ void Stage::Initialize()
 	stageObjects.push_back(std::make_unique<Enemy>());
 	stageObjects.push_back(std::make_unique<Goal>());
 	for (auto& obj : stageObjects) { obj->Initialize(); }
-
-	// ƒvƒŒƒCƒ„[‚Æ“G‚Ìî•ñ‚ğæ“¾
-	for (auto& obj : stageObjects)
-	{
-		if (dynamic_cast<Player*>(obj.get()))
-		{
-			pPlayer = dynamic_cast<Player*>(obj.get());
-		}
-		else if (dynamic_cast<Enemy*>(obj.get()))
-		{
-			const Enemy* pEnemy = dynamic_cast<Enemy*>(obj.get());
-			enemyEyeDir = pEnemy->GetEyeAngle();
-		}
-		else if (dynamic_cast<Goal*>(obj.get()))
-		{
-			const Goal* pGoal = dynamic_cast<Goal*>(obj.get());
-			goalPos = pGoal->GetPosition();
-		}
-	}
 }
 
 void Stage::Update()
