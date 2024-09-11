@@ -121,7 +121,7 @@ void Player::Update()
 		}
 
 		// UŒ‚
-		if (operate->GetTrigger("Attack") && isCanUseAttack)
+		if (operate->GetTrigger("SceneChange") && isCanUseAttack)
 		{
 			ui_attack->SetRect(Const(Vector2, "UIIconSize"), { 32,0 });
 			Action = &Player::Attack;

@@ -15,7 +15,7 @@ void GamePlayScene::Initialize()
 void GamePlayScene::Update()
 {
 	// ƒŠƒZƒbƒg
-	if (OperateConfig::GetInstance()->GetTrigger("SceneChange"))
+	if (OperateConfig::GetInstance()->GetTrigger("Pause"))
 	{
 		sceneManager->ChangeScene(Scene::Play);
 		WristerEngine::Constant::GetInstance()->LoadConstants();
