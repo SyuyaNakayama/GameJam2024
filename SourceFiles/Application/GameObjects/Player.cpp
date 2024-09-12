@@ -33,6 +33,7 @@ void Player::Hide()
 	sprite->isFlipY = true;
 	walk->isFlipY = true;
 	hide->isFlipY = false;
+	hide->isFlipX = sprite->isFlipX;
 	if (hideTimer.Update())
 	{
 		Action = nullptr;
@@ -53,6 +54,7 @@ void Player::Attack()
 	drill->isInvisible = false;
 	isAttack->isInvisible = false;
 	sprite->isInvisible = true;
+	walk->isInvisible = true;
 	attack->position = sprite->position;
 	drill->position = sprite->position;
 	attack->isFlipX = sprite->isFlipX;
@@ -64,6 +66,7 @@ void Player::Attack()
 		drill->isInvisible = true;
 		isAttack->isInvisible = true;
 		sprite->isInvisible = false;
+		walk->isInvisible = false;
 		Action = nullptr;
 		isCanUseAttack = false;
 		attackCoolTimer = Const(int, "PlayerAttackTime");
@@ -105,7 +108,7 @@ void Player::Initialize(const ObjectData& objData)
 	drill->anchorPoint = { -0.5f,1.0f };
 	drill->isInvisible = true;
 
-	hide = Sprite::Create("Dive.png");
+	hide = Sprite::Create("dive2.png");
 	hide->SetAnimation(2, 30);
 	hide->size = objData.size;
 	hide->position.y = WristerEngine::WIN_SIZE.y - Const(float, "GroundHeight");
