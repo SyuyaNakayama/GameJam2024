@@ -8,7 +8,7 @@ using namespace WristerEngine::_2D;
 void Goal::Initialize(const ObjectData& objData)
 {
 	// ‰Šú‰»
-	sprite = Sprite::Create("TestGoal.png");
+	sprite = Sprite::Create("treasure.png");
 	MyGameObject::Initialize(objData);
 
 	collisionAttribute = CollisionAttribute::Goal;
