@@ -8,7 +8,7 @@ void GamePlayScene::Initialize()
 {
 	ShareValue::GetInstance()->isGoal = false;
 	stage.Initialize();
-	
+
 	background = Sprite::Create("background.png");
 	background->size = WristerEngine::WIN_SIZE;
 	background->Update();
@@ -20,22 +20,17 @@ void GamePlayScene::Initialize()
 
 void GamePlayScene::Update()
 {
-	// ƒŠƒZƒbƒg
-	if (OperateConfig::GetInstance()->GetTrigger("Pause"))
+	ShareValue* shareVal = ShareValue::GetInstance();
+	if (shareVal->isGoal)
 	{
-		sceneManager->ChangeScene(Scene::Play);
-		WristerEngine::Constant::GetInstance()->LoadConstants();
+		shareVal->isGoal = false;
+		shareVal->stageNum++;
+		if (shareVal->stageNum <= 2) { sceneManager->ChangeScene(Scene::Play); }
+		else { sceneManager->ChangeScene(Scene::Clear); }
 		return;
 	}
 
-	if (ShareValue::GetInstance()->isGoal)
-	{
-		ShareValue::GetInstance()->isGoal = false;
-		sceneManager->ChangeScene(Scene::Clear);
-		return;
-	}
-
-	if (ShareValue::GetInstance()->isGameOver)
+	if (shareVal->isGameOver)
 	{
 		sceneManager->ChangeScene(Scene::GameOver);
 		return;

@@ -12,6 +12,7 @@ private:
 public:
 	bool isGoal = false;
 	bool isGameOver = false;
+	int stageNum = 1;
 
 	static ShareValue* GetInstance() { static ShareValue obj; return &obj; }
 };

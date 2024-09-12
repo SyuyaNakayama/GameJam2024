@@ -3,6 +3,7 @@
 #include <cmath>
 #include "SceneManager.h"
 #include "ShareValue.h"
+#include <algorithm>
 
 using namespace WristerEngine::_2D;
 
@@ -11,6 +12,8 @@ void Player::Move()
 	// ˆÚ“®‘¬“x‚ðŒvŽZ
 	float moveDir = (float)operate->GetPush("Right") - operate->GetPush("Left");
 	sprite->position += moveDir * Const(float, "PlayerMoveSpd");
+	sprite->position.x = std::clamp(sprite->position.x, sprite->size.x / 2.0f,
+		WristerEngine::WIN_SIZE.x - sprite->size.x / 2.0f);
 	hide->position.x = sprite->position.x;
 	// Œü‚«‚ð•Ï‚¦‚é
 	if (moveDir < 0) { sprite->isFlipX = true; }

@@ -6,30 +6,30 @@ using namespace WristerEngine::_2D;
 
 void TutorialScene::Initialize()
 {
+	ShareValue::GetInstance()->stageNum = 1;
 	stage.Initialize();
 
+	background = Sprite::Create("background.png");
+	background->size = WristerEngine::WIN_SIZE;
+	background->Update();
+	
 	uiDrawer = std::make_unique<UIDrawerTutorialScene>();
 	uiDrawer->Initialize();
 }
 
 void TutorialScene::Update()
 {
-	// リセット
-	if (OperateConfig::GetInstance()->GetTrigger("Pause"))
-	{
-		sceneManager->ChangeScene(Scene::Tutorial);
-		WristerEngine::Constant::GetInstance()->LoadConstants();
-		return;
-	}
+	ShareValue* shareVal = ShareValue::GetInstance();
 
-	if (ShareValue::GetInstance()->isGoal)
+	if (shareVal->isGoal)
 	{
-		ShareValue::GetInstance()->isGoal = false;
+		shareVal->isGoal = false;
+		shareVal->stageNum++;
 		sceneManager->ChangeScene(Scene::Play);
 		return;
 	}
 
-	if (ShareValue::GetInstance()->isGameOver)
+	if (shareVal->isGameOver)
 	{
 		sceneManager->ChangeScene(Scene::GameOver);
 		return;
@@ -42,6 +42,7 @@ void TutorialScene::Update()
 
 void TutorialScene::Draw()
 {
+	background->Draw();
 	stage.Draw();
 	uiDrawer->Draw();
 }
@@ -49,7 +50,7 @@ void TutorialScene::Draw()
 void UIDrawerTutorialScene::Initialize()
 {
 	// 地面のUIの初期化
-	sprites["Ground"] = Sprite::Create("block.png");
+	sprites["Ground"] = Sprite::Create("brick.png");
 	std::unique_ptr<Sprite>& s = sprites["Ground"];
 	s->position.y = WristerEngine::WIN_SIZE.y - Const(float, "GroundHeight");
 	s->textureSize.x *= (WristerEngine::WIN_SIZE.x / s->size.x);
