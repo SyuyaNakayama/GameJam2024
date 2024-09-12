@@ -42,7 +42,7 @@ bool WristerEngine::CollisionManager::Check2DCollision2Boxes(const std::array<_2
 	{
 		trans[i] = box2DColliders[i]->GetTransform();
 		// ’†S“_‚ðŒvŽZ
-		auto pos = box2DColliders[i]->GetLTRB();
+		auto pos = box2DColliders[i]->GetVertex();
 		posCenter[i] = Half<Vector2>(pos["LT"] + pos["RB"]);
 	}
 
@@ -81,6 +81,7 @@ bool WristerEngine::CollisionManager::Check2DCollisionBox2Rays(const std::array<
 	const _2D::Sprite* pSprite = boxCollider->GetTransform();
 	Vector2 pPosLT, pPosRB;
 	pPosLT = pPosRB = pSprite->position;
+
 	pPosLT -= Vector2(pSprite->size.x * pSprite->anchorPoint.x, pSprite->size.y * pSprite->anchorPoint.y);
 	pPosRB += Vector2(pSprite->size.x * (1.0f - pSprite->anchorPoint.x), pSprite->size.y * (1.0f - pSprite->anchorPoint.y));
 
@@ -94,7 +95,25 @@ bool WristerEngine::CollisionManager::Check2DCollisionBox2Rays(const std::array<
 	Vector2 toEyePlayerRB = Normalize(pPosRB - rayTrans->position);
 	float crossRB = Cross(vec, Normalize(toEyePlayerRB));
 
-	return crossRB <= 0 && crossLT >= 0;
+	if (crossRB < 0 && crossLT > 0) { return true; }
+
+	Vector2 pPosLB, pPosRT;
+	pPosLB = pPosRT = pSprite->position;
+
+	pPosLB += Vector2(-pSprite->size.x * pSprite->anchorPoint.x, pSprite->size.y * (1.0f - pSprite->anchorPoint.y));
+	pPosRT += Vector2(pSprite->size.x * (1.0f - pSprite->anchorPoint.x), -pSprite->size.y * pSprite->anchorPoint.y);
+
+	// ¶‰º‚ÌÚG”»’è
+	vec = Normalize(Vector2(std::cos(rightRot), std::sin(rightRot)));
+	Vector2 toEyePlayerLB = Normalize(pPosLB - rayTrans->position);
+	float crossLB = Cross(vec, Normalize(toEyePlayerLB));
+
+	// ‰Eã‚ÌÚG”»’è
+	vec = Normalize(Vector2(std::cos(leftRot), std::sin(leftRot)));
+	Vector2 toEyePlayerRT = Normalize(pPosRT - rayTrans->position);
+	float crossRT = Cross(vec, Normalize(toEyePlayerRT));
+
+	return crossRT < 0 && crossLB > 0;
 }
 
 bool CollisionManager::CheckCollision2Boxes(BoxCollider* colliderA, BoxCollider* colliderB)

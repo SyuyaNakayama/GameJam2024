@@ -25,7 +25,7 @@ void GamePlayScene::Update()
 	{
 		shareVal->isGoal = false;
 		shareVal->stageNum++;
-		if (shareVal->stageNum <= 2) { sceneManager->ChangeScene(Scene::Play); }
+		if (shareVal->stageNum <= WEConst(int, "StageNum")) { sceneManager->ChangeScene(Scene::Play); }
 		else { sceneManager->ChangeScene(Scene::Clear); }
 		return;
 	}

@@ -279,7 +279,9 @@ void Player::OnCollision(WristerEngine::_2D::ColliderGroup* group)
 		// “G‚Æ‚ÌÚG
 		if (pairName == "body")
 		{
-			sprite->position -= Const(float, "PlayerMoveSpd");
+			float move = Const(float, "PlayerMoveSpd");
+			if (sprite->isFlipX) { move = -move; }
+			sprite->position -= move;
 		}
 		if (!IsHide())
 		{
