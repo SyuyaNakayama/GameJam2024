@@ -16,18 +16,28 @@ void Player::Move()
 		WristerEngine::WIN_SIZE.x - sprite->size.x / 2.0f);
 	hide->position.x = sprite->position.x;
 	// 向きを変える
-	if (moveDir < 0) { sprite->isFlipX = true; }
-	else if (moveDir > 0) { sprite->isFlipX = false; }
+	if (moveDir < 0) { 
+		sprite->isFlipX = true; 
+		walk->isFlipX = true;
+		isAttack->isFlipX = true;
+	}
+	else if (moveDir > 0) { 
+		sprite->isFlipX = false; 
+		walk->isFlipX = false;
+		isAttack->isFlipX = false;
+	}
 }
 
 void Player::Hide()
 {
 	sprite->isFlipY = true;
+	walk->isFlipY = true;
 	hide->isFlipY = false;
 	if (hideTimer.Update())
 	{
 		Action = nullptr;
 		sprite->isFlipY = false;
+		walk->isFlipY = false;
 		hide->isFlipY = true;
 		isCanUseHide = false;
 		hideCoolTimer = Const(int, "PlayerHideTime");
@@ -36,14 +46,24 @@ void Player::Hide()
 
 void Player::Attack()
 {
-	sprite->posOffset = { shakeBody(),shakeBody() };
+	isAttack->posOffset = { shakeBody(),shakeBody() };
+	drill->posOffset = { shakeBody(),shakeBody() };
+	attack->posOffset = { shakeBody(),shakeBody() };
 	attack->isInvisible = false;
+	drill->isInvisible = false;
+	isAttack->isInvisible = false;
+	sprite->isInvisible = true;
 	attack->position = sprite->position;
+	drill->position = sprite->position;
 	attack->isFlipX = sprite->isFlipX;
+	drill->isFlipX = sprite->isFlipX;
 	if (attackTimer.Update())
 	{
 		sprite->posOffset = {};
 		attack->isInvisible = true;
+		drill->isInvisible = true;
+		isAttack->isInvisible = true;
+		sprite->isInvisible = false;
 		Action = nullptr;
 		isCanUseAttack = false;
 		attackCoolTimer = Const(int, "PlayerAttackTime");
@@ -54,9 +74,24 @@ void Player::Attack()
 void Player::Initialize(const ObjectData& objData)
 {
 	// 初期化
-	sprite = Sprite::Create("player.png");
+	sprite = Sprite::Create("drill_girl.png");
+	sprite->size = Const(Vector2, "EffectSize");
+	sprite->SetAnimation(4, 60);
 	MyGameObject::Initialize(objData);
 	shakeBody = { -2,2 };
+
+	walk = Sprite::Create("drill_girl_walk.png");
+	walk->size = Const(Vector2, "WalkSize");
+	walk->SetAnimation(6, 5);
+	walk->anchorPoint = { 0.5f, 1.0f};
+	walk->position = sprite->position;
+
+	isAttack = Sprite::Create("drill_girl_attack.png");
+	isAttack->size = Const(Vector2, "PlayerSize");
+	isAttack->anchorPoint = { 0.5f, 1.0f };
+	isAttack->position = sprite->position;
+	isAttack->isInvisible = true;
+
 
 	attack = Sprite::Create("attack_effect.png");
 	attack->size = Const(Vector2, "EffectSize");
@@ -64,6 +99,11 @@ void Player::Initialize(const ObjectData& objData)
 	attack->anchorPoint = { -0.5f,1.0f };
 	attack->color = { 1.0f,0.5f,0.5f,1.0f };
 	attack->isInvisible = true;
+
+	drill = Sprite::Create("drill.png");
+	drill->size = Const(Vector2, "PlayerSize");
+	drill->anchorPoint = { -0.5f,1.0f };
+	drill->isInvisible = true;
 
 	hide = Sprite::Create("Dive.png");
 	hide->SetAnimation(2, 30);
@@ -134,6 +174,8 @@ void Player::InitializeUI() {
 void Player::Update()
 {
 	Move();
+	walk->position = sprite->position;
+	isAttack->position = sprite->position;
 
 	if (!isCanUseHide)
 	{
@@ -196,11 +238,22 @@ void Player::Update()
 	ui_coolTime2->Update();
 	ui_key_space->Update();
 	ui_key_down->Update();
+	walk->Update();
+	drill->Update();
+	isAttack->Update();
 }
 
 void Player::Draw()
 {
-	sprite->Draw();
+	//アニメーション切り替え
+	if (operate->GetPush("Right") || operate->GetPush("Left")) {
+		walk->Draw();
+	}
+	else {
+		sprite->Draw();
+	}
+	isAttack->Draw();
+	drill->Draw();
 	attack->Draw();
 	hide->Draw();
 	ui_attack->Draw();

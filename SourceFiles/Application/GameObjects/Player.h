@@ -9,6 +9,9 @@ class Player : public MyGameObject
 {
 	std::unique_ptr<WristerEngine::_2D::Sprite> attack;
 	std::unique_ptr<WristerEngine::_2D::Sprite> hide;	//ö‚Á‚Ä‚¢‚é‚ÌƒXƒvƒ‰ƒCƒg
+	std::unique_ptr<WristerEngine::_2D::Sprite> walk;	//•à‚¢‚Ä‚é
+	std::unique_ptr<WristerEngine::_2D::Sprite> isAttack;	//UŒ‚
+	std::unique_ptr<WristerEngine::_2D::Sprite> drill;	//UŒ‚‚ÌƒhƒŠƒ‹
 	OperateConfig* operate = OperateConfig::GetInstance();
 	WristerEngine::FrameTimer hideTimer; // ‰B‚ê‚Ä‚¢‚éŠÔ
 	WristerEngine::FrameTimer attackTimer; // UŒ‚‚µ‚Ä‚¢‚éŠÔ
