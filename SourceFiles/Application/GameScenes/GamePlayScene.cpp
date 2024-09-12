@@ -8,6 +8,11 @@ void GamePlayScene::Initialize()
 {
 	ShareValue::GetInstance()->isGoal = false;
 	stage.Initialize();
+	
+	background = Sprite::Create("background.png");
+	background->size = WristerEngine::WIN_SIZE;
+	background->Update();
+
 	// UI•`‰æƒNƒ‰ƒX‚Ì‰Šú‰»
 	uiDrawer = std::make_unique<UIDrawerGamePlayScene>();
 	uiDrawer->Initialize();
@@ -36,8 +41,6 @@ void GamePlayScene::Update()
 		return;
 	}
 
-
-
 	stage.Update();
 	// UI•`‰æ
 	uiDrawer->Update();
@@ -45,6 +48,7 @@ void GamePlayScene::Update()
 
 void GamePlayScene::Draw()
 {
+	background->Draw();
 	stage.Draw();
 	// UI•`‰æ
 	uiDrawer->Draw();

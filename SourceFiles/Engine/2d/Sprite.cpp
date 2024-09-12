@@ -242,7 +242,7 @@ void Sprite::Update()
 
 	Matrix4 matRot, matTrans;
 	matRot = Matrix4::RotateZ(rotation);
-	matTrans = Matrix4::Translate(position);
+	matTrans = Matrix4::Translate(position + posOffset);
 
 	matWorld = matRot * matTrans;
 

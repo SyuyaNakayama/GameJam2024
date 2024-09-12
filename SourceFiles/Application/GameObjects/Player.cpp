@@ -53,10 +53,6 @@ void Player::Attack()
 
 void Player::Initialize(const ObjectData& objData)
 {
-	sprites = Sprite::Create("background.png");
-	sprites->size.x = WristerEngine::WIN_SIZE.x;
-	sprites->size.y = WristerEngine::WIN_SIZE.y;
-	sprites->isInvisible = false;
 	// 初期化
 	sprite = Sprite::Create("player.png");
 	MyGameObject::Initialize(objData);
@@ -70,6 +66,7 @@ void Player::Initialize(const ObjectData& objData)
 	attackCutPos = 0.0f;
 
 	hide = Sprite::Create("Dive.png");
+	hide->SetAnimation(2, 30);
 	hide->SetRect(Const(Vector2, "UIIconSize"), { 0,0 });
 	hide->size = objData.size;
 	hide->position.y = WristerEngine::WIN_SIZE.y - Const(float, "GroundHeight");
@@ -107,7 +104,7 @@ void Player::InitializeUI() {
 	ui_coolTime1->SetRect(Const(Vector2, "UIIconSize"), { 0, 0 });
 	ui_coolTime1->position = Vector2(WristerEngine::WIN_SIZE.x - Const(float, "PlayerSize"), WristerEngine::WIN_SIZE.y / 2 - Const(float, "PlayerSize"));
 	ui_coolTime1->anchorPoint = { 0.5f,1.25f };
-	
+
 	//潜るアイコンのクールタイム
 	ui_coolTime2 = Sprite::Create("num.png");
 	ui_coolTime2->size = Const(Vector2, "CoolTimeAllSize");
@@ -191,7 +188,6 @@ void Player::Update()
 	Animations();
 
 	// スプライトの更新
-	sprites->Update();
 	sprite->Update();
 	attackArea->Update();
 	hide->Update();
@@ -203,14 +199,13 @@ void Player::Update()
 	ui_key_down->Update();
 }
 
-void Player::Draw() 
-{ 
-	sprites->Draw();
+void Player::Draw()
+{
 	sprite->Draw();
 	attackArea->Draw();
-	hide->Draw(); 
+	hide->Draw();
 	ui_attack->Draw();
-	ui_dive->Draw(); 
+	ui_dive->Draw();
 	ui_key_space->Draw();
 	ui_key_down->Draw();
 	if (coolTimeCountStartA) {
@@ -225,20 +220,24 @@ void Player::OnCollision(WristerEngine::_2D::ColliderGroup* group)
 {
 	for (auto pair : collisionPair[0])
 	{
+		std::string pairName = group->GetColliderName(pair);
 		// 敵との接触
-		if (group->GetColliderName(pair) == "body")
+		if (pairName == "body")
 		{
 			sprite->position -= Const(float, "PlayerMoveSpd");
 		}
-		// ゴール
-		if (group->GetColliderName(pair) == "Goal" && !IsHide())
+		if (!IsHide())
 		{
-			ShareValue::GetInstance()->isGoal = true;
-		}
-		// ゲームオーバー
-		if (group->GetColliderName(pair) == "eyeBeam" && !IsHide())
-		{
-			ShareValue::GetInstance()->isGameOver = true;
+			// ゴール
+			if (pairName == "Goal")
+			{
+				ShareValue::GetInstance()->isGoal = true;
+			}
+			// ゲームオーバー
+			if (pairName == "eyeBeam" || pairName == "attack")
+			{
+				ShareValue::GetInstance()->isGameOver = true;
+			}
 		}
 	}
 }
@@ -287,15 +286,5 @@ void Player::UITimer() {
 }
 
 void Player::Animations() {
-	animTime--;
-	if (animTime < 31) {
-		hide->SetRect(Const(Vector2, "UIIconSize"), { 0,0 });
-	}
-	else {
-		hide->SetRect(Const(Vector2, "UIIconSize"), { 32,0 });
-	}
 
-	if (animTime < 0) {
-		animTime = Const(int, "PlayerAnimationTimer");
-	}
 }

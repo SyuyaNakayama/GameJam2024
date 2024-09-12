@@ -1,14 +1,14 @@
 {
   "objects": [
     {
+      "name": "DarumaEnemy",
+      "positionX": 1020,
+      "size": [ 100, 400 ]
+    },
+    {
       "name": "Player",
       "positionX": 100,
       "size": [ 50, 50 ]
-    },
-    {
-      "name": "Enemy",
-      "positionX": 1020,
-      "size": [ 100, 400 ]
     },
     {
       "name": "Goal",

@@ -3,7 +3,9 @@
     "PlayerHideTime": 120,
     "PlayerAttackTime": 60,
     "PlayerAnimationTimer": 60,
-    "EnemyEyeFOV": 3
+    "EnemyEyeFOV": 3,
+    "DarumaEnemyAttackInterval": 300,
+    "DarumaEnemyAttackTime": 30
   },
   "int[]": {
   },

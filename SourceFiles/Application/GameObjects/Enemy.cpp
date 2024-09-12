@@ -54,13 +54,67 @@ void Enemy::Draw()
 	hpGauge->Draw();
 }
 
-void Enemy::OnCollision(WristerEngine::_2D::ColliderGroup* collider)
+void DarumaEnemy::Initialize(const ObjectData& objData)
 {
-	for (auto pair : collisionPair[0])
+	sprite = Sprite::Create("pillar.png");
+	sprite->color = { 1.0f,0.5f,0.5f,1.0f };
+	MyGameObject::Initialize(objData);
+	sprite->isFlipX = true;
+
+	// HPゲージ
+	hpGauge = Sprite::Create("white1x1.png");
+	hpGauge->size = Const(Vector2, "EnemyGaugeSize");
+	hpGauge->position = Const(Vector2, "EnemyGaugePos");
+	hpGauge->color = { 0,1,0,1 };
+
+	// コライダーの設定
+	collisionAttribute = CollisionAttribute::Enemy;
+	collisionMask = CollisionMask::Enemy;
+	AddCollider(sprite.get(), CollisionShapeType::Box, "body");
+
+	attack = Sprite::Create("white1x1.png");
+	attack->size = WristerEngine::WIN_SIZE;
+	attack->isInvisible = true;
+	attackInterval = Const(int, "DarumaEnemyAttackInterval");
+
+	shakeBody = { 0,15 };
+}
+
+void DarumaEnemy::Update()
+{
+	if (attackInterval.Update())
 	{
-		if (collider->GetColliderName(pair) == "attack")
+		attack->isInvisible = false;
+		AddCollider(attack.get(), CollisionShapeType::Box, "attack");
+		attackTimer= Const(int, "DarumaEnemyAttackTime");
+		sprite->isFlipX = false;
+		sprite->posOffset.x = 0;
+	}
+	else
+	{
+		if (attackInterval.GetRemainTimeRate() <= 0.2f)
 		{
-			hpRate -= 0.01f;
+			sprite->posOffset.x = shakeBody();
 		}
 	}
+	if (!attack->isInvisible)
+	{
+		if (attackTimer.Update())
+		{
+			sprite->isFlipX = true;
+			attack->isInvisible = true;
+			DeleteCollider("attack");
+		}
+	}
+
+	attack->Update();
+	sprite->Update();
+	hpGauge->Update();
+}
+
+void DarumaEnemy::Draw()
+{
+	attack->Draw();
+	sprite->Draw();
+	hpGauge->Draw();
 }

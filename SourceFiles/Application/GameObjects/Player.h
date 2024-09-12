@@ -6,7 +6,6 @@
 
 class Player : public MyGameObject
 {
-	std::unique_ptr<WristerEngine::_2D::Sprite> sprites;
 	std::unique_ptr<WristerEngine::_2D::Sprite> attackArea;
 	std::unique_ptr<WristerEngine::_2D::Sprite> hide;	//潜っている時のスプライト
 	OperateConfig* operate = OperateConfig::GetInstance();

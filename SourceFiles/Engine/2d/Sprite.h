@@ -35,6 +35,7 @@ namespace WristerEngine::_2D
 		Vector2 textureLeftTop; // 切り取り領域の左上座標
 		Vector2 textureSize; // 切り取り領域のサイズ
 		TextureData* tex = nullptr;
+		Vector2 posOffset; // 表示位置の調整
 
 	private:
 		class Animation

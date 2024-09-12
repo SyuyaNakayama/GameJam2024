@@ -9,15 +9,15 @@ void Stage::EnemyDie()
 {
 	stageObjects.remove_if([](const std::unique_ptr<WristerEngine::_2D::GameObject>& obj)
 		{
-			if (dynamic_cast<Enemy*>(obj.get()) == nullptr) { return false; }
-			const Enemy* pEnemy = dynamic_cast<Enemy*>(obj.get());
+			if (dynamic_cast<BaseEnemy*>(obj.get()) == nullptr) { return false; }
+			const BaseEnemy* pEnemy = dynamic_cast<BaseEnemy*>(obj.get());
 			return pEnemy->IsDead();
 		});
 }
 
 void Stage::Initialize()
 {
-	std::vector<ObjectData> objects = levelLoader.LoadLevel("stage1");
+	std::vector<ObjectData> objects = levelLoader.LoadLevel("stage2");
 
 	for (auto obj : objects)
 	{
@@ -25,6 +25,7 @@ void Stage::Initialize()
 
 		if (obj.name == "Player") { stageObject = std::make_unique<Player>(); }
 		else if (obj.name == "Enemy") { stageObject = std::make_unique<Enemy>(); }
+		else if (obj.name == "DarumaEnemy") { stageObject = std::make_unique<DarumaEnemy>(); }
 		else if (obj.name == "Goal") { stageObject = std::make_unique<Goal>(); }
 		assert(stageObject);
 

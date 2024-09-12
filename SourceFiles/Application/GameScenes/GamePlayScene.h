@@ -16,6 +16,7 @@ class GamePlayScene : public WristerEngine::BaseScene
 {
 	// ステージオブジェクト
 	Stage stage;
+	std::unique_ptr<WristerEngine::_2D::Sprite> background; // 背景
 public:
 
 	// BaseScene を介して継承されました
