@@ -8,6 +8,7 @@ void Enemy::Initialize(const ObjectData& objData)
 	// “G
 	sprite = Sprite::Create("pillar.png");
 	BaseEnemy::Initialize(objData);
+	sprite->isFlipX = objData.e_flip;
 
 	// ƒr[ƒ€
 	eyeBeam = Sprite::Create("EyeBeam.png");
@@ -89,6 +90,6 @@ void DarumaEnemy::Update()
 
 void DarumaEnemy::Draw()
 {
-	BaseEnemy::Draw();
 	attack->Draw();
+	BaseEnemy::Draw();
 }

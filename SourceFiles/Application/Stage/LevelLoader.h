@@ -12,6 +12,7 @@ struct ObjectData
 	int e_attackInterval;
 	int e_attackTime;
 	std::array<int, 2> e_angleRange{};
+	bool e_flip;
 };
 
 class LevelLoader : public WristerEngine::JsonLoader

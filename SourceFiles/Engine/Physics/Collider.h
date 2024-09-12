@@ -68,7 +68,7 @@ namespace WristerEngine
 		{
 		public:
 			// 左上端と右下端の座標を求める
-			std::map<std::string, Vector2> GetLTRB() const;
+			std::map<std::string, Vector2> GetVertex() const;
 		};
 
 		// 1点から2方向に延びる線分との当たり判定（まだ不完全）

@@ -6,7 +6,7 @@ std::vector<ObjectData> LevelLoader::LoadLevel(const std::string& fileName)
 	auto loaded = LoadJson(fileName);
 	for (nlohmann::json& object : loaded["objects"])
 	{
-		ObjectData obj;
+		ObjectData obj{};
 		obj.name = object["name"];
 		obj.posX = object["positionX"];
 		obj.size.x = object["size"][0];
@@ -32,6 +32,10 @@ std::vector<ObjectData> LevelLoader::LoadLevel(const std::string& fileName)
 		if (object.contains("angleRange"))
 		{
 			obj.e_angleRange = object["angleRange"];
+		}
+		if (object.contains("flip"))
+		{
+			obj.e_flip = object["flip"];
 		}
 		objects.push_back(obj);
 	}

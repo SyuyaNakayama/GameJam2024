@@ -1,0 +1,31 @@
+{
+  "objects": [
+    {
+      "name": "Player",
+      "positionX": 600,
+      "size": [ 50, 50 ]
+    },
+    {
+      "name": "Enemy",
+      "positionX": 1050,
+      "size": [ 100, 400 ],
+      "eyePos": [ 990, 270 ],
+      "gaugePos": [ 975, 170 ],
+      "angleRange": [ 60, 60 ]
+    },
+    {
+      "name": "Enemy",
+      "positionX": 150,
+      "size": [ 100, 400 ],
+      "eyePos": [ 210, 270 ],
+      "gaugePos": [ 75, 170 ],
+      "angleRange": [ -63, -63 ],
+      "flip": true
+    },
+    {
+      "name": "Goal",
+      "positionX": 1200,
+      "size": [ 50, 50 ]
+    }
+  ]
+}
