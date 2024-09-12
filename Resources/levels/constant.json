@@ -3,9 +3,7 @@
     "PlayerHideTime": 120,
     "PlayerAttackTime": 60,
     "PlayerAnimationTimer": 60,
-    "EnemyEyeFOV": 3,
-    "DarumaEnemyAttackInterval": 300,
-    "DarumaEnemyAttackTime": 30
+    "EnemyEyeFOV": 3
   },
   "int[]": {
   },
@@ -16,15 +14,11 @@
   "Vector2": {
     "WhitePicSize": [ 300, 200 ],
     "PlayerSize": [ 50, 50 ],
-    "EnemyEyePos": [ 960, 270 ],
     "EnemyGaugeSize": [ 150, 30 ],
-    "EnemyGaugePos": [ 945, 170 ],
     "UIAllSize": [ 300, 75 ],
     "UIIconSize": [ 32, 32 ],
     "CoolTimeAllSize": [ 450, 50 ],
     "KeyAllSize": [ 100, 50 ],
-    "EffectSize": [200,50]
-  },
-  "BitMapProp": {
+    "EffectSize": [ 200, 50 ]
   }
 }

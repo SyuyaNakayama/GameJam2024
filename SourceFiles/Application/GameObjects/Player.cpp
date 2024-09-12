@@ -33,17 +33,14 @@ void Player::Hide()
 
 void Player::Attack()
 {
-	attackArea->isInvisible = false;
-	attackArea->position = sprite->position;
-	attackArea->isFlipX = sprite->isFlipX;
-	attackArea->SetRect(Const(Vector2, "UIIconSize"), { 32 * attackCutPos,0 });
-	attackCutPos += 1.0f;
-	if (attackCutPos > 3.0f) {
-		attackCutPos = 0.0f;
-	}
+	sprite->posOffset = { shakeBody(),shakeBody() };
+	attack->isInvisible = false;
+	attack->position = sprite->position;
+	attack->isFlipX = sprite->isFlipX;
 	if (attackTimer.Update())
 	{
-		attackArea->isInvisible = true;
+		sprite->posOffset = {};
+		attack->isInvisible = true;
 		Action = nullptr;
 		isCanUseAttack = false;
 		attackCoolTimer = Const(int, "PlayerAttackTime");
@@ -56,18 +53,17 @@ void Player::Initialize(const ObjectData& objData)
 	// 初期化
 	sprite = Sprite::Create("player.png");
 	MyGameObject::Initialize(objData);
+	shakeBody = { -2,2 };
 
-	attackArea = Sprite::Create("attack_effect.png");
-	attackArea->size = Const(Vector2, "EffectSize");
-	attackArea->SetRect(Const(Vector2, "UIIconSize"), { 0,0 });
-	attackArea->anchorPoint = { -0.5f,1.0f };
-	attackArea->color = { 1.0f,0.5f,0.5f,1.0f };
-	attackArea->isInvisible = true;
-	attackCutPos = 0.0f;
+	attack = Sprite::Create("attack_effect.png");
+	attack->size = Const(Vector2, "EffectSize");
+	attack->SetAnimation(4, 1);
+	attack->anchorPoint = { -0.5f,1.0f };
+	attack->color = { 1.0f,0.5f,0.5f,1.0f };
+	attack->isInvisible = true;
 
 	hide = Sprite::Create("Dive.png");
 	hide->SetAnimation(2, 30);
-	hide->SetRect(Const(Vector2, "UIIconSize"), { 0,0 });
 	hide->size = objData.size;
 	hide->position.y = WristerEngine::WIN_SIZE.y - Const(float, "GroundHeight");
 	hide->anchorPoint = { 0.5f,1.0f };
@@ -164,7 +160,7 @@ void Player::Update()
 			ui_attack->SetRect(Const(Vector2, "UIIconSize"), { 32,0 });
 			Action = &Player::Attack;
 			attackTimer = Const(int, "PlayerAttackTime");
-			AddCollider(attackArea.get(), CollisionShapeType::Box, "attack");
+			AddCollider(attack.get(), CollisionShapeType::Box, "attack");
 			coolTimeCountStartA = true;
 		}
 	}
@@ -189,7 +185,7 @@ void Player::Update()
 
 	// スプライトの更新
 	sprite->Update();
-	attackArea->Update();
+	attack->Update();
 	hide->Update();
 	ui_attack->Update();
 	ui_dive->Update();
@@ -202,7 +198,7 @@ void Player::Update()
 void Player::Draw()
 {
 	sprite->Draw();
-	attackArea->Draw();
+	attack->Draw();
 	hide->Draw();
 	ui_attack->Draw();
 	ui_dive->Draw();

@@ -12,12 +12,13 @@ void Enemy::Initialize(const ObjectData& objData)
 	// ビーム
 	eyeBeam = Sprite::Create("EyeBeam.png");
 	eyeBeam->size.y = 1000;
-	eyeBeam->position = Const(Vector2, "EnemyEyePos");
+	eyeBeam->position = objData.e_eyePos;
 	eyeBeam->anchorPoint = { 0.5f,0.0f };
 	eyeBeam->color = { 1.0f,1.0f,1.0f,1.0f };
 
 	beamRotEasing.Initialize(120, WristerEngine::Easing::Type::Linear);
 	beamRotEasing.SetLoop(30);
+	beamAngleRange = objData.e_angleRange;
 
 	Option option{};
 	option.fov = Const(int, "EnemyEyeFOV");
@@ -26,7 +27,8 @@ void Enemy::Initialize(const ObjectData& objData)
 
 void Enemy::Update()
 {
-	eyeBeam->rotation = Angle(30) * (beamRotEasing.Update() + 1);
+	eyeBeam->rotation = Angle(beamAngleRange[1] - beamAngleRange[0]) *
+		beamRotEasing.Update() + Angle(beamAngleRange[0]);
 
 	// スプライトの更新
 	eyeBeam->Update();
@@ -49,7 +51,8 @@ void DarumaEnemy::Initialize(const ObjectData& objData)
 	attack = Sprite::Create("white1x1.png");
 	attack->size = WristerEngine::WIN_SIZE;
 	attack->isInvisible = true;
-	attackInterval = Const(int, "DarumaEnemyAttackInterval");
+	attackTimer = objData.e_attackTime;
+	attackInterval = objData.e_attackInterval;
 
 	shakeBody = { 0,15 };
 }
@@ -60,7 +63,6 @@ void DarumaEnemy::Update()
 	{
 		attack->isInvisible = false;
 		AddCollider(attack.get(), CollisionShapeType::Box, "attack");
-		attackTimer = Const(int, "DarumaEnemyAttackTime");
 		sprite->isFlipX = false;
 		sprite->posOffset.x = 0;
 	}

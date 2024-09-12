@@ -8,7 +8,7 @@ void BaseEnemy::Initialize(const ObjectData& objData)
 	// HPゲージ
 	hpGauge = Sprite::Create("white1x1.png");
 	hpGauge->size = Const(Vector2, "EnemyGaugeSize");
-	hpGauge->position = Const(Vector2, "EnemyGaugePos");
+	hpGauge->position = objData.e_gaugePos;
 	hpGauge->color = { 0,1,0,1 };
 
 	// コライダーの設定

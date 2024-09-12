@@ -17,7 +17,7 @@ void Stage::EnemyDie()
 
 void Stage::Initialize()
 {
-	std::vector<ObjectData> objects = levelLoader.LoadLevel("stage2");
+	std::vector<ObjectData> objects = levelLoader.LoadLevel("stage1");
 
 	for (auto obj : objects)
 	{

@@ -3,10 +3,11 @@
 #include "Sprite.h"
 #include "OperateConfig.h"
 #include "Collider.h"
+#include "Random.h"
 
 class Player : public MyGameObject
 {
-	std::unique_ptr<WristerEngine::_2D::Sprite> attackArea;
+	std::unique_ptr<WristerEngine::_2D::Sprite> attack;
 	std::unique_ptr<WristerEngine::_2D::Sprite> hide;	//潜っている時のスプライト
 	OperateConfig* operate = OperateConfig::GetInstance();
 	WristerEngine::FrameTimer hideTimer; // 隠れている時間
@@ -40,8 +41,8 @@ class Player : public MyGameObject
 	int countCoolTimeH;
 	bool coolTimeCountStartA;
 	bool coolTimeCountStartH;
-	//攻撃判定
-	float attackCutPos;
+
+	WristerEngine::Random_Float shakeBody;
 
 	void Move(); // 移動
 	void UITimer();	//UIでのクールタイム視覚化
