@@ -30,6 +30,7 @@ class DarumaEnemy : public BaseEnemy
 	WristerEngine::FrameTimer attackInterval;
 	WristerEngine::FrameTimer attackTimer;
 	WristerEngine::LoopEasing whiteAlphaEasing;
+	WristerEngine::Audio* audio_attack = nullptr;
 
 	// BaseEnemy ‚ğ‰î‚µ‚ÄŒp³‚³‚ê‚Ü‚µ‚½
 	void Initialize(const ObjectData& objData) override;

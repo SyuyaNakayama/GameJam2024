@@ -15,6 +15,7 @@ void Enemy::Initialize(const ObjectData& objData)
 	eyeBeam->size.y = 1000;
 	eyeBeam->position = objData.e_eyePos;
 	eyeBeam->anchorPoint = { 0.5f,0.0f };
+	eyeBeam->color.a = 0.7f;
 
 	beamRotEasing.Initialize(objData.e_beamEasingTime, objData.e_beamEasingType);
 	beamRotEasing.SetLoop(30);
@@ -75,6 +76,8 @@ void DarumaEnemy::Initialize(const ObjectData& objData)
 	attack->isInvisible = true;
 	attackTimer = objData.e_attackTime;
 	attackInterval = objData.e_attackInterval;
+
+	audio_attack = WristerEngine::AudioManager::Create("enemyStrobo.mp3");
 }
 
 void DarumaEnemy::Update()
@@ -86,6 +89,7 @@ void DarumaEnemy::Update()
 		AddCollider(attack.get(), CollisionShapeType::Box, "attack");
 		sprite->isFlipX = false;
 		sprite->posOffset.x = 0;
+		audio_attack->Play();
 	}
 	else
 	{

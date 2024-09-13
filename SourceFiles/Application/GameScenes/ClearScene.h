@@ -6,8 +6,12 @@
 // UI描画クラス(ClearScene用)
 class UIDrawerClearScene : public WristerEngine::_2D::AbstractUIDrawer
 {
+	int animTime = 0;
+	int maxAnimTime = 0;
+
 	// AbstractUIDrawer を介して継承されました
 	void Initialize() override;
+	void Update() override;
 };
 
 // クリアシーン

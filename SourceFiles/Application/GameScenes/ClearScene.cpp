@@ -32,7 +32,35 @@ void UIDrawerClearScene::Initialize()
 	sprites["clear"] = Sprite::Create("SceneBG/GameClear.png");
 	sprites["clear"]->size *= 3.0f;
 	sprites["clear"]->SetCenterPos();
+	sprites["clear"]->position.y -= 50;
 	sprites["clear"]->SetCenterAnchor();
 
 	sprites["bg"] = Sprite::Create("SceneBG/background.png");
+
+	//ƒiƒr
+	sprites["navi"] = Sprite::Create("UI/gameover_guidance.png");
+	sprites["navi"]->position = { WristerEngine::WIN_SIZE.x / 2,WristerEngine::WIN_SIZE.y - WEConst(float, "GroundHeight") };
+	sprites["navi"]->size = WEConst(Vector2, "NaviSize");
+	sprites["navi"]->size.x /= 2.0f;
+	sprites["navi"]->isInvisible = false;
+	sprites["navi"]->anchorPoint.x = 0.5f;
+	sprites["navi"]->textureSize.x = 144;
+	maxAnimTime = 60;
+	animTime = maxAnimTime;
+}
+
+void UIDrawerClearScene::Update()
+{
+	animTime--;
+	if (animTime < 0) {
+		animTime = maxAnimTime;
+		if (!sprites["navi"]->isInvisible) {
+			sprites["navi"]->isInvisible = true;
+		}
+		else {
+			sprites["navi"]->isInvisible = false;
+		}
+	}
+
+	AbstractUIDrawer::Update();
 }

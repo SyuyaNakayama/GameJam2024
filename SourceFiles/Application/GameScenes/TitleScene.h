@@ -20,7 +20,6 @@ class TitleScene : public WristerEngine::BaseScene
 	// BaseScene ‚ğ‰î‚µ‚ÄŒp³‚³‚ê‚Ü‚µ‚½
 	void Initialize() override;
 	void Update() override;
-	
 	void Draw() override;
 
 	float chargeMove;

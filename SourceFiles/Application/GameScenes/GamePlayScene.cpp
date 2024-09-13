@@ -26,12 +26,6 @@ void GamePlayScene::Update()
 {
 	ShareValue* shareVal = ShareValue::GetInstance();
 
-	if (operateConfig->GetTrigger("Pause"))
-	{
-		sceneManager->ChangeScene(Scene::Play, true, true, false);
-		return;
-	}
-
 	if (shareVal->isGoal)
 	{
 		shareVal->isGoal = false;

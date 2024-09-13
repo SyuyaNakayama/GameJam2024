@@ -6,8 +6,8 @@
 // UI•`‰æƒNƒ‰ƒX(GameOverScene—p)
 class UIDrawerGameOverScene : public WristerEngine::_2D::AbstractUIDrawer
 {
-	int animTime;
-	int maxAnimTime;
+	int animTime = 0;
+	int maxAnimTime = 0;
 
 	// AbstractUIDrawer ‚ğ‰î‚µ‚ÄŒp³‚³‚ê‚Ü‚µ‚½
 	void Initialize() override;
@@ -18,8 +18,8 @@ class UIDrawerGameOverScene : public WristerEngine::_2D::AbstractUIDrawer
 class GameOverScene : public WristerEngine::BaseScene
 {
 	OperateConfig* operate = OperateConfig::GetInstance();
-	WristerEngine::Audio* audio_select;
-	WristerEngine::Audio* bgm;
+	WristerEngine::Audio* audio_select = nullptr;
+	WristerEngine::Audio* bgm = nullptr;
 
 	// BaseScene ‚ğ‰î‚µ‚ÄŒp³‚³‚ê‚Ü‚µ‚½
 	void Initialize() override;
