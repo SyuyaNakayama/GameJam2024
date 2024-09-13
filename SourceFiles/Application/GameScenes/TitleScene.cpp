@@ -24,12 +24,18 @@ void TitleScene::Initialize()
 
 	chargeMove = 0.5f;
 	isUDChange = false;
+
+	audio_select = WristerEngine::AudioManager::Create("select.mp3");
+	bgm = WristerEngine::AudioManager::Create("title.mp3", true);
+	bgm->Play();
 }
 
 void TitleScene::Update()
 {
 	if (operate->GetTrigger("SceneChange")) {
 		sceneManager->ChangeScene(Scene::Tutorial);
+		audio_select->Play();
+		bgm->Stop();
 	}
 	logo->position.y += chargeMove;
 	if (!isUDChange) {

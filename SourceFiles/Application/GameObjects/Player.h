@@ -4,16 +4,17 @@
 #include "OperateConfig.h"
 #include "Collider.h"
 #include "Random.h"
+#include "Audio.h"
 
 class Player : public MyGameObject
 {
 	std::unique_ptr<WristerEngine::_2D::Sprite> attack;
-	std::unique_ptr<WristerEngine::_2D::Sprite> hide;	//潜っている時のスプライト
+	std::unique_ptr<WristerEngine::_2D::Sprite> dive;	//潜っている時のスプライト
 	std::unique_ptr<WristerEngine::_2D::Sprite> walk;	//歩いてる時
 	std::unique_ptr<WristerEngine::_2D::Sprite> isAttack;	//攻撃時
 	std::unique_ptr<WristerEngine::_2D::Sprite> drill;	//攻撃時のドリル
 	OperateConfig* operate = OperateConfig::GetInstance();
-	WristerEngine::FrameTimer hideTimer; // 隠れている時間
+	WristerEngine::FrameTimer diveTimer; // 潜っている時間
 	WristerEngine::FrameTimer attackTimer; // 攻撃している時間
 	bool isGoal = false;
 
@@ -27,13 +28,13 @@ class Player : public MyGameObject
 
 	// なんらかのアクション
 	void (Player::* Action)() = nullptr;
-	void Hide(); // 隠れる
+	void Dive(); // 潜る
 	void Attack(); // 攻撃
 	// クールタイム
-	WristerEngine::FrameTimer hideCoolTimer;
+	WristerEngine::FrameTimer diveCoolTimer;
 	WristerEngine::FrameTimer attackCoolTimer;
 
-	bool isCanUseHide = true, isCanUseAttack = true;
+	bool isCanUseDive = true, isCanUseAttack = true;
 
 	//アニメーション変数
 	int animTime;
@@ -47,6 +48,10 @@ class Player : public MyGameObject
 
 	WristerEngine::Random_Float shakeBody;
 
+	// 音
+	WristerEngine::Audio* audio_attack;
+	WristerEngine::Audio* audio_dive;
+
 	void Move(); // 移動
 	void UITimer();	//UIでのクールタイム視覚化
 	void Animations();	//プレイヤーのアニメーション周り
@@ -58,7 +63,7 @@ class Player : public MyGameObject
 	void Draw();
 	void OnCollision(WristerEngine::_2D::ColliderGroup* group) override;
 public:
-	bool IsHide() const { return Action == &Player::Hide; }
+	bool IsDive() const { return Action == &Player::Dive; }
 	const WristerEngine::_2D::Sprite* GetSprite() const { return sprite.get(); }
 	bool IsGoal() const { return isGoal; }
 };

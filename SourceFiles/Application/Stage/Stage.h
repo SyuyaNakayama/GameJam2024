@@ -3,6 +3,7 @@
 #include "Enemy.h"
 #include "Goal.h"
 #include "LevelLoader.h"
+#include "AudioManager.h"
 
 class Stage
 {
@@ -10,6 +11,7 @@ class Stage
 	std::list<std::unique_ptr<WristerEngine::_2D::GameObject>> stageObjects;
 
 	LevelLoader levelLoader;
+	WristerEngine::Audio* audio_enemyDeath = nullptr;
 
 	// “G‚ª€‚ñ‚Å‚é‚©‚ÌŒŸo‚ÆÁ–Å
 	void EnemyDie();

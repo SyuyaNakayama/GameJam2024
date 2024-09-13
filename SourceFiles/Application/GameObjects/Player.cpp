@@ -4,6 +4,7 @@
 #include "SceneManager.h"
 #include "ShareValue.h"
 #include <algorithm>
+#include "AudioManager.h"
 
 using namespace WristerEngine::_2D;
 
@@ -14,34 +15,34 @@ void Player::Move()
 	sprite->position += moveDir * Const(float, "PlayerMoveSpd");
 	sprite->position.x = std::clamp(sprite->position.x, sprite->size.x / 2.0f,
 		WristerEngine::WIN_SIZE.x - sprite->size.x / 2.0f);
-	hide->position.x = sprite->position.x;
+	dive->position.x = sprite->position.x;
 	// 向きを変える
-	if (moveDir < 0) { 
-		sprite->isFlipX = true; 
+	if (moveDir < 0) {
+		sprite->isFlipX = true;
 		walk->isFlipX = true;
 		isAttack->isFlipX = true;
 	}
-	else if (moveDir > 0) { 
-		sprite->isFlipX = false; 
+	else if (moveDir > 0) {
+		sprite->isFlipX = false;
 		walk->isFlipX = false;
 		isAttack->isFlipX = false;
 	}
 }
 
-void Player::Hide()
+void Player::Dive()
 {
 	sprite->isFlipY = true;
 	walk->isFlipY = true;
-	hide->isFlipY = false;
-	hide->isFlipX = sprite->isFlipX;
-	if (hideTimer.Update())
+	dive->isFlipY = false;
+	dive->isFlipX = sprite->isFlipX;
+	if (diveTimer.Update())
 	{
 		Action = nullptr;
 		sprite->isFlipY = false;
 		walk->isFlipY = false;
-		hide->isFlipY = true;
-		isCanUseHide = false;
-		hideCoolTimer = Const(int, "PlayerHideTime");
+		dive->isFlipY = true;
+		isCanUseDive = false;
+		diveCoolTimer = Const(int, "PlayerDiveTime");
 	}
 }
 
@@ -71,6 +72,7 @@ void Player::Attack()
 		isCanUseAttack = false;
 		attackCoolTimer = Const(int, "PlayerAttackTime");
 		DeleteCollider("attack");
+		audio_attack->Stop();
 	}
 }
 
@@ -86,7 +88,7 @@ void Player::Initialize(const ObjectData& objData)
 	walk = Sprite::Create("Player/drill_girl_walk.png");
 	walk->size = Const(Vector2, "WalkSize");
 	walk->SetAnimation(6, 5);
-	walk->anchorPoint = { 0.5f, 1.0f};
+	walk->anchorPoint = { 0.5f, 1.0f };
 	walk->position = sprite->position;
 
 	isAttack = Sprite::Create("Player/drill_girl_attack.png");
@@ -94,7 +96,6 @@ void Player::Initialize(const ObjectData& objData)
 	isAttack->anchorPoint = { 0.5f, 1.0f };
 	isAttack->position = sprite->position;
 	isAttack->isInvisible = true;
-
 
 	attack = Sprite::Create("Player/attack_effect.png");
 	attack->size = Const(Vector2, "EffectSize");
@@ -108,12 +109,12 @@ void Player::Initialize(const ObjectData& objData)
 	drill->anchorPoint = { -0.5f,1.0f };
 	drill->isInvisible = true;
 
-	hide = Sprite::Create("Player/dive.png");
-	hide->SetAnimation(2, 30);
-	hide->size = objData.size;
-	hide->position.y = WristerEngine::WIN_SIZE.y - Const(float, "GroundHeight");
-	hide->anchorPoint = { 0.5f,1.0f };
-	hide->isFlipY = true;
+	dive = Sprite::Create("Player/dive.png");
+	dive->SetAnimation(2, 30);
+	dive->size = objData.size;
+	dive->position.y = WristerEngine::WIN_SIZE.y - Const(float, "GroundHeight");
+	dive->anchorPoint = { 0.5f,1.0f };
+	dive->isFlipY = true;
 
 	InitializeUI();
 
@@ -124,6 +125,10 @@ void Player::Initialize(const ObjectData& objData)
 
 	//アニメーション時間
 	animTime = Const(int, "PlayerAnimationTimer");
+
+	// 音
+	audio_attack = WristerEngine::AudioManager::Create("attack.mp3");
+	audio_dive = WristerEngine::AudioManager::Create("dive.mp3");
 }
 
 void Player::InitializeUI() {
@@ -180,9 +185,9 @@ void Player::Update()
 	walk->position = sprite->position;
 	isAttack->position = sprite->position;
 
-	if (!isCanUseHide)
+	if (!isCanUseDive)
 	{
-		isCanUseHide = hideCoolTimer.Update();
+		isCanUseDive = diveCoolTimer.Update();
 	}
 	if (!isCanUseAttack)
 	{
@@ -194,12 +199,13 @@ void Player::Update()
 	if (!Action)
 	{
 		// 地面に隠れる
-		if (operate->GetTrigger("Down") && isCanUseHide)
+		if (operate->GetTrigger("Down") && isCanUseDive)
 		{
 			ui_dive->SetRect(Const(Vector2, "UIIconSize"), { 32,0 });
-			Action = &Player::Hide;
-			hideTimer = Const(int, "PlayerHideTime");
+			Action = &Player::Dive;
+			diveTimer = Const(int, "PlayerDiveTime");
 			coolTimeCountStartH = true;
+			audio_dive->Play();
 		}
 
 		// 攻撃
@@ -210,6 +216,7 @@ void Player::Update()
 			attackTimer = Const(int, "PlayerAttackTime");
 			AddCollider(attack.get(), CollisionShapeType::Box, "attack");
 			coolTimeCountStartA = true;
+			audio_attack->Play();
 		}
 	}
 	if (Action) { (this->*Action)(); }
@@ -234,7 +241,7 @@ void Player::Update()
 	// スプライトの更新
 	sprite->Update();
 	attack->Update();
-	hide->Update();
+	dive->Update();
 	ui_attack->Update();
 	ui_dive->Update();
 	ui_coolTime1->Update();
@@ -258,7 +265,7 @@ void Player::Draw()
 	isAttack->Draw();
 	drill->Draw();
 	attack->Draw();
-	hide->Draw();
+	dive->Draw();
 	ui_attack->Draw();
 	ui_dive->Draw();
 	ui_key_space->Draw();
@@ -283,7 +290,7 @@ void Player::OnCollision(WristerEngine::_2D::ColliderGroup* group)
 			if (sprite->isFlipX) { move = -move; }
 			sprite->position -= move;
 		}
-		if (!IsHide())
+		if (!IsDive())
 		{
 			// ゴール
 			if (pairName == "Goal")
@@ -323,14 +330,14 @@ void Player::UITimer() {
 	if (coolTimeCountStartH) {
 		ui_coolTime2->SetRect(Const(Vector2, "UIIconSize"), { coolCutPosH * 32,0 });
 	}
-	if (!isCanUseHide) {
-		if (Const(int, "PlayerHideTime") / 3 >= hideCoolTimer.GetRemainTime() && 1 < hideCoolTimer.GetRemainTime()) {
+	if (!isCanUseDive) {
+		if (Const(int, "PlayerDiveTime") / 3 >= diveCoolTimer.GetRemainTime() && 1 < diveCoolTimer.GetRemainTime()) {
 			ui_dive->SetRect(Const(Vector2, "UIIconSize"), { 96,0 });
 		}
-		else if (Const(int, "PlayerHideTime") / 3 * 2 >= hideCoolTimer.GetRemainTime() && Const(int, "PlayerHideTime") / 3 < hideCoolTimer.GetRemainTime()) {
+		else if (Const(int, "PlayerDiveTime") / 3 * 2 >= diveCoolTimer.GetRemainTime() && Const(int, "PlayerDiveTime") / 3 < diveCoolTimer.GetRemainTime()) {
 			ui_dive->SetRect(Const(Vector2, "UIIconSize"), { 64,0 });
 		}
-		else if (Const(int, "PlayerHideTime") / 3 * 2 < hideCoolTimer.GetRemainTime()) {
+		else if (Const(int, "PlayerDiveTime") / 3 * 2 < diveCoolTimer.GetRemainTime()) {
 			ui_dive->SetRect(Const(Vector2, "UIIconSize"), { 32,0 });
 		}
 		else {

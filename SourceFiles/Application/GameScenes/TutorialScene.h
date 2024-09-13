@@ -2,6 +2,8 @@
 #include "BaseScene.h"
 #include "AbstractUIDrawer.h"
 #include "Stage.h"
+#include "AudioManager.h"
+#include "AudioManager.h"
 
 class UIDrawerTutorialScene : public WristerEngine::_2D::AbstractUIDrawer
 {
@@ -15,6 +17,7 @@ class TutorialScene : public WristerEngine::BaseScene
 	// ステージオブジェクト
 	Stage stage;
 	std::unique_ptr<WristerEngine::_2D::Sprite> background; // 背景
+	WristerEngine::Audio* bgm;
 
 public:
 
