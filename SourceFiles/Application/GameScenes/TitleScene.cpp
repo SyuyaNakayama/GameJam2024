@@ -19,7 +19,7 @@ void TitleScene::Initialize()
 	player->anchorPoint = { -0.5f,1.0f };
 	//ƒƒS
 	logo = Sprite::Create("UI/logo.png");
-	logo->position = { WristerEngine::WIN_SIZE.x / 2,WEConst(float, "GroundHeight") / 2 };
+	logo->position = { WristerEngine::WIN_SIZE.x / 2 - 10.0f,WEConst(float, "GroundHeight") / 2 };
 	logo->size = WEConst(Vector2, "LogoSize");
 
 	chargeMove = 0.5f;

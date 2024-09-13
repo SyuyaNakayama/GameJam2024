@@ -23,8 +23,6 @@ class TitleScene : public WristerEngine::BaseScene
 	
 	void Draw() override;
 
-	OperateConfig* operate = OperateConfig::GetInstance();
-
 	float chargeMove;
 	bool isUDChange;
 
