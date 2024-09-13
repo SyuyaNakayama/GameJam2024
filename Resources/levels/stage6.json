@@ -1,0 +1,25 @@
+{
+  "objects": [
+    {
+      "name": "Player",
+      "positionX": 100,
+      "size": [ 50, 50 ]
+    },
+    {
+      "name": "Enemy",
+      "positionX": 1020,
+      "size": [ 100, 400 ],
+      "eyePos": [ 960, 270 ],
+      "gaugePos": [ 945, 170 ],
+      "angleRange": [ 0, 40 ],
+      "beamEasingTime": 200,
+      "hp": 230,
+      "beamEasingType": "OutElastic"
+    },
+    {
+      "name": "Goal",
+      "positionX": 1200,
+      "size": [ 50, 50 ]
+    }
+  ]
+}

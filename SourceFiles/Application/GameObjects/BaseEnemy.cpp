@@ -13,6 +13,8 @@ void BaseEnemy::Initialize(const ObjectData& objData)
 
 	damageShake = { -2,2 };
 
+	maxHp = objData.e_hp;
+
 	// コライダーの設定
 	collisionAttribute = CollisionAttribute::Enemy;
 	collisionMask = CollisionMask::Enemy;
@@ -38,7 +40,7 @@ void BaseEnemy::OnCollision(WristerEngine::_2D::ColliderGroup* collider)
 	{
 		if (collider->GetColliderName(pair) == "attack")
 		{
-			hpRate -= 0.01f;
+			hpRate -= 1.0f / maxHp;
 			sprite->posOffset = { damageShake(),damageShake() };
 		}
 		else

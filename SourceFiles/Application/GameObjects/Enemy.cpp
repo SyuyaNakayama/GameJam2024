@@ -16,7 +16,7 @@ void Enemy::Initialize(const ObjectData& objData)
 	eyeBeam->position = objData.e_eyePos;
 	eyeBeam->anchorPoint = { 0.5f,0.0f };
 
-	beamRotEasing.Initialize(120, WristerEngine::Easing::Type::Linear);
+	beamRotEasing.Initialize(objData.e_beamEasingTime, objData.e_beamEasingType);
 	beamRotEasing.SetLoop(30);
 	beamAngleRange = objData.e_angleRange;
 

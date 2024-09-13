@@ -14,13 +14,7 @@ bool OperateConfig::GetPush(const std::string& str)
 
 	bool key = false, pad = false;
 
-	if (str == "Dash")
-	{
-		key = input->IsInput(Key::Lshift) || input->IsInput(Key::Rshift);
-		pad = false;
-		if (input->IsConnectGamePad()) { pad = input->IsInput(Pad::B); }
-	}
-	else if (str == "Left")
+	 if (str == "Left")
 	{
 		key = input->IsInput(Key::Left);
 		if (input->IsConnectGamePad())
