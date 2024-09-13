@@ -25,9 +25,16 @@ class TitleScene : public WristerEngine::BaseScene
 
 	float chargeMove;
 	bool isUDChange;
+	int animTime;
+	int maxAnimTime;
+
+	bool isStart;
+	int wait;
 
 	//タイトル用スプライト
 	std::unique_ptr<WristerEngine::_2D::Sprite> bg;
 	std::unique_ptr<WristerEngine::_2D::Sprite> player;
+	std::unique_ptr<WristerEngine::_2D::Sprite> walk;
 	std::unique_ptr<WristerEngine::_2D::Sprite> logo;
+	std::unique_ptr<WristerEngine::_2D::Sprite> navi;
 };

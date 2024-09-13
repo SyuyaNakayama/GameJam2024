@@ -24,6 +24,7 @@
     "EffectSize": [ 200, 50 ],
     "WalkSize": [ 300, 50 ],
     "LogoSize": [ 640, 293 ],
-    "TextBoxSize": [1200,200]
+    "TextBoxSize": [ 1200, 200 ],
+    "NaviSize": [450,50]
   }
 }
