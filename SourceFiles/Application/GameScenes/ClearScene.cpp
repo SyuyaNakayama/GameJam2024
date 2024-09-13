@@ -29,4 +29,8 @@ void ClearScene::Update()
 
 void UIDrawerClearScene::Initialize()
 {
+	sprites["death"] = Sprite::Create("SceneBG/GameClear.png");
+	sprites["death"]->size *= 3.0f;
+	sprites["death"]->SetCenterPos();
+	sprites["death"]->SetCenterAnchor();
 }
