@@ -9,7 +9,7 @@ void TutorialScene::Initialize()
 	ShareValue::GetInstance()->stageNum = 1;
 	stage.Initialize();
 
-	background = Sprite::Create("background.png");
+	background = Sprite::Create("SceneBG/background.png");
 	background->size = WristerEngine::WIN_SIZE;
 	background->Update();
 	
