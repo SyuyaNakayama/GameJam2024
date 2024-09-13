@@ -10,12 +10,15 @@ void GameOverScene::Initialize()
 	// UI•`‰æƒNƒ‰ƒX‚Ì‰Šú‰»
 	uiDrawer = std::make_unique<UIDrawerGameOverScene>();
 	uiDrawer->Initialize();
+
+	audio_select = WristerEngine::AudioManager::Create("select.mp3");
 }
 
 void GameOverScene::Update()
 {
 	if (operate->GetTrigger("SceneChange")) {
-		sceneManager->ChangeScene(Scene::Title);
+		sceneManager->ChangeScene(Scene::Play);
+		audio_select->Play();
 	}
 	// UI•`‰æ
 	uiDrawer->Update();

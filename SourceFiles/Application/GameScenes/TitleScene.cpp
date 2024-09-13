@@ -8,12 +8,15 @@ void TitleScene::Initialize()
 	// UI•`‰æƒNƒ‰ƒX‚Ì‰Šú‰»
 	uiDrawer = std::make_unique<UIDrawerTitleScene>();
 	uiDrawer->Initialize();
+
+	audio_select = WristerEngine::AudioManager::Create("select.mp3");
 }
 
 void TitleScene::Update()
 {
 	if (operate->GetTrigger("SceneChange")) {
 		sceneManager->ChangeScene(Scene::Tutorial);
+		audio_select->Play();
 	}
 	// UI•`‰æ
 	uiDrawer->Update();
