@@ -177,11 +177,18 @@ void Player::InitializeUI() {
 	ui_key_down->SetRect(Const(Vector2, "UIIconSize"), { 32,0 });
 	ui_key_down->position = Vector2(WristerEngine::WIN_SIZE.x - Const(float, "PlayerSize") * 2, WristerEngine::WIN_SIZE.y / 2 + Const(float, "PlayerSize"));
 	ui_key_down->anchorPoint = { 1.0f,1.0f };
+	//テキストボックス
+	textBox = Sprite::Create("UI/textbox.png");
+	textBox->SetRect(Const(Vector2, "TextBoxSize"), { 0,0 });
+	textBox->position.x = 40.0f;
+	isExplanation = true;
 }
 
 void Player::Update()
 {
-	Move();
+	if (!isExplanation) {
+		Move();
+	}
 	walk->position = sprite->position;
 	isAttack->position = sprite->position;
 
@@ -195,28 +202,29 @@ void Player::Update()
 	}
 
 	UITimer();
-
-	if (!Action)
-	{
-		// 地面に隠れる
-		if (operate->GetTrigger("Down") && isCanUseDive)
+	if (!isExplanation) {
+		if (!Action)
 		{
-			ui_dive->SetRect(Const(Vector2, "UIIconSize"), { 32,0 });
-			Action = &Player::Dive;
-			diveTimer = Const(int, "PlayerDiveTime");
-			coolTimeCountStartH = true;
-			audio_dive->Play();
-		}
+			// 地面に隠れる
+			if (operate->GetTrigger("Down") && isCanUseDive)
+			{
+				ui_dive->SetRect(Const(Vector2, "UIIconSize"), { 32,0 });
+				Action = &Player::Dive;
+				diveTimer = Const(int, "PlayerDiveTime");
+				coolTimeCountStartH = true;
+				audio_dive->Play();
+			}
 
-		// 攻撃
-		if (operate->GetTrigger("SceneChange") && isCanUseAttack)
-		{
-			ui_attack->SetRect(Const(Vector2, "UIIconSize"), { 32,0 });
-			Action = &Player::Attack;
-			attackTimer = Const(int, "PlayerAttackTime");
-			AddCollider(attack.get(), CollisionShapeType::Box, "attack");
-			coolTimeCountStartA = true;
-			audio_attack->Play();
+			// 攻撃
+			if (operate->GetTrigger("SceneChange") && isCanUseAttack)
+			{
+				ui_attack->SetRect(Const(Vector2, "UIIconSize"), { 32,0 });
+				Action = &Player::Attack;
+				attackTimer = Const(int, "PlayerAttackTime");
+				AddCollider(attack.get(), CollisionShapeType::Box, "attack");
+				coolTimeCountStartA = true;
+				audio_attack->Play();
+			}
 		}
 	}
 	if (Action) { (this->*Action)(); }
@@ -236,6 +244,8 @@ void Player::Update()
 		}
 	}
 
+	Tutorial();
+
 	Animations();
 
 	// スプライトの更新
@@ -251,13 +261,19 @@ void Player::Update()
 	walk->Update();
 	drill->Update();
 	isAttack->Update();
+	textBox->Update();
 }
 
 void Player::Draw()
 {
 	//アニメーション切り替え
-	if (operate->GetPush("Right") || operate->GetPush("Left")) {
-		walk->Draw();
+	if (!isExplanation) {
+		if (operate->GetPush("Right") || operate->GetPush("Left")) {
+			walk->Draw();
+		}
+		else {
+			sprite->Draw();
+		}
 	}
 	else {
 		sprite->Draw();
@@ -275,6 +291,9 @@ void Player::Draw()
 	}
 	if (coolTimeCountStartH) {
 		ui_coolTime2->Draw();
+	}
+	if (isExplanation) {
+		textBox->Draw();
 	}
 }
 
@@ -345,6 +364,21 @@ void Player::UITimer() {
 			coolTimeCountStartH = false;
 			countCoolTimeH = 0;
 			coolCutPosH = 3.0f;
+		}
+	}
+}
+
+void Player::Tutorial() {
+	if (GetNowScene() != Scene::Tutorial) {
+		isExplanation = false;
+	}
+	else {
+		if (operate->GetTrigger("SceneChange")) {
+			page += 1.0f;
+			textBox->SetRect(Const(Vector2,"TextBoxSize"), {Const(float,"PageSize") * page,0});
+			if (page > 2.0f) {
+				isExplanation = false;
+			}
 		}
 	}
 }

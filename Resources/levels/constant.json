@@ -10,7 +10,8 @@
   },
   "float": {
     "GroundHeight": 100,
-    "PlayerMoveSpd": 3
+    "PlayerMoveSpd": 3,
+    "PageSize": 1200
   },
   "Vector2": {
     "WhitePicSize": [ 300, 200 ],
@@ -22,6 +23,7 @@
     "KeyAllSize": [ 100, 50 ],
     "EffectSize": [ 200, 50 ],
     "WalkSize": [ 300, 50 ],
-    "LogoSize": [ 640, 293 ]
+    "LogoSize": [ 640, 293 ],
+    "TextBoxSize": [1200,200]
   }
 }
