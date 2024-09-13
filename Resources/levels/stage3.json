@@ -9,7 +9,7 @@
       "name": "Enemy",
       "positionX": 1050,
       "size": [ 100, 400 ],
-      "eyePos": [ 990, 270 ],
+      "eyePos": [ 1000, 270 ],
       "gaugePos": [ 975, 170 ],
       "angleRange": [ 60, 60 ]
     },
@@ -17,7 +17,7 @@
       "name": "Enemy",
       "positionX": 150,
       "size": [ 100, 400 ],
-      "eyePos": [ 210, 270 ],
+      "eyePos": [ 200, 270 ],
       "gaugePos": [ 75, 170 ],
       "angleRange": [ -63, -63 ],
       "flip": true

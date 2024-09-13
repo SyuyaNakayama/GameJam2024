@@ -9,7 +9,7 @@
       "name": "Enemy",
       "positionX": 1050,
       "size": [ 50, 200 ],
-      "eyePos": [ 1015, 445 ],
+      "eyePos": [ 1025, 445 ],
       "gaugePos": [ 975, 345 ],
       "angleRange": [ 0, 40 ],
       "hp": 50
@@ -18,7 +18,7 @@
       "name": "Enemy",
       "positionX": 750,
       "size": [ 50, 200 ],
-      "eyePos": [ 715, 445 ],
+      "eyePos": [ 725, 445 ],
       "gaugePos": [ 675, 345 ],
       "angleRange": [ 40, 0 ],
       "hp": 50
@@ -27,7 +27,7 @@
       "name": "Enemy",
       "positionX": 450,
       "size": [ 50, 200 ],
-      "eyePos": [ 415, 445 ],
+      "eyePos": [ 425, 445 ],
       "gaugePos": [ 375, 345 ],
       "angleRange": [ 0, 40 ],
       "hp": 50
