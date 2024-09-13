@@ -26,9 +26,10 @@ public:
 class DarumaEnemy : public BaseEnemy
 {
 	std::unique_ptr<WristerEngine::_2D::Sprite> attack;
+	std::unique_ptr<WristerEngine::_2D::Sprite> whiteBody;
 	WristerEngine::FrameTimer attackInterval;
 	WristerEngine::FrameTimer attackTimer;
-	WristerEngine::Random_Float shakeBody; // —\”õ“®ì
+	WristerEngine::LoopEasing whiteAlphaEasing;
 
 	// BaseEnemy ‚ğ‰î‚µ‚ÄŒp³‚³‚ê‚Ü‚µ‚½
 	void Initialize(const ObjectData& objData) override;
