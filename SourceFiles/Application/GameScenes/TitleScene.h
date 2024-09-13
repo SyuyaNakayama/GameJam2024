@@ -20,4 +20,14 @@ class TitleScene : public WristerEngine::BaseScene
 	// BaseScene を介して継承されました
 	void Initialize() override;
 	void Update() override;
+	
+	void Draw() override;
+
+	float chargeMove;
+	bool isUDChange;
+
+	//タイトル用スプライト
+	std::unique_ptr<WristerEngine::_2D::Sprite> bg;
+	std::unique_ptr<WristerEngine::_2D::Sprite> player;
+	std::unique_ptr<WristerEngine::_2D::Sprite> logo;
 };

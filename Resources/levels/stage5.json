@@ -21,6 +21,7 @@
       "eyePos": [ 960, 270 ],
       "gaugePos": [ 945, 170 ],
       "angleRange": [ 0, 60 ],
+      "beamEasingTime": 240,
       "beamEasingType": "InOutQuint"
     },
     {
