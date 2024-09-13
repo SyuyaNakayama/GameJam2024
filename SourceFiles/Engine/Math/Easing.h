@@ -92,7 +92,7 @@ namespace WristerEngine
 		// イージングの関数テーブル
 		static float (LoopEasing::* Ease[])();
 
-		// √x
+		// cosine
 		float Cos();
 
 	public:

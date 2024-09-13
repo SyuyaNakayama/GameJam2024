@@ -37,6 +37,25 @@ std::vector<ObjectData> LevelLoader::LoadLevel(const std::string& fileName)
 		{
 			obj.e_flip = object["flip"];
 		}
+		if (object.contains("hp"))
+		{
+			obj.e_hp = object["hp"];
+		}
+		if (object.contains("beamEasingTime"))
+		{
+			obj.e_beamEasingTime = object["beamEasingTime"];
+		}
+		if (object.contains("beamEasingType"))
+		{
+			if (object["beamEasingType"] == "InOutQuint")
+			{
+				obj.e_beamEasingType = WristerEngine::Easing::Type::EaseInOutQuint;
+			}
+			else if (object["beamEasingType"] == "OutElastic")
+			{
+				obj.e_beamEasingType = WristerEngine::Easing::Type::OutElastic;
+			}
+		}
 		objects.push_back(obj);
 	}
 	return objects;

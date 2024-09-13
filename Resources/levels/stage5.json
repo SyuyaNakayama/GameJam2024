@@ -1,0 +1,33 @@
+{
+  "objects": [
+    {
+      "name": "Player",
+      "positionX": 100,
+      "size": [ 50, 50 ]
+    },
+    {
+      "name": "Enemy",
+      "positionX": 650,
+      "size": [ 50, 200 ],
+      "eyePos": [ 615, 445 ],
+      "gaugePos": [ 575, 345 ],
+      "angleRange": [ 40, 40 ],
+      "hp": 50
+    },
+    {
+      "name": "Enemy",
+      "positionX": 1020,
+      "size": [ 100, 400 ],
+      "eyePos": [ 960, 270 ],
+      "gaugePos": [ 945, 170 ],
+      "angleRange": [ 0, 60 ],
+      "beamEasingTime": 240,
+      "beamEasingType": "InOutQuint"
+    },
+    {
+      "name": "Goal",
+      "positionX": 1200,
+      "size": [ 50, 50 ]
+    }
+  ]
+}

@@ -4,7 +4,7 @@
     "PlayerAttackTime": 60,
     "PlayerAnimationTimer": 60,
     "EnemyEyeFOV": 3,
-    "StageNum": 3
+    "StageNum": 6
   },
   "int[]": {
   },
@@ -22,6 +22,6 @@
     "KeyAllSize": [ 100, 50 ],
     "EffectSize": [ 200, 50 ],
     "WalkSize": [ 300, 50 ],
-    "LogoSize": [640,293]
+    "LogoSize": [ 640, 293 ]
   }
 }
