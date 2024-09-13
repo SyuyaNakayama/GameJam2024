@@ -77,38 +77,38 @@ void Player::Attack()
 void Player::Initialize(const ObjectData& objData)
 {
 	// 初期化
-	sprite = Sprite::Create("drill_girl.png");
+	sprite = Sprite::Create("Player/drill_girl.png");
 	sprite->size = Const(Vector2, "EffectSize");
 	sprite->SetAnimation(4, 60);
 	MyGameObject::Initialize(objData);
 	shakeBody = { -2,2 };
 
-	walk = Sprite::Create("drill_girl_walk.png");
+	walk = Sprite::Create("Player/drill_girl_walk.png");
 	walk->size = Const(Vector2, "WalkSize");
 	walk->SetAnimation(6, 5);
 	walk->anchorPoint = { 0.5f, 1.0f};
 	walk->position = sprite->position;
 
-	isAttack = Sprite::Create("drill_girl_attack.png");
+	isAttack = Sprite::Create("Player/drill_girl_attack.png");
 	isAttack->size = Const(Vector2, "PlayerSize");
 	isAttack->anchorPoint = { 0.5f, 1.0f };
 	isAttack->position = sprite->position;
 	isAttack->isInvisible = true;
 
 
-	attack = Sprite::Create("attack_effect.png");
+	attack = Sprite::Create("Player/attack_effect.png");
 	attack->size = Const(Vector2, "EffectSize");
 	attack->SetAnimation(4, 1);
 	attack->anchorPoint = { -0.5f,1.0f };
 	attack->color = { 1.0f,0.5f,0.5f,1.0f };
 	attack->isInvisible = true;
 
-	drill = Sprite::Create("drill.png");
+	drill = Sprite::Create("Player/drill.png");
 	drill->size = Const(Vector2, "PlayerSize");
 	drill->anchorPoint = { -0.5f,1.0f };
 	drill->isInvisible = true;
 
-	hide = Sprite::Create("dive2.png");
+	hide = Sprite::Create("Player/dive.png");
 	hide->SetAnimation(2, 30);
 	hide->size = objData.size;
 	hide->position.y = WristerEngine::WIN_SIZE.y - Const(float, "GroundHeight");
@@ -129,26 +129,26 @@ void Player::Initialize(const ObjectData& objData)
 void Player::InitializeUI() {
 	//UIのスプライト初期化設定
 	//攻撃アイコン
-	ui_attack = Sprite::Create("ui_attack.png");
+	ui_attack = Sprite::Create("UI/attack.png");
 	ui_attack->size = Const(Vector2, "UIAllSize");
 	ui_attack->SetRect(Const(Vector2, "UIIconSize"), { 0,0 });
 	ui_attack->position = Vector2(WristerEngine::WIN_SIZE.x - Const(float, "PlayerSize"), WristerEngine::WIN_SIZE.y / 2 - Const(float, "PlayerSize"));
 	ui_attack->anchorPoint = { 0.5f,1.0f };
 	//潜るアイコン
-	ui_dive = Sprite::Create("ui_dive.png");
+	ui_dive = Sprite::Create("UI/dive.png");
 	ui_dive->size = Const(Vector2, "UIAllSize");
 	ui_dive->SetRect(Const(Vector2, "UIIconSize"), { 0,0 });
 	ui_dive->position = Vector2(WristerEngine::WIN_SIZE.x - Const(float, "PlayerSize"), WristerEngine::WIN_SIZE.y / 2 + Const(float, "PlayerSize"));
 	ui_dive->anchorPoint = { 0.5f,1.0f };
 	//攻撃アイコンのクールタイム
-	ui_coolTime1 = Sprite::Create("num.png");
+	ui_coolTime1 = Sprite::Create("UI/num.png");
 	ui_coolTime1->size = Const(Vector2, "CoolTimeAllSize");
 	ui_coolTime1->SetRect(Const(Vector2, "UIIconSize"), { 0, 0 });
 	ui_coolTime1->position = Vector2(WristerEngine::WIN_SIZE.x - Const(float, "PlayerSize"), WristerEngine::WIN_SIZE.y / 2 - Const(float, "PlayerSize"));
 	ui_coolTime1->anchorPoint = { 0.5f,1.25f };
 
 	//潜るアイコンのクールタイム
-	ui_coolTime2 = Sprite::Create("num.png");
+	ui_coolTime2 = Sprite::Create("UI/num.png");
 	ui_coolTime2->size = Const(Vector2, "CoolTimeAllSize");
 	ui_coolTime2->SetRect(Const(Vector2, "UIIconSize"), { 0, 0 });
 	ui_coolTime2->position = Vector2(WristerEngine::WIN_SIZE.x - Const(float, "PlayerSize"), WristerEngine::WIN_SIZE.y / 2 + Const(float, "PlayerSize"));
@@ -161,13 +161,13 @@ void Player::InitializeUI() {
 	coolTimeCountStartA = false;
 	coolTimeCountStartH = false;
 	//UI SPACE
-	ui_key_space = Sprite::Create("key.png");
+	ui_key_space = Sprite::Create("UI/key.png");
 	ui_key_space->size = Const(Vector2, "KeyAllSize");
 	ui_key_space->SetRect(Const(Vector2, "UIIconSize"), { 0,0 });
 	ui_key_space->position = Vector2(WristerEngine::WIN_SIZE.x - Const(float, "PlayerSize") * 2, WristerEngine::WIN_SIZE.y / 2 - Const(float, "PlayerSize"));
 	ui_key_space->anchorPoint = { 1.0f,1.0f };
 	//UI DOWN
-	ui_key_down = Sprite::Create("key.png");
+	ui_key_down = Sprite::Create("UI/key.png");
 	ui_key_down->size = Const(Vector2, "KeyAllSize");
 	ui_key_down->SetRect(Const(Vector2, "UIIconSize"), { 32,0 });
 	ui_key_down->position = Vector2(WristerEngine::WIN_SIZE.x - Const(float, "PlayerSize") * 2, WristerEngine::WIN_SIZE.y / 2 + Const(float, "PlayerSize"));

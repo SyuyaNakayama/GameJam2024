@@ -6,12 +6,12 @@ using namespace WristerEngine::_2D;
 void Enemy::Initialize(const ObjectData& objData)
 {
 	// “G
-	sprite = Sprite::Create("pillar.png");
+	sprite = Sprite::Create("Enemy/pillar.png");
 	BaseEnemy::Initialize(objData);
 	sprite->isFlipX = objData.e_flip;
 
 	// ƒr[ƒ€
-	eyeBeam = Sprite::Create("EyeBeam.png");
+	eyeBeam = Sprite::Create("Enemy/EyeBeam.png");
 	eyeBeam->size.y = 1000;
 	eyeBeam->position = objData.e_eyePos;
 	eyeBeam->anchorPoint = { 0.5f,0.0f };
@@ -44,7 +44,7 @@ void Enemy::Draw()
 
 void DarumaEnemy::Initialize(const ObjectData& objData)
 {
-	sprite = Sprite::Create("pillar.png");
+	sprite = Sprite::Create("Enemy/pillar.png");
 	BaseEnemy::Initialize(objData);
 	sprite->color = { 1.0f,0.5f,0.5f,1.0f };
 	sprite->isFlipX = true;
