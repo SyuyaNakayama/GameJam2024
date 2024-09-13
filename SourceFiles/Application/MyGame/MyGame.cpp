@@ -12,10 +12,10 @@ using namespace WristerEngine::_3D;
 
 void MyGame::Initialize()
 {
-	windowName = L"“ä‚ª‰ð‚¯‚È‚¢‚Ì‚Å—Í‹Æ‚Å“Ë”j‚µ‚Ü‚·";
+	windowName = L"4026_“ä‚ª‰ð‚¯‚È‚¢‚Ì‚Å—Í‹Æ‚Å“Ë”j‚µ‚Ü‚·";
 	Framework::Initialize();
 #ifdef _DEBUG
-	sceneManager->ChangeScene(Scene::Play, false, false, false);
+	sceneManager->ChangeScene(Scene::Tutorial, false, false, false);
 #endif // _DEBUG
 #ifdef NDEBUG
 	sceneManager->ChangeScene(Scene::Title, false, false, false);

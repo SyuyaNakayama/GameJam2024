@@ -15,6 +15,7 @@ class GameOverScene : public WristerEngine::BaseScene
 {
 	OperateConfig* operate = OperateConfig::GetInstance();
 	WristerEngine::Audio* audio_select;
+	WristerEngine::Audio* bgm;
 
 	// BaseScene ‚ğ‰î‚µ‚ÄŒp³‚³‚ê‚Ü‚µ‚½
 	void Initialize() override;

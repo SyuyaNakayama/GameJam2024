@@ -12,6 +12,8 @@ void GameOverScene::Initialize()
 	uiDrawer->Initialize();
 
 	audio_select = WristerEngine::AudioManager::Create("select.mp3");
+	bgm = WristerEngine::AudioManager::Create("gameover.mp3", true);
+	bgm->Play();
 }
 
 void GameOverScene::Update()
@@ -19,6 +21,7 @@ void GameOverScene::Update()
 	if (operate->GetTrigger("SceneChange")) {
 		sceneManager->ChangeScene(Scene::Play);
 		audio_select->Play();
+		bgm->Stop();
 	}
 	// UI•`‰æ
 	uiDrawer->Update();

@@ -10,6 +10,8 @@ void TitleScene::Initialize()
 	uiDrawer->Initialize();
 
 	audio_select = WristerEngine::AudioManager::Create("select.mp3");
+	bgm = WristerEngine::AudioManager::Create("title.mp3", true);
+	bgm->Play();
 }
 
 void TitleScene::Update()
@@ -17,6 +19,7 @@ void TitleScene::Update()
 	if (operate->GetTrigger("SceneChange")) {
 		sceneManager->ChangeScene(Scene::Tutorial);
 		audio_select->Play();
+		bgm->Stop();
 	}
 	// UI•`‰æ
 	uiDrawer->Update();

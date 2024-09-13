@@ -18,6 +18,8 @@ void GamePlayScene::Initialize()
 	uiDrawer->Initialize();
 
 	audio_goal = WristerEngine::AudioManager::Create("Goal.mp3");
+	bgm = WristerEngine::AudioManager::Create("stageBGM.mp3", true);
+	bgm->Play();
 }
 
 void GamePlayScene::Update()
@@ -30,12 +32,14 @@ void GamePlayScene::Update()
 		if (shareVal->stageNum <= WEConst(int, "StageNum")) { sceneManager->ChangeScene(Scene::Play); }
 		else { sceneManager->ChangeScene(Scene::Clear); }
 		audio_goal->Play();
+		bgm->Stop();
 		return;
 	}
 
 	if (shareVal->isGameOver)
 	{
 		sceneManager->ChangeScene(Scene::GameOver);
+		bgm->Stop();
 		return;
 	}
 

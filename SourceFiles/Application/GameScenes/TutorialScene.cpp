@@ -15,6 +15,8 @@ void TutorialScene::Initialize()
 	
 	uiDrawer = std::make_unique<UIDrawerTutorialScene>();
 	uiDrawer->Initialize();
+	bgm = WristerEngine::AudioManager::Create("stageBGM.mp3", true);
+	bgm->Play();
 }
 
 void TutorialScene::Update()
@@ -26,12 +28,14 @@ void TutorialScene::Update()
 		shareVal->isGoal = false;
 		shareVal->stageNum++;
 		sceneManager->ChangeScene(Scene::Play);
+		bgm->Stop();
 		return;
 	}
 
 	if (shareVal->isGameOver)
 	{
 		sceneManager->ChangeScene(Scene::GameOver);
+		bgm->Stop();
 		return;
 	}
 

@@ -18,6 +18,7 @@ class GamePlayScene : public WristerEngine::BaseScene
 	Stage stage;
 	std::unique_ptr<WristerEngine::_2D::Sprite> background; // îwåi
 	WristerEngine::Audio* audio_goal = nullptr;
+	WristerEngine::Audio* bgm;
 
 public:
 
