@@ -151,6 +151,7 @@ void WristerEngine::_2D::ColliderGroup::DeletePair()
 
 const std::string WristerEngine::_2D::ColliderGroup::GetColliderName(size_t index) const
 {
+	if (colliders.size() <= index) { return "Null"; }
 	auto itr = colliders.begin();
 	for (size_t i = 0; i < index; i++)
 	{

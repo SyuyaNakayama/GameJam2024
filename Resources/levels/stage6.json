@@ -13,7 +13,7 @@
       "gaugePos": [ 945, 170 ],
       "angleRange": [ 0, 40 ],
       "beamEasingTime": 200,
-      "hp": 230,
+      "hp": 240,
       "beamEasingType": "OutElastic"
     },
     {

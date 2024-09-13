@@ -1,25 +1,33 @@
 {
   "objects": [
     {
+      "name": "DarumaEnemy",
+      "positionX": 1020,
+      "size": [ 100, 400 ],
+      "gaugePos": [ 945, 170 ],
+      "attackInterval": 300,
+      "attackTime": 30
+    },
+    {
       "name": "Player",
       "positionX": 100,
       "size": [ 50, 50 ]
     },
     {
       "name": "Enemy",
-      "positionX": 1050,
+      "positionX": 850,
       "size": [ 50, 200 ],
-      "eyePos": [ 1015, 445 ],
-      "gaugePos": [ 975, 345 ],
+      "eyePos": [ 815, 445 ],
+      "gaugePos": [ 775, 345 ],
       "angleRange": [ 0, 40 ],
       "hp": 50
     },
     {
       "name": "Enemy",
-      "positionX": 750,
+      "positionX": 650,
       "size": [ 50, 200 ],
-      "eyePos": [ 715, 445 ],
-      "gaugePos": [ 675, 345 ],
+      "eyePos": [ 615, 445 ],
+      "gaugePos": [ 575, 345 ],
       "angleRange": [ 40, 0 ],
       "hp": 50
     },

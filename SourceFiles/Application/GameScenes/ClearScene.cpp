@@ -29,4 +29,10 @@ void ClearScene::Update()
 
 void UIDrawerClearScene::Initialize()
 {
+	sprites["clear"] = Sprite::Create("SceneBG/GameClear.png");
+	sprites["clear"]->size *= 3.0f;
+	sprites["clear"]->SetCenterPos();
+	sprites["clear"]->SetCenterAnchor();
+
+	sprites["bg"] = Sprite::Create("SceneBG/background.png");
 }

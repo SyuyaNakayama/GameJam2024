@@ -1,12 +1,10 @@
 #include "AudioManager.h"
 #include "CollisionManager.h"
-#include "ImGuiManager.h"
 #include "ModelManager.h"
 #include "MyGame.h"
 #include "ParticleManager.h"
 #include "Scene.h"
 #include "ShareValue.h"
-#include <imgui.h>
 using namespace WristerEngine::_2D;
 using namespace WristerEngine::_3D;
 
@@ -23,7 +21,6 @@ void MyGame::Initialize()
 
 	ModelManager::Initialize();
 	WristerEngine::ParticleManager::Initialize();
-	ImGuiManager::Initialize();
 	WristerEngine::AudioManager::Initialize();
 	PostEffect::StaticInitialize();
 	postEffect.Initialize(PostEffect::Type::None);
@@ -31,14 +28,12 @@ void MyGame::Initialize()
 
 void MyGame::Update()
 {
-	ImGuiManager::Begin();
 	Framework::Update();
 	ModelManager::Update();
 	WristerEngine::CollisionManager::CheckAllCollisions();
 	WristerEngine::Physics::ResetCollideList();
 	WristerEngine::ParticleManager::Update();
 	WristerEngine::AudioManager::Update();
-	ImGuiManager::End();
 }
 
 void MyGame::Draw()
@@ -52,13 +47,11 @@ void MyGame::Draw()
 	postEffect.Draw();
 	Sprite::PreDraw();
 	sceneManager->Draw();
-	ImGuiManager::Draw();
 	dxCommon->PostDraw();
 }
 
 void MyGame::Finalize()
 {
-	ImGuiManager::Finalize();
 	WristerEngine::AudioManager::Finalize();
 	Framework::Finalize();
 }
