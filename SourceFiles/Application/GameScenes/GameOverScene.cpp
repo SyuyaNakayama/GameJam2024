@@ -33,4 +33,7 @@ void UIDrawerGameOverScene::Initialize()
 	sprites["death"]->size *= 3.0f;
 	sprites["death"]->SetCenterPos();
 	sprites["death"]->SetCenterAnchor();
+
+	sprites["bg"] = Sprite::Create("SceneBG/background.png");
+	sprites["bg"]->color.a = 0.5f;
 }
