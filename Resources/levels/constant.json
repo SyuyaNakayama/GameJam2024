@@ -4,7 +4,7 @@
     "PlayerAttackTime": 60,
     "PlayerAnimationTimer": 60,
     "EnemyEyeFOV": 3,
-    "StageNum": 6
+    "StageNum": 7
   },
   "int[]": {
   },

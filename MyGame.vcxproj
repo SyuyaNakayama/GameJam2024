@@ -255,6 +255,7 @@
     <None Include="Resources\levels\stage4.json" />
     <None Include="Resources\levels\stage5.json" />
     <None Include="Resources\levels\stage6.json" />
+    <None Include="Resources\levels\stage7.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
