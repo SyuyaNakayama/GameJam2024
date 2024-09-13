@@ -4,6 +4,7 @@
 #include "OperateConfig.h"
 #include "Collider.h"
 #include "Random.h"
+#include "Audio.h"
 
 class Player : public MyGameObject
 {
@@ -13,7 +14,7 @@ class Player : public MyGameObject
 	std::unique_ptr<WristerEngine::_2D::Sprite> isAttack;	//攻撃時
 	std::unique_ptr<WristerEngine::_2D::Sprite> drill;	//攻撃時のドリル
 	OperateConfig* operate = OperateConfig::GetInstance();
-	WristerEngine::FrameTimer hideTimer; // 隠れている時間
+	WristerEngine::FrameTimer hideTimer; // 潜っている時間
 	WristerEngine::FrameTimer attackTimer; // 攻撃している時間
 	bool isGoal = false;
 
@@ -27,7 +28,7 @@ class Player : public MyGameObject
 
 	// なんらかのアクション
 	void (Player::* Action)() = nullptr;
-	void Hide(); // 隠れる
+	void Hide(); // 潜る
 	void Attack(); // 攻撃
 	// クールタイム
 	WristerEngine::FrameTimer hideCoolTimer;
@@ -46,6 +47,10 @@ class Player : public MyGameObject
 	bool coolTimeCountStartH;
 
 	WristerEngine::Random_Float shakeBody;
+
+	// 音
+	WristerEngine::Audio* audio_attack;
+	WristerEngine::Audio* audio_dive;
 
 	void Move(); // 移動
 	void UITimer();	//UIでのクールタイム視覚化

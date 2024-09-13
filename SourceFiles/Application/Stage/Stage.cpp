@@ -7,10 +7,11 @@ using namespace WristerEngine::_2D;
 
 void Stage::EnemyDie()
 {
-	stageObjects.remove_if([](const std::unique_ptr<WristerEngine::_2D::GameObject>& obj)
+	stageObjects.remove_if([&](const std::unique_ptr<WristerEngine::_2D::GameObject>& obj)
 		{
 			if (dynamic_cast<BaseEnemy*>(obj.get()) == nullptr) { return false; }
 			const BaseEnemy* pEnemy = dynamic_cast<BaseEnemy*>(obj.get());
+			if (pEnemy->IsDead()) { audio_enemyDeath->Play(); }
 			return pEnemy->IsDead();
 		});
 }
@@ -34,6 +35,8 @@ void Stage::Initialize()
 		stageObject->Initialize(obj);
 		stageObjects.push_back(std::move(stageObject));
 	}
+
+	audio_enemyDeath = WristerEngine::AudioManager::Create("enemyBroken.mp3");
 }
 
 void Stage::Update()

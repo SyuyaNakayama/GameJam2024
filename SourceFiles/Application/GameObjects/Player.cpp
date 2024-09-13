@@ -4,6 +4,7 @@
 #include "SceneManager.h"
 #include "ShareValue.h"
 #include <algorithm>
+#include "AudioManager.h"
 
 using namespace WristerEngine::_2D;
 
@@ -16,13 +17,13 @@ void Player::Move()
 		WristerEngine::WIN_SIZE.x - sprite->size.x / 2.0f);
 	hide->position.x = sprite->position.x;
 	// 向きを変える
-	if (moveDir < 0) { 
-		sprite->isFlipX = true; 
+	if (moveDir < 0) {
+		sprite->isFlipX = true;
 		walk->isFlipX = true;
 		isAttack->isFlipX = true;
 	}
-	else if (moveDir > 0) { 
-		sprite->isFlipX = false; 
+	else if (moveDir > 0) {
+		sprite->isFlipX = false;
 		walk->isFlipX = false;
 		isAttack->isFlipX = false;
 	}
@@ -71,6 +72,7 @@ void Player::Attack()
 		isCanUseAttack = false;
 		attackCoolTimer = Const(int, "PlayerAttackTime");
 		DeleteCollider("attack");
+		audio_attack->Stop();
 	}
 }
 
@@ -86,7 +88,7 @@ void Player::Initialize(const ObjectData& objData)
 	walk = Sprite::Create("Player/drill_girl_walk.png");
 	walk->size = Const(Vector2, "WalkSize");
 	walk->SetAnimation(6, 5);
-	walk->anchorPoint = { 0.5f, 1.0f};
+	walk->anchorPoint = { 0.5f, 1.0f };
 	walk->position = sprite->position;
 
 	isAttack = Sprite::Create("Player/drill_girl_attack.png");
@@ -94,7 +96,6 @@ void Player::Initialize(const ObjectData& objData)
 	isAttack->anchorPoint = { 0.5f, 1.0f };
 	isAttack->position = sprite->position;
 	isAttack->isInvisible = true;
-
 
 	attack = Sprite::Create("Player/attack_effect.png");
 	attack->size = Const(Vector2, "EffectSize");
@@ -124,6 +125,10 @@ void Player::Initialize(const ObjectData& objData)
 
 	//アニメーション時間
 	animTime = Const(int, "PlayerAnimationTimer");
+
+	// 音
+	audio_attack = WristerEngine::AudioManager::Create("attack.mp3");
+	audio_dive = WristerEngine::AudioManager::Create("dive.mp3");
 }
 
 void Player::InitializeUI() {
@@ -200,6 +205,7 @@ void Player::Update()
 			Action = &Player::Hide;
 			hideTimer = Const(int, "PlayerHideTime");
 			coolTimeCountStartH = true;
+			audio_dive->Play();
 		}
 
 		// 攻撃
@@ -210,6 +216,7 @@ void Player::Update()
 			attackTimer = Const(int, "PlayerAttackTime");
 			AddCollider(attack.get(), CollisionShapeType::Box, "attack");
 			coolTimeCountStartA = true;
+			audio_attack->Play();
 		}
 	}
 	if (Action) { (this->*Action)(); }

@@ -39,6 +39,14 @@ void WristerEngine::Constant::LoadFloat()
 	for (const auto& val : list) { constants[val.first] = new float(val.second); }
 }
 
+void WristerEngine::Constant::LoadDouble()
+{
+	if (!deserialized.contains("double")) { return; }
+	// 定数リスト取得とインスタンス生成(float)
+	const auto& list = deserialized["double"].get<std::map<std::string, double>>();
+	for (const auto& val : list) { constants[val.first] = new double(val.second); }
+}
+
 void WristerEngine::Constant::LoadVector()
 {
 	if (deserialized.contains("Vector2"))
@@ -96,6 +104,7 @@ void Constant::LoadConstants()
 
 	LoadInt();
 	LoadFloat();
+	LoadDouble();
 	LoadVector();
 	LoadColor();
 	LoadStruct();

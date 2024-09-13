@@ -3,12 +3,16 @@
 #include "Collider.h"
 #include "Easing.h"
 #include "Random.h"
+#include "AudioManager.h"
 
 class Enemy : public BaseEnemy
 {
 	std::unique_ptr<WristerEngine::_2D::Sprite> eyeBeam;
 	WristerEngine::Easing beamRotEasing;
 	std::array<int, 2> beamAngleRange;
+	WristerEngine::Audio* audio_eyeMove = nullptr;
+	bool isPreEyeMove = false, isEyeMove = false;
+	float eyePreRot = 0;
 
 	// BaseEnemy ‚ğ‰î‚µ‚ÄŒp³‚³‚ê‚Ü‚µ‚½
 	void Initialize(const ObjectData& objData) override;

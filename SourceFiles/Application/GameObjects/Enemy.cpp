@@ -24,12 +24,25 @@ void Enemy::Initialize(const ObjectData& objData)
 	Option option{};
 	option.fov = Const(int, "EnemyEyeFOV");
 	AddCollider(eyeBeam.get(), CollisionShapeType::TwoRay, "eyeBeam", &option);
+
+	audio_eyeMove = WristerEngine::AudioManager::Create("enemyEyeMove.mp3");
+
+	eyeBeam->rotation = Angle(beamAngleRange[0]);
 }
 
 void Enemy::Update()
 {
+	eyePreRot = eyeBeam->rotation;
+
 	eyeBeam->rotation = Angle(beamAngleRange[1] - beamAngleRange[0]) *
 		beamRotEasing.Update() + Angle(beamAngleRange[0]);
+
+	isEyeMove = false;
+	if (std::abs(eyeBeam->rotation - eyePreRot) >= 1e-4f) { isEyeMove = true; }
+
+	if (!isPreEyeMove && isEyeMove) { audio_eyeMove->Play(); }
+
+	isPreEyeMove = isEyeMove;
 
 	// スプライトの更新
 	eyeBeam->Update();

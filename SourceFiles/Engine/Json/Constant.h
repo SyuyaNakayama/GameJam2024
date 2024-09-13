@@ -22,6 +22,7 @@ namespace WristerEngine
 		// å^ï ì«Ç›çûÇ›
 		void LoadInt();
 		void LoadFloat();
+		void LoadDouble();
 		void LoadVector();
 		void LoadColor();
 		void LoadStruct();

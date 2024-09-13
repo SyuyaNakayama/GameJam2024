@@ -21,7 +21,7 @@ Audio* AudioManager::Create(const std::string& fileName, bool isLoop)
 	std::unique_ptr<Audio> newAudio = std::make_unique<Audio>();
 	newAudio->Initialize(fileName);
 	audios[isLoop].push_back(std::move(newAudio));
-	return audios[isLoop].front().get();
+	return audios[isLoop].back().get();
 }
 
 PointAudio* AudioManager::CreatePointAudio(const std::string& fileName, 
@@ -30,7 +30,7 @@ PointAudio* AudioManager::CreatePointAudio(const std::string& fileName,
 	std::unique_ptr<PointAudio> newAudio = std::make_unique<PointAudio>();
 	newAudio->Initialize(fileName, audioPos, useCamera, usePan);
 	pointAudios[isLoop].push_back(std::move(newAudio));
-	return pointAudios[isLoop].front().get();
+	return pointAudios[isLoop].back().get();
 }
 
 void AudioManager::Update()
