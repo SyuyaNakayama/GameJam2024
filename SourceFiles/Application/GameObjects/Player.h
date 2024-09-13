@@ -59,7 +59,6 @@ class Player : public MyGameObject
 
 	void Move(); // 移動
 	void UITimer();	//UIでのクールタイム視覚化
-	void Animations();	//プレイヤーのアニメーション周り
 	void InitializeUI();//長くなりそうなのでUI部分の初期化だけ別個用意
 	void Tutorial();	//チュートリアル処理
 

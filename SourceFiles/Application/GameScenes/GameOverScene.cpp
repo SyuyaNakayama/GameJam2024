@@ -36,4 +36,28 @@ void UIDrawerGameOverScene::Initialize()
 
 	sprites["bg"] = Sprite::Create("SceneBG/background.png");
 	sprites["bg"]->color.a = 0.5f;
+
+	//ƒiƒr
+	sprites["navi"] = Sprite::Create("UI/gameover_guidance.png");
+	sprites["navi"]->position = { WristerEngine::WIN_SIZE.x / 3,WristerEngine::WIN_SIZE.y - WEConst(float, "GroundHeight") };
+	sprites["navi"]->size = WEConst(Vector2, "NaviSize");
+	sprites["navi"]->isInvisible = false;
+	maxAnimTime = 60;
+	animTime = maxAnimTime;
+}
+
+void UIDrawerGameOverScene::Update()
+{
+	animTime--;
+	if (animTime < 0) {
+		animTime = maxAnimTime;
+		if (!sprites["navi"]->isInvisible) {
+			sprites["navi"]->isInvisible = true;
+		}
+		else {
+			sprites["navi"]->isInvisible = false;
+		}
+	}
+
+	AbstractUIDrawer::Update();
 }

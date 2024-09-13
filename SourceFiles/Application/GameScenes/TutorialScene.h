@@ -3,11 +3,9 @@
 #include "AbstractUIDrawer.h"
 #include "Stage.h"
 #include "AudioManager.h"
-#include "AudioManager.h"
 
 class UIDrawerTutorialScene : public WristerEngine::_2D::AbstractUIDrawer
 {
-
 	// AbstractUIDrawer ‚ğ‰î‚µ‚ÄŒp³‚³‚ê‚Ü‚µ‚½
 	void Initialize() override;
 };

@@ -6,8 +6,12 @@
 // UI描画クラス(GameOverScene用)
 class UIDrawerGameOverScene : public WristerEngine::_2D::AbstractUIDrawer
 {
+	int animTime;
+	int maxAnimTime;
+
 	// AbstractUIDrawer を介して継承されました
 	void Initialize() override;
+	void Update() override;
 };
 
 // ゲームオーバーシーン

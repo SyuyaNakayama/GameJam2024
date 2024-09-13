@@ -10,7 +10,7 @@ void TitleScene::Initialize()
 	uiDrawer->Initialize();
 
 	//”wŒi
-	bg = Sprite::Create("title_background.png");
+	bg = Sprite::Create("SceneBG/title_background.png");
 	//ƒLƒƒƒ‰
 	player = Sprite::Create("Player/drill_girl.png");
 	player->size = WEConst(Vector2, "EffectSize");
@@ -59,7 +59,7 @@ void TitleScene::Update()
 		}
 	}
 
-	if (operate->GetTrigger("SceneChange")) {
+	if (operate->GetTrigger("SceneChange") && !isStart) {
 		animTime = 2;
 		maxAnimTime = 2;
 		isStart = true;
@@ -102,7 +102,7 @@ void TitleScene::Draw() {
 	if (!isStart) {
 		player->Draw();
 	}
-	else{
+	else {
 		walk->Draw();
 	}
 	logo->Draw();
@@ -111,7 +111,7 @@ void TitleScene::Draw() {
 
 void UIDrawerTitleScene::Initialize()
 {
-	sprites["title"] = Sprite::Create("title_background.png");
-	sprites["title"]->SetCenterPos();
-	sprites["title"]->SetCenterAnchor();
+	//sprites["title"] = Sprite::Create("title_background.png");
+	//sprites["title"]->SetCenterPos();
+	//sprites["title"]->SetCenterAnchor();
 }

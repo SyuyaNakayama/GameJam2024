@@ -246,8 +246,6 @@ void Player::Update()
 
 	Tutorial();
 
-	Animations();
-
 	// スプライトの更新
 	sprite->Update();
 	attack->Update();
@@ -319,6 +317,7 @@ void Player::OnCollision(WristerEngine::_2D::ColliderGroup* group)
 			// ゲームオーバー
 			if (pairName == "eyeBeam" || pairName == "attack")
 			{
+				audio_attack->Stop();
 				ShareValue::GetInstance()->isGameOver = true;
 			}
 		}
@@ -381,8 +380,4 @@ void Player::Tutorial() {
 			}
 		}
 	}
-}
-
-void Player::Animations() {
-
 }
