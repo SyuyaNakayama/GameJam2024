@@ -12,7 +12,7 @@ using namespace WristerEngine::_3D;
 
 void MyGame::Initialize()
 {
-	windowName = L"クアッドホッケー";
+	windowName = L"謎が解けないので力業で突破します";
 	Framework::Initialize();
 #ifdef _DEBUG
 	sceneManager->ChangeScene(Scene::Play, false, false, false);
