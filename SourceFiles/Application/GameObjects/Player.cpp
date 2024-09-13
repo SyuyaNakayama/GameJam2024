@@ -177,6 +177,10 @@ void Player::InitializeUI() {
 	ui_key_down->SetRect(Const(Vector2, "UIIconSize"), { 32,0 });
 	ui_key_down->position = Vector2(WristerEngine::WIN_SIZE.x - Const(float, "PlayerSize") * 2, WristerEngine::WIN_SIZE.y / 2 + Const(float, "PlayerSize"));
 	ui_key_down->anchorPoint = { 1.0f,1.0f };
+	//UI_MOVE
+	ui_move = Sprite::Create("UI/key_move.png");
+	ui_move->size = Const(Vector2, "KeyMoveUISize");
+	ui_move->position = Vector2(WristerEngine::WIN_SIZE.x - Const(float, "PlayerSize") * 2.5f, WristerEngine::WIN_SIZE.y / 2 + Const(float, "PlayerSize") * 1.25f);
 	//テキストボックス
 	textBox = Sprite::Create("UI/textbox.png");
 	textBox->SetRect(Const(Vector2, "TextBoxSize"), { 0,0 });
@@ -256,6 +260,7 @@ void Player::Update()
 	ui_coolTime2->Update();
 	ui_key_space->Update();
 	ui_key_down->Update();
+	ui_move->Update();
 	walk->Update();
 	drill->Update();
 	isAttack->Update();
@@ -284,6 +289,7 @@ void Player::Draw()
 	ui_dive->Draw();
 	ui_key_space->Draw();
 	ui_key_down->Draw();
+	ui_move->Draw();
 	if (coolTimeCountStartA) {
 		ui_coolTime1->Draw();
 	}

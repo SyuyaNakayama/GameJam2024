@@ -13,7 +13,7 @@ void MyGame::Initialize()
 	windowName = L"4026_“ä‚ª‰ð‚¯‚È‚¢‚Ì‚Å—Í‹Æ‚Å“Ë”j‚µ‚Ü‚·";
 	Framework::Initialize();
 #ifdef _DEBUG
-	sceneManager->ChangeScene(Scene::Clear, false, false, false);
+	sceneManager->ChangeScene(Scene::Tutorial, false, false, false);
 #endif // _DEBUG
 #ifdef NDEBUG
 	sceneManager->ChangeScene(Scene::Title, false, false, false);

@@ -25,6 +25,7 @@ class Player : public MyGameObject
 	std::unique_ptr<WristerEngine::_2D::Sprite> ui_coolTime2;
 	std::unique_ptr<WristerEngine::_2D::Sprite> ui_key_space;
 	std::unique_ptr<WristerEngine::_2D::Sprite> ui_key_down;
+	std::unique_ptr<WristerEngine::_2D::Sprite> ui_move;
 	std::unique_ptr<WristerEngine::_2D::Sprite> textBox;
 
 	// ‚È‚ñ‚ç‚©‚ÌƒAƒNƒVƒ‡ƒ“
