@@ -110,7 +110,7 @@ void Player::Initialize(const ObjectData& objData)
 	drill->isInvisible = true;
 
 	dive = Sprite::Create("Player/dive.png");
-	dive->SetAnimation(2, 30);
+	dive->SetAnimation(2, 10);
 	dive->size = objData.size;
 	dive->position.y = WristerEngine::WIN_SIZE.y - Const(float, "GroundHeight");
 	dive->anchorPoint = { 0.5f,1.0f };
