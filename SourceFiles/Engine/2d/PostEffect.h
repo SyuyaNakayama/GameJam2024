@@ -19,7 +19,8 @@ namespace WristerEngine::_2D
 			GaussianBlur, // ガウシアンブラー
 			GaussianBlurLinear, // 単方向のガウシアンブラー
 			CreateDotFilter, // クロスフィルタ
-			Bloom // ブルーム
+			Bloom, // ブルーム
+			Dark
 		};
 
 	private:
@@ -31,16 +32,21 @@ namespace WristerEngine::_2D
 			float angle = 0;
 			float brightness = 1;
 			Vector2 uvOffset;
+			Vector2 pad;
+			Vector2 spotlightCenterUV;
 		};
 
 		template<class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 		static const float CLEAR_COLOR[4];
-
 		static ID3D12Device* device;
-		ComPtr<ID3D12Resource> texBuff;
-		ComPtr<ID3D12Resource> depthBuff;
 		static ComPtr<ID3D12DescriptorHeap> descHeapSRV;
 		static int staticSRVIndex;
+		static ComPtr<ID3D12RootSignature> rootSignature;
+		static ComPtr<ID3D12PipelineState> pipelineState;
+		static std::vector<std::unique_ptr<PostEffect>> postEffects;
+
+		ComPtr<ID3D12Resource> texBuff;
+		ComPtr<ID3D12Resource> depthBuff;
 		int srvIndex;
 		ComPtr<ID3D12DescriptorHeap> descHeapRTV;
 		ComPtr<ID3D12DescriptorHeap> descHeapDSV;
@@ -48,8 +54,6 @@ namespace WristerEngine::_2D
 		D3D12_VERTEX_BUFFER_VIEW vbView{};
 		Microsoft::WRL::ComPtr<ID3D12Resource> constBuff;
 		ConstBufferData* constMap = nullptr;
-		static ComPtr<ID3D12RootSignature> rootSignature;
-		static ComPtr<ID3D12PipelineState> pipelineState;
 
 		void CreateBuffers();
 		void CreateSRV();
@@ -58,9 +62,12 @@ namespace WristerEngine::_2D
 
 	public:
 		static void StaticInitialize();
+		static PostEffect* Create(Type effectType = Type::None);
+		static PostEffect* GetPostEffect(size_t index) { return postEffects[index].get(); }
 		void Initialize(Type effectType = Type::None);
 		void SetEffectType(Type effectType) { constMap->effectType = (UINT32)effectType; }
 		void SetAngle(float angle) { constMap->angle = angle; }
+		void SetLightPos(Vector2 lightPos) { constMap->spotlightCenterUV = lightPos; }
 		static ID3D12DescriptorHeap* GetSRV() { return descHeapSRV.Get(); }
 		D3D12_GPU_DESCRIPTOR_HANDLE GetGPUHandle() const;
 		void Draw();

@@ -10,6 +10,7 @@ Microsoft::WRL::ComPtr<ID3D12RootSignature> PostEffect::rootSignature;
 Microsoft::WRL::ComPtr<ID3D12PipelineState> PostEffect::pipelineState;
 ID3D12Device* PostEffect::device;
 int PostEffect::staticSRVIndex = 0;
+std::vector<std::unique_ptr<PostEffect>> PostEffect::postEffects;
 
 #pragma region ¶¬ŠÖ”
 void PostEffect::CreateBuffers()
@@ -142,6 +143,18 @@ void PostEffect::StaticInitialize()
 	srvHeapDesc.NumDescriptors = 16;
 
 	Result result = device->CreateDescriptorHeap(&srvHeapDesc, IID_PPV_ARGS(&descHeapSRV));
+}
+
+PostEffect* WristerEngine::_2D::PostEffect::Create(Type effectType)
+{
+	std::unique_ptr<PostEffect> postEffect = std::make_unique<PostEffect>();
+	postEffect->CreateBuffers();
+	postEffect->CreateSRV();
+	postEffect->CreateRTV();
+	postEffect->CreateDSV();
+	postEffect->SetEffectType(effectType);
+	postEffects.push_back(std::move(postEffect));
+	return postEffects.back().get();
 }
 
 void PostEffect::Draw()

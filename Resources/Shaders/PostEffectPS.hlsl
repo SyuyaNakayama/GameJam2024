@@ -35,6 +35,9 @@ float4 main(VSOutput input) : SV_TARGET
         case 8: // ƒuƒ‹[ƒ€
             texcolor = Bloom(input);
             break;
+        case 9: // ˆÃ•¢ŠE
+            texcolor = Dark(input);
+            break;
     }
     texcolor.a = 1;
     return texcolor;

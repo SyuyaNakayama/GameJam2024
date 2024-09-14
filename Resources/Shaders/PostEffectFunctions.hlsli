@@ -122,3 +122,13 @@ float4 Bloom(VSOutput i)
     float4 blur = GaussianBlur(i); // ぼかし
     return tex.Sample(smp, i.uv) + highLumi + blur; // テクスチャ合成
 }
+
+float4 Dark(VSOutput i)
+{
+    if (pow(i.uv.x - spotlightCenterUV.x, 2) * 1280 / 720 + 
+        pow(i.uv.y - spotlightCenterUV.y, 2) / 1280 * 720 >= 0.01)
+    {
+        return float4(0, 0, 0, 0);
+    }
+    return tex.Sample(smp, i.uv);
+}

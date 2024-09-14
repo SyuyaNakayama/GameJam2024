@@ -23,7 +23,8 @@ void MyGame::Initialize()
 	WristerEngine::ParticleManager::Initialize();
 	WristerEngine::AudioManager::Initialize();
 	PostEffect::StaticInitialize();
-	postEffect.Initialize(PostEffect::Type::None);
+	//postEffect->Initialize(PostEffect::Type::Dark);
+	postEffect = PostEffect::Create(PostEffect::Type::Dark);
 }
 
 void MyGame::Update()
@@ -38,15 +39,15 @@ void MyGame::Update()
 
 void MyGame::Draw()
 {
-	postEffect.PreDrawScene();
+	postEffect->PreDrawScene();
 	ModelManager::DrawObjects();
 	WristerEngine::ParticleManager::Draw();
-	postEffect.PostDrawScene();
-
-	dxCommon->PreDraw();
-	postEffect.Draw();
 	Sprite::PreDraw();
 	sceneManager->Draw();
+	postEffect->PostDrawScene();
+
+	dxCommon->PreDraw();
+	postEffect->Draw();
 	dxCommon->PostDraw();
 }
 
