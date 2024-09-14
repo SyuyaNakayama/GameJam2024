@@ -23,7 +23,6 @@ void MyGame::Initialize()
 	WristerEngine::ParticleManager::Initialize();
 	WristerEngine::AudioManager::Initialize();
 	PostEffect::StaticInitialize();
-	//postEffect->Initialize(PostEffect::Type::Dark);
 	postEffect = PostEffect::Create(PostEffect::Type::Dark);
 }
 

@@ -124,15 +124,6 @@ void PostEffect::CreateDSV()
 }
 #pragma endregion
 
-void PostEffect::Initialize(Type effectType)
-{
-	CreateBuffers();
-	CreateSRV();
-	CreateRTV();
-	CreateDSV();
-	SetEffectType(effectType);
-}
-
 void PostEffect::StaticInitialize()
 {
 	device = DirectXCommon::GetInstance()->GetDevice();

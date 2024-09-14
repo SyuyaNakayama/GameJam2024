@@ -64,7 +64,6 @@ namespace WristerEngine::_2D
 		static void StaticInitialize();
 		static PostEffect* Create(Type effectType = Type::None);
 		static PostEffect* GetPostEffect(size_t index) { return postEffects[index].get(); }
-		void Initialize(Type effectType = Type::None);
 		void SetEffectType(Type effectType) { constMap->effectType = (UINT32)effectType; }
 		void SetAngle(float angle) { constMap->angle = angle; }
 		void SetLightPos(Vector2 lightPos) { constMap->spotlightCenterUV = lightPos; }
