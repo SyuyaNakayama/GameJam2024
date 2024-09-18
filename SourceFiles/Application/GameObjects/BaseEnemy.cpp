@@ -1,4 +1,5 @@
 #include "BaseEnemy.h"
+#include "NonEffectDrawer.h"
 using namespace WristerEngine::_2D;
 
 void BaseEnemy::Initialize(const ObjectData& objData)
@@ -19,6 +20,8 @@ void BaseEnemy::Initialize(const ObjectData& objData)
 	collisionAttribute = CollisionAttribute::Enemy;
 	collisionMask = CollisionMask::Enemy;
 	AddCollider(sprite.get(), CollisionShapeType::Box, "body");
+
+	//WristerEngine::NonEffectDrawer::AddSprite(hpGauge.get());
 }
 
 void BaseEnemy::Update()

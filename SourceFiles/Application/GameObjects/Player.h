@@ -5,6 +5,7 @@
 #include "Collider.h"
 #include "Random.h"
 #include "Audio.h"
+#include "PostEffect.h"
 
 class Player : public MyGameObject
 {

@@ -2,6 +2,7 @@
 #include "ShareValue.h"
 #include <imgui.h>
 #include "ImGuiManager.h"
+#include "PostEffect.h"
 
 using namespace WristerEngine::_2D;
 
@@ -20,6 +21,11 @@ void Stage::Initialize()
 {
 	std::string levelName = "stage" + std::to_string(ShareValue::GetInstance()->stageNum);
 	std::vector<ObjectData> objects = levelLoader.LoadLevel(levelName);
+
+	if (ShareValue::GetInstance()->stageNum >= 8) 
+	{
+		PostEffect::GetPostEffect(0)->SetEffectType(PostEffect::Type::Dark); 
+	}
 
 	for (auto obj : objects)
 	{

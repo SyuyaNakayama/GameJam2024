@@ -63,7 +63,6 @@ void DarumaEnemy::Initialize(const ObjectData& objData)
 	sprite->isFlipX = true;
 
 	whiteBody = Sprite::Create("Enemy/pillar_white.png");
-	BaseEnemy::Initialize(objData);
 	whiteBody->position = sprite->position;
 	whiteBody->anchorPoint = sprite->anchorPoint;
 	whiteBody->size = sprite->size;

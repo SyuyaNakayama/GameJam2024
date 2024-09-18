@@ -87,8 +87,6 @@ void TitleScene::Update()
 		isUDChange = false;
 	}
 
-	// UI•`‰æ
-	//uiDrawer->Update();
 	//ƒAƒjƒ[ƒVƒ‡ƒ“•`‰æ
 	bg->Update();
 	player->Update();
@@ -107,11 +105,13 @@ void TitleScene::Draw() {
 	}
 	logo->Draw();
 	navi->Draw();
+	// UI•`‰æ
+	uiDrawer->Draw();
 }
 
 void UIDrawerTitleScene::Initialize()
 {
-	//sprites["title"] = Sprite::Create("title_background.png");
-	//sprites["title"]->SetCenterPos();
-	//sprites["title"]->SetCenterAnchor();
+	sprites["version"] = Sprite::Create("UI/version.png");
+	sprites["version"]->position = Const(Vector2, "VersionPos");
+	sprites["version"]->Update();
 }

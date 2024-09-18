@@ -121,6 +121,7 @@
     <ClCompile Include="SourceFiles\Application\MyGame\MyGame.cpp" />
     <ClCompile Include="SourceFiles\Application\Stage\LevelLoader.cpp" />
     <ClCompile Include="SourceFiles\Application\Stage\Stage.cpp" />
+    <ClCompile Include="SourceFiles\Engine\2d\NonEffectDrawer.cpp" />
     <ClCompile Include="SourceFiles\Engine\GameObject\BaseStage.cpp" />
     <ClCompile Include="SourceFiles\Engine\Scene\BasePauseMenu.cpp" />
     <ClCompile Include="SourceFiles\Engine\2d\BitMapNumber.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="SourceFiles\Application\Stage\LevelLoader.h" />
     <ClInclude Include="SourceFiles\Application\Stage\Stage.h" />
     <ClInclude Include="SourceFiles\Application\MyGame\ShareValue.h" />
+    <ClInclude Include="SourceFiles\Engine\2d\NonEffectDrawer.h" />
     <ClInclude Include="SourceFiles\Engine\GameObject\BaseStage.h" />
     <ClInclude Include="SourceFiles\Engine\Scene\BasePauseMenu.h" />
     <ClInclude Include="SourceFiles\Engine\2d\AbstractUIDrawer.h" />

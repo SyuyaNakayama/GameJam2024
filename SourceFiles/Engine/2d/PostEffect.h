@@ -32,7 +32,7 @@ namespace WristerEngine::_2D
 			float angle = 0;
 			float brightness = 1;
 			Vector2 uvOffset;
-			Vector2 pad;
+			float pad;
 			Vector2 spotlightCenterUV;
 		};
 

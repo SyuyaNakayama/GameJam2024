@@ -1,6 +1,7 @@
 #include "GameOverScene.h"
 #include "SceneManager.h"
 #include "ShareValue.h"
+#include "PostEffect.h"
 
 using namespace WristerEngine::_2D;
 
@@ -14,6 +15,8 @@ void GameOverScene::Initialize()
 	audio_select = WristerEngine::AudioManager::Create("select.mp3");
 	bgm = WristerEngine::AudioManager::Create("gameover.mp3", true);
 	bgm->Play();
+
+	PostEffect::GetPostEffect(0)->SetEffectType(PostEffect::Type::None);
 }
 
 void GameOverScene::Update()

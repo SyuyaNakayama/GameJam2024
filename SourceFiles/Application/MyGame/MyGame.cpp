@@ -5,6 +5,7 @@
 #include "ParticleManager.h"
 #include "Scene.h"
 #include "ShareValue.h"
+#include "NonEffectDrawer.h"
 using namespace WristerEngine::_2D;
 using namespace WristerEngine::_3D;
 
@@ -13,7 +14,7 @@ void MyGame::Initialize()
 	windowName = L"4026_“ä‚ª‰ð‚¯‚È‚¢‚Ì‚Å—Í‹Æ‚Å“Ë”j‚µ‚Ü‚·";
 	Framework::Initialize();
 #ifdef _DEBUG
-	sceneManager->ChangeScene(Scene::Tutorial, false, false, false);
+	sceneManager->ChangeScene(Scene::Play, false, false, false);
 #endif // _DEBUG
 #ifdef NDEBUG
 	sceneManager->ChangeScene(Scene::Title, false, false, false);
@@ -23,7 +24,7 @@ void MyGame::Initialize()
 	WristerEngine::ParticleManager::Initialize();
 	WristerEngine::AudioManager::Initialize();
 	PostEffect::StaticInitialize();
-	postEffect = PostEffect::Create(PostEffect::Type::Dark);
+	postEffect = PostEffect::Create(PostEffect::Type::None);
 }
 
 void MyGame::Update()
@@ -47,6 +48,8 @@ void MyGame::Draw()
 
 	dxCommon->PreDraw();
 	postEffect->Draw();
+	Sprite::PreDraw();
+	WristerEngine::NonEffectDrawer::Draw();
 	dxCommon->PostDraw();
 }
 

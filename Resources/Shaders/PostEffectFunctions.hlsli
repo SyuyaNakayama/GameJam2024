@@ -125,10 +125,12 @@ float4 Bloom(VSOutput i)
 
 float4 Dark(VSOutput i)
 {
+    float4 texcolor = tex.Sample(smp, i.uv);
+    
     if (pow(i.uv.x - spotlightCenterUV.x, 2) * 1280 / 720 + 
-        pow(i.uv.y - spotlightCenterUV.y, 2) / 1280 * 720 >= 0.01)
+        pow(i.uv.y - spotlightCenterUV.y, 2) / 1280 * 720 >= 0.05)
     {
         return float4(0, 0, 0, 0);
     }
-    return tex.Sample(smp, i.uv);
+    return texcolor;
 }

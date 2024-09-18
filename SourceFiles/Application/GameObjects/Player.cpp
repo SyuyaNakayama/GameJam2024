@@ -5,6 +5,7 @@
 #include "ShareValue.h"
 #include <algorithm>
 #include "AudioManager.h"
+#include "NonEffectDrawer.h"
 
 using namespace WristerEngine::_2D;
 
@@ -186,6 +187,14 @@ void Player::InitializeUI() {
 	textBox->SetRect(Const(Vector2, "TextBoxSize"), { 0,0 });
 	textBox->position.x = 40.0f;
 	isExplanation = true;
+
+	WristerEngine::NonEffectDrawer::AddSprite(ui_attack.get());
+	WristerEngine::NonEffectDrawer::AddSprite(ui_dive.get());
+	WristerEngine::NonEffectDrawer::AddSprite(ui_coolTime1.get());
+	WristerEngine::NonEffectDrawer::AddSprite(ui_coolTime2.get());
+	WristerEngine::NonEffectDrawer::AddSprite(ui_key_space.get());
+	WristerEngine::NonEffectDrawer::AddSprite(ui_key_down.get());
+	WristerEngine::NonEffectDrawer::AddSprite(ui_move.get());
 }
 
 void Player::Update()
@@ -250,6 +259,15 @@ void Player::Update()
 
 	Tutorial();
 
+	// 現在の位置のプロジェクション座標を計算
+	Vector2 projectionPos = sprite->position;
+	projectionPos.x /= WristerEngine::WIN_SIZE.x;
+	projectionPos.y /= WristerEngine::WIN_SIZE.y;
+	WristerEngine::_2D::PostEffect::GetPostEffect(0)->SetLightPos(projectionPos);
+
+	ui_coolTime1->isInvisible = !coolTimeCountStartA;
+	ui_coolTime2->isInvisible = !coolTimeCountStartH;
+
 	// スプライトの更新
 	sprite->Update();
 	attack->Update();
@@ -271,7 +289,7 @@ void Player::Draw()
 {
 	//アニメーション切り替え
 	if (!isExplanation) {
-		if (operate->GetPush("Right") || operate->GetPush("Left")) {
+		if (operate->GetPush("Right") ^ operate->GetPush("Left")) {
 			walk->Draw();
 		}
 		else {
@@ -285,17 +303,6 @@ void Player::Draw()
 	drill->Draw();
 	attack->Draw();
 	dive->Draw();
-	ui_attack->Draw();
-	ui_dive->Draw();
-	ui_key_space->Draw();
-	ui_key_down->Draw();
-	ui_move->Draw();
-	if (coolTimeCountStartA) {
-		ui_coolTime1->Draw();
-	}
-	if (coolTimeCountStartH) {
-		ui_coolTime2->Draw();
-	}
 	if (isExplanation) {
 		textBox->Draw();
 	}
@@ -380,7 +387,7 @@ void Player::Tutorial() {
 	else {
 		if (operate->GetTrigger("SceneChange")) {
 			page += 1.0f;
-			textBox->SetRect(Const(Vector2,"TextBoxSize"), {Const(float,"PageSize") * page,0});
+			textBox->SetRect(Const(Vector2, "TextBoxSize"), { Const(float,"PageSize") * page,0 });
 			if (page > 2.0f) {
 				isExplanation = false;
 			}
